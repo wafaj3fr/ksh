@@ -85,7 +85,7 @@ export default function Home() {
                 <p className="text-sm text-gray-600 mb-4">
                   Specializing in innovative ICT solutions and services.
                 </p>
-                <span className="text-blue-600 font-semibold hover:underline">
+                <span className="text-blue-900 font-semibold hover:underline">
                   Learn More →
                 </span>
               </div>
