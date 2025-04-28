@@ -1,23 +1,41 @@
 'use client';
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
+import { Menu, X } from 'lucide-react';
 
 export default function Home() {
+  const [isOpen, setIsOpen] = useState(false);
   return (
     <div className="min-h-screen text-gray-900 font-sans">
 
       {/* Header */}
       <header className="flex justify-between items-center px-8 sm:px-20 py-6 bg-gradient-to-b from-[#d1e9ff] via-[#e0f2fe] to-[#f0f9ff] shadow-sm">
-        <div className="text-2xl font-extrabold tracking-wide text-gray-900">
-          KSHC
+      <div className="text-2xl font-bold text-gray-900">TAD</div>
+
+      {/* Desktop Nav */}
+      <nav className="hidden sm:flex gap-8 text-md font-medium">
+        <a href="#about" className="text-gray-700 hover:text-primary transition">About</a>
+        <a href="#services" className="text-gray-700 hover:text-primary transition">Services</a>
+        <a href="#vision" className="text-gray-700 hover:text-primary transition">Vision</a>
+        <a href="#contact" className="text-gray-700 hover:text-primary transition">Contact</a>
+      </nav>
+
+      {/* Mobile Menu Button */}
+      <button onClick={() => setIsOpen(!isOpen)} className="sm:hidden text-gray-800">
+        {isOpen ? <X size={28} /> : <Menu size={28} />}
+      </button>
+
+      {/* Mobile Nav Dropdown */}
+      {isOpen && (
+        <div className="absolute top-20 right-8 bg-white/90 backdrop-blur-md p-6 rounded-xl shadow-lg flex flex-col gap-4 sm:hidden">
+          <a href="#about" className="text-gray-700 hover:text-primary transition">About</a>
+          <a href="#services" className="text-gray-700 hover:text-primary transition">Services</a>
+          <a href="#vision" className="text-gray-700 hover:text-primary transition">Vision</a>
+          <a href="#contact" className="text-gray-700 hover:text-primary transition">Contact</a>
         </div>
-        <nav className="flex gap-8 text-lg">
-          <a href="#about" className="text-gray-600 hover:text-gray-900 transition">About</a>
-          <a href="#subsidiaries" className="text-gray-600 hover:text-gray-900 transition">Subsidiaries</a>
-          <a href="#services" className="text-gray-600 hover:text-gray-900 transition">Services</a>
-          <a href="#contact" className="text-gray-600 hover:text-gray-900 transition">Contact</a>
-        </nav>
-      </header>
+      )}
+    </header>
 
       {/* Hero Section */}
       <section
@@ -61,8 +79,8 @@ export default function Home() {
         <h2 className="text-3xl font-bold mb-8 text-center">Our Subsidiaries</h2>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
           {[
-            { name: "QAST", link: "/qast", image: "cyber.png" },
-            { name: "TAD", link: "/tad", image: "ai2.png" },
+            { name: "QAST", link: "/qast", image: "cyber.png", desc: "Empowering digital transformation through a collective of experts in ICT, cloud systems, and AI innovation." },
+            { name: "TAD", link: "/tad", image: "fac1.png", desc: "Excellence in Facilities Management, ensuring smarter, safer, and more sustainable environments." },
             { name: "X", link: "/x", image: "cpu.png" },
           ].map((subsidiary) => (
             <Link
@@ -83,7 +101,7 @@ export default function Home() {
               <div className="p-6 flex flex-col items-center text-center">
                 <h3 className="text-xl font-bold text-gray-900 mb-2">{subsidiary.name}</h3>
                 <p className="text-sm text-gray-600 mb-4">
-                  Specializing in innovative ICT solutions and services.
+                  {subsidiary.desc || "Leading the way in technology and innovation."}
                 </p>
                 <span className="text-blue-900 font-semibold hover:underline">
                   Learn More →

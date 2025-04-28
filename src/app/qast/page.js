@@ -71,7 +71,7 @@ export default function QastPage() {
 
         {/* About Section */}
         <section id="about" className="flex justify-center px-8 sm:px-20">
-          <div className="bg-white/10 backdrop-blur-md p-12 rounded-2xl max-w-3xl text-center shadow-lg border border-white/20">
+          <div className="bg-white/10 backdrop-blur-md p-12 rounded-2xl max-w-5xl text-center shadow-lg border border-white/20">
             <h2 className="text-4xl font-bold mb-6 text-white">About QAST</h2>
             <p className="text-lg text-gray-300">
               <strong>QAST</strong> — a leader in the ICT industry in Sudan, is a subsidiary of the esteemed Kuwaiti Sudanese Holding Company (KSHC) and operates as a sister company to Zain Sudan.
