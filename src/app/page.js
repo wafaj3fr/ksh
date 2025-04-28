@@ -11,7 +11,7 @@ export default function Home() {
 
       {/* Header */}
       <header className="flex justify-between items-center px-8 sm:px-20 py-6 bg-gradient-to-b from-[#d1e9ff] via-[#e0f2fe] to-[#f0f9ff] shadow-sm">
-      <div className="text-2xl font-bold text-gray-900">TAD</div>
+      <div className="text-2xl font-bold text-gray-900">KSHC</div>
 
       {/* Desktop Nav */}
       <nav className="hidden sm:flex gap-8 text-md font-medium">

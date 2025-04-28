@@ -4,12 +4,12 @@
   "private": true,
   "scripts": {
     "predev": "npm run typegen",
-    "dev": "next",
+    "dev": "npm run typegen && next dev",
     "prebuild": "npm run typegen",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "typegen": "sanity schema extract --path=src/sanity/extract.json && sanity typegen generate"
+    "typegen": "sanity schema extract --path=src/sanity/extract.json --project your-project-id && sanity typegen generate"
   },
   "dependencies": {
     "@sanity/client": "^6.29.1",
