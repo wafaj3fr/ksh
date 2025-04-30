@@ -11,7 +11,7 @@ export async function getProjects(): Promise<Project[]> {
   const query = groq`*[_type == "project"]{
     _id,
     name,
-    description,
+    content,
     slug,
     "slug": slug.current,
     image {
