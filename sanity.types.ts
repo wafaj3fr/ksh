@@ -143,7 +143,7 @@ export type POST_QUERYResult = null;
 
 // Source: ./src/sanity/sanity-utils.ts
 // Variable: query
-// Query: *[_type == "project"]{    _id,    name,    description,    image {      asset -> {        url      }    },    technologies[] -> {      name    }  }
+// Query: *[_type == "project"]{    _id,    name,    description,    slug,    "slug": slug.current,    image {      asset -> {        url      }    },    technologies[] -> {      name    }    }
 export type QueryResult = Array<never>;
 
 // Query TypeMap
@@ -152,6 +152,6 @@ declare module "@sanity/client" {
   interface SanityQueries {
     "*[_type == \"post\" && defined(slug.current)][0...12]{\n  _id, title, slug\n}": POSTS_QUERYResult;
     "*[_type == \"post\" && slug.current == $slug][0]{\n  title, body, mainImage\n}": POST_QUERYResult;
-    "*[_type == \"project\"]{\n    _id,\n    name,\n    description,\n    image {\n      asset -> {\n        url\n      }\n    },\n    technologies[] -> {\n      name\n    }\n  }": QueryResult;
+    "*[_type == \"project\"]{\n    _id,\n    name,\n    description,\n    slug,\n    \"slug\": slug.current,\n    image {\n      asset -> {\n        url\n      }\n    },\n    technologies[] -> {\n      name\n    }\n  \n  }": QueryResult;
   }
 }
