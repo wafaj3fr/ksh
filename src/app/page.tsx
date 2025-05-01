@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
-import { Target, Globe, Users, TrendingUp, Layers } from "lucide-react";
+import { Target, Globe, Users, TrendingUp, Layers, Building, Wifi, Truck, Hammer } from "lucide-react";
 
 export default function Home() {
   const [isOpen, setIsOpen] = useState(false);
@@ -92,37 +92,58 @@ export default function Home() {
   </div>
 </section>
 
-      {/* Services Section */}
-      <section id="services" className="px-8 sm:px-20 py-20 bg-[#f7f9fc]">
-        <h2 className="text-3xl font-bold mb-8 text-center text-primary">Fields of Operation</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 max-w-5xl mx-auto">
-          <div>
-            <h3 className="text-xl font-semibold mb-2 text-primary">General Investment</h3>
-            <p className="text-gray-600">
-              Focus on impactful projects and companies that improve productivity and life quality.
-            </p>
+<section id="services" className="px-8 sm:px-20 py-24 bg-gradient-to-br from-[#f0f4fa] to-[#e8f0fc]">
+  <div className="max-w-6xl mx-auto text-center">
+    <h2 className="text-4xl font-bold text-gray-900 mb-4">Fields of Operation</h2>
+    <p className="text-lg text-gray-700 mb-12">
+      Driving progress across essential sectors through strategic and specialized investment.
+    </p>
+
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+      {[
+        {
+          title: "Telecom & Technology",
+          desc: "Empowering connectivity and innovation through advanced ICT infrastructure.",
+          icon: <Wifi className="text-blue-600" size={32} />
+        },
+        {
+          title: "Real Estate & Development",
+          desc: "Planning and managing sustainable urban and commercial growth.",
+          icon: <Building className="text-blue-600" size={32} />
+        },
+        {
+          title: "Supply Chain & Logistics",
+          desc: "Streamlining procurement, storage, and distribution systems nationwide.",
+          icon: <Truck className="text-blue-600" size={32} />
+        },
+        {
+          title: "Facility Management",
+          desc: "Delivering integrated smart solutions for modern infrastructure.",
+          icon: <Hammer className="text-blue-600" size={32} />
+        }
+      ].map((item, idx) => (
+        <div key={idx} className="bg-white p-6 rounded-xl shadow hover:shadow-lg transition text-left">
+          <div className="flex items-center gap-4 mb-4">
+            {item.icon}
+            <h4 className="text-lg font-semibold text-blue-800">{item.title}</h4>
           </div>
-          <div>
-            <h3 className="text-xl font-semibold mb-2 text-primary">Specialized Investment</h3>
-            <ul className="list-disc list-inside text-gray-600 space-y-2">
-              <li>Telecom & tech services</li>
-              <li>Real estate & project development</li>
-              <li>Supply chain & logistics</li>
-              <li>Modern facility management</li>
-            </ul>
-          </div>
+          <p className="text-sm text-gray-700">{item.desc}</p>
         </div>
-      </section>
+      ))}
+    </div>
+  </div>
+</section>
+
 
       {/* Subsidiaries Section */}
       <section id="subsidiaries" className="px-8 sm:px-20 py-20 bg-white">
         <h2 className="text-3xl font-bold mb-8 text-center text-primary">KSHC Subsidiaries</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {[ 
-            { name: "Qast", desc: "ICT & Network Services", image: "cyber.png", link: "https://qasthub.com/" },
+            { name: "Qast", desc: "ICT & Network Services", image: "cpu.png", link: "https://qasthub.com/" },
             { name: "Cubes", desc: "Construction & Real Estate", image: "fac1.png" },
             { name: "TAD", desc: "Facility Management Solutions", image: "fac2.png" },
-            { name: "Quality", desc: "Supply Chain Services", image: "supply.png" },
+            { name: "Quality", desc: "Supply Chain Services", image: "fac3.png" },
           ].map((sub, i) => (
             <Link key={i} href={sub.link || "#"} target="_blank">
               <div className="bg-[#f9fafb] p-6 rounded-xl shadow hover:shadow-md transition-all">
@@ -135,29 +156,75 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Vision Section */}
-      <section id="vision" className="px-8 sm:px-20 py-20 bg-[#f0f9ff]">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl font-bold mb-6 text-primary">Building the Foundations of a Better Future</h2>
-          <p className="text-gray-700 text-lg">
-            KSHC is committed to becoming a major economic group, driving growth, innovation, and impact through integrated ventures, community upliftment, and preparing the region for future challenges.
-          </p>
-        </div>
-      </section>
+      <section id="vision" className="px-8 sm:px-20 py-24 bg-gradient-to-br from-[#e6f0ff] via-[#f0f9ff] to-white">
+  <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 items-center gap-12">
 
-      {/* Establishment & Board */}
-      <section className="px-8 sm:px-20 py-20 bg-white">
-        <h2 className="text-3xl font-bold mb-6 text-center text-primary">Establishment & Leadership</h2>
-        <p className="text-gray-600 text-center mb-8">Founded under the Sudanese Companies Law.</p>
-        <div className="max-w-3xl mx-auto space-y-4">
-          <h3 className="text-xl font-semibold text-primary">Board of Directors</h3>
-          <ul className="list-disc list-inside text-gray-600">
-            <li>Major General Pilot Al-Fateh Mohamed Ahmed Aroua – Chairman</li>
-            <li>Hisham Mustafa Allam – Member</li>
-            <li>Osama Michel Matta – Member</li>
-          </ul>
+    {/* Image / Illustration */}
+    <div className="flex justify-center">
+      <Image
+        src="/20824346_6342383.svg"
+        alt="Vision illustration"
+        width={400}
+        height={400}
+        
+      />
+    </div>
+
+    {/* Text Content */}
+    <div className="text-center md:text-left">
+      <h2 className="text-4xl sm:text-5xl font-extrabold text-blue-900 mb-4 leading-tight">
+        Building the <span className="text-blue-600">Foundations</span> of a <span className="text-blue-600">Better Future</span>
+      </h2>
+      <p className="text-lg text-gray-700 leading-relaxed">
+        At KSHC, we strive to shape a resilient and thriving economy through innovation, integrated ventures, and transformative partnerships. Our focus is on <span className="font-medium text-blue-700">long-term impact</span>, <span className="font-medium text-blue-700">community upliftment</span>, and preparing Sudan for the opportunities of tomorrow.
+      </p>
+    </div>
+  </div>
+</section>
+
+
+<section className="px-8 sm:px-20 py-24 bg-gradient-to-br from-[#f7faff] via-white to-[#f4f8ff]">
+  <div className="max-w-5xl mx-auto text-center">
+    <h2 className="text-4xl font-bold text-blue-900 mb-4">Establishment & Leadership</h2>
+    <p className="text-gray-600 text-lg mb-12">
+      Officially established under the <strong>Sudanese Companies Law</strong>, KSHC is governed by an experienced board of visionaries.
+    </p>
+
+    {/* Board Cards */}
+    <div className="grid sm:grid-cols-3 gap-8">
+      {[
+        {
+          name: "Maj. Gen. Pilot Al-Fateh Mohamed Ahmed Aroua",
+          role: "Chairman",
+          image: "/avatar.png"
+        },
+        {
+          name: "Hisham Mustafa Allam",
+          role: "Board Member",
+          image: "/avatar.png"
+        },
+        {
+          name: "Osama Michel Matta",
+          role: "Board Member",
+          image: "/avatar.png"
+        },
+      ].map((member, idx) => (
+        <div key={idx} className="bg-white rounded-xl shadow-md p-6 text-center hover:shadow-lg transition-all">
+          <Image
+            src={member.image}
+            alt={member.name}
+            width={100}
+            height={100}
+            className="rounded-full mx-auto mb-4 object-cover"
+          />
+          <h3 className="text-lg font-semibold text-blue-800">{member.name}</h3>
+          <p className="text-sm text-gray-500">{member.role}</p>
         </div>
-      </section>
+      ))}
+    </div>
+  </div>
+</section>
+
 
       {/* CEO Message */}
       <section className="px-8 sm:px-20 py-20 bg-[#f7f9fc]">
