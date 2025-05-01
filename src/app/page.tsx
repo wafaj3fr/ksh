@@ -196,12 +196,12 @@ export default function Home() {
         {
           name: "Maj. Gen. Pilot Al-Fateh Mohamed Ahmed Aroua",
           role: "Chairman",
-          image: "/avatar.png"
+          image: "/avatar4.png"
         },
         {
           name: "Hisham Mustafa Allam",
           role: "Board Member",
-          image: "/avatar.png"
+          image: "/avatar2.png"
         },
         {
           name: "Osama Michel Matta",
