@@ -39,7 +39,7 @@ export default function Home() {
       </header>
 
       {/* Hero Section */}
-      <section id="home" className="text-center px-8 sm:px-20 py-24 bg-[url('/image.png')] bg-cover bg-center">
+      <section id="home" className="text-center px-8 sm:px-20 py-24 bg-[url('/banner.png')] bg-cover bg-center">
         <h1 className="text-5xl sm:text-6xl font-extrabold mb-6 text-primary leading-tight text-white">
           We Aspire to Excellence<br />Through Integration
         </h1>
