@@ -1,46 +1,89 @@
 const project = {
-    name: 'project',
-    title: 'Project',
-    type: 'document',
-    fields: [
+  name: 'project',
+  title: 'Project',
+  type: 'document',
+  fields: [
+    {
+      name: 'title',
+      title: 'Title',
+      type: 'string',
+      validation: Rule => Rule.required() // Added validation
+    },
+    {
+      name: 'tagline',
+      title: 'Tagline',
+      type: 'string',
+      description: 'Main headline under the title'
+    },
+    {
+      name: 'description',
+      title: 'Description',
+      type: 'text',
+      rows: 3
+    },
+    {
+      name: 'aboutSection',
+      title: 'About Section',
+      type: 'object',
+      fields: [
         {
-            name: 'name',
-            title: 'Project Name',
-            type: 'string',
+          name: 'heading',
+          title: 'Heading',
+          type: 'string',
+          validation: Rule => Rule.required() // Added validation
         },
         {
-            name: 'slug',
-            title: 'Slug',
-            type: 'slug',
-            options: {source: 'name',}
-        },
+          name: 'content',
+          title: 'Content',
+          type: 'array',
+          of: [{ type: 'block' }],
+        }
+      ]
+    },
+    {
+      name: 'subsidiaries',
+      title: 'Subsidiaries',
+      type: 'array',
+      of: [
         {
-            name: 'image',
-            title: 'Project Image',
-            type: 'image',
-            options: {hotspot: true,},
-
-            fields: [
-                {
-                    name: 'alt',
-                    title: 'Alternative Text',
-                    type: 'string',
-                }
-            ]
-        },
+          type: 'reference',
+          to: [{ type: 'company' }],
+          options: { disableNew: true } // Prevent creating new companies from here
+        }
+      ]
+    },
+    {
+      name: 'logo',
+      title: 'Logo',
+      type: 'image',
+      options: {
+        hotspot: true // Enable image cropping
+      }
+    },
+    {
+      name: 'heroImage',
+      title: 'Hero Image',
+      type: 'image',
+      options: {
+        hotspot: true
+      },
+      fields: [
         {
-            name: 'url',
-            title: 'Project URL',
-            type: 'url',
-        },
-
-        {
-            name: 'content',
-            title: 'Project Content',
-            type: 'array',
-            of: [{ type: 'block' }],
-        },
-
-    ]
+          name: 'alt',
+          title: 'Alternative Text',
+          type: 'string',
+          description: 'Important for SEO and accessibility'
+        }
+      ]
+    }
+  ],
+  // Add preview configuration
+  preview: {
+    select: {
+      title: 'title',
+      media: 'logo'
+    }
+  }
 };
+
 export default project;

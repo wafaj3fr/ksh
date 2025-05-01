@@ -1,29 +1,78 @@
 import { createClient, groq } from "next-sanity";
-import { Project } from "../../types/Project";
 
-export async function getProjects(): Promise<Project[]> {
-  const client = createClient({
-    projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
-    dataset: process.env.NEXT_PUBLIC_SANITY_DATASET,
-    apiVersion: '2025-04-29',
-    useCdn: true,
-  });
-  const query = groq`*[_type == "project"]{
+const client = createClient({
+  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!,
+  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET!,
+  apiVersion: '2025-04-29',
+  useCdn: process.env.NODE_ENV === 'production',
+});
+
+export async function getProjects() {
+  return client.fetch(groq`*[_type == "project"]{
     _id,
-    name,
-    content,
-    slug,
+    title,
+    tagline,
+    description,
     "slug": slug.current,
-    image {
-      asset -> {
+    logo {
+      asset->{
         url
       }
     },
-    technologies[] -> {
-      name
+    heroImage {
+      asset->{
+        url
+      },
+      alt
+    },
+    aboutSection {
+      heading,
+      content,
+    },
+    subsidiaries[]->{
+      _id,
+      name,
+      "slug": slug.current,
+      logo {
+        asset->{
+          url
+        }
+      }
     }
-  
-  }`;
-  const projects = await client.fetch(query);
-  return projects;
+  }`);
+}
+
+export async function getProjectBySlug(slug: string) {
+  return client.fetch(groq`*[_type == "project" && slug.current == $slug][0]{
+    _id,
+    title,
+    tagline,
+    description,
+    "slug": slug.current,
+    logo {
+      asset->{
+        url
+      }
+    },
+    heroImage {
+      asset->{
+        url
+      },
+      alt
+    },
+    aboutSection {
+      heading,
+      content
+    },
+    subsidiaries[]->{
+      _id,
+      name,
+      "slug": slug.current,
+      logo {
+        asset->{
+          url
+        }
+      }
+    }
+  }`, { slug });
 }
