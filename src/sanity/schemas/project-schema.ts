@@ -75,7 +75,25 @@ const project = {
           description: 'Important for SEO and accessibility'
         }
       ]
-    }
+    },
+    {
+      name: 'ceoMessage',
+      title: 'CEO Message',
+      type: 'reference',
+      to: [{ type: 'ceoMessage' }]
+    },
+    {
+      name: 'visionSection',
+      title: 'Vision Section',
+      type: 'reference',
+      to: [{ type: 'visionSection' }]
+    },
+    {
+      name: 'whyUs',
+      title: 'Why Us',
+      type: 'reference',
+      to: [{ type: 'whyUs' }]
+    },
   ],
   // Add preview configuration
   preview: {

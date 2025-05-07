@@ -1,7 +1,8 @@
-'use client';
 import { getProjects } from "../sanity/sanity-utils";
 import Image from "next/image";
 import { PortableText } from "@portabletext/react";
+
+export const revalidate = 3600;
 
 export default async function Home() {
   const projects = await getProjects();

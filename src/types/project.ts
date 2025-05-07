@@ -15,6 +15,9 @@ export type Project = {
         heading: string;
         content: PortableTextBlock[];
     };
+    ceoMessage?: CeoMessage;
+    visionSection?: VisionSection;
+    whyUs?: WhyUs;
     tagline: string;
     title: string;
     subsidiaries: Array<{
@@ -22,3 +25,21 @@ export type Project = {
         slug: { current: string };
     }>;
 }
+
+export type CeoMessage = {
+    _id: string;
+    heading: string;
+    message: PortableTextBlock[];
+  };
+  
+  export type VisionSection = {
+    _id: string;
+    title: string;
+    content: any;
+  };
+  
+  export type WhyUs = {
+    _id: string;
+    title: string;
+    points: string[];
+  };

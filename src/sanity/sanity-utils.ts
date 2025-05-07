@@ -29,6 +29,18 @@ export async function getProjects() {
       heading,
       content,
     },
+    ceoMessage->{
+        heading,
+        message
+      },
+      visionSection->{
+        title,
+        content
+      },
+      whyUs->{
+        title,
+        points
+      },
     subsidiaries[]->{
       _id,
       name,
