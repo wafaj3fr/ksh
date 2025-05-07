@@ -1,6 +1,6 @@
-module.exports = {
-  plugins: {
-    tailwindcss: {},
-    autoprefixer: {},
-  },
+const config = {
+  darkMode: 'class',
+  plugins: ["@tailwindcss/postcss"],
 };
+
+export default config;
