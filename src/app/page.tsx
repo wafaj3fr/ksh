@@ -55,17 +55,17 @@ export default function Home() {
     <p className="text-lg text-gray-600">KSHC is an innovative investment group advancing economic development in Sudan through strategic and integrated ventures.</p>
 
     <div className="grid sm:grid-cols-2 gap-8">
-      <div className="bg-blue-50 p-6 rounded-xl shadow hover:shadow-md transition text-left">
+      <div className="bg-gray-50 p-6 rounded-xl shadow hover:shadow-md transition text-left">
         <div className="flex items-center gap-4 mb-3">
-          <Globe className="text-blue-600" size={28} />
-          <h3 className="text-xl font-semibold text-blue-800">Our Vision</h3>
+          <Globe className="text-gray-600" size={28} />
+          <h3 className="text-xl font-semibold text-gray-800">Our Vision</h3>
         </div>
         <p className="text-gray-700">To establish the largest economic group with foreign capital contributing to Sudan’s growth.</p>
       </div>
-      <div className="bg-blue-50 p-6 rounded-xl shadow hover:shadow-md transition text-left">
+      <div className="bg-gray-50 p-6 rounded-xl shadow hover:shadow-md transition text-left">
         <div className="flex items-center gap-4 mb-3">
-          <Target className="text-blue-600" size={28} />
-          <h3 className="text-xl font-semibold text-blue-800">Our Mission</h3>
+          <Target className="text-gray-600" size={28} />
+          <h3 className="text-xl font-semibold text-gray-800">Our Mission</h3>
         </div>
         <p className="text-gray-700">Supporting the Sudanese economy internally and bringing global innovations externally.</p>
       </div>
@@ -73,17 +73,17 @@ export default function Home() {
 
     <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
       {[
-        { icon: <Users className="text-blue-600" size={28} />, title: "Kuwait-Sudan Ties", desc: "Strengthening economic relationships between Kuwait and Sudan." },
-        { icon: <TrendingUp className="text-blue-600" size={28} />, title: "Reconstruction Focus", desc: "Supporting post-conflict rebuilding efforts in Sudan." },
-        { icon: <Layers className="text-blue-600" size={28} />, title: "Smart Investments", desc: "Investing in impactful sectors that drive innovation." },
-        { icon: <Users className="text-blue-600" size={28} />, title: "Talent Development", desc: "Nurturing innovation and Sudanese professionals." },
-        { icon: <Target className="text-blue-600" size={28} />, title: "Social Responsibility", desc: "Building community connections across generations." },
-        { icon: <Globe className="text-blue-600" size={28} />, title: "Smart Partnerships", desc: "Expanding impact through collaboration and strong asset management." },
+        { icon: <Users className="text-gray-600" size={28} />, title: "Kuwait-Sudan Ties", desc: "Strengthening economic relationships between Kuwait and Sudan." },
+        { icon: <TrendingUp className="text-gray-600" size={28} />, title: "Reconstruction Focus", desc: "Supporting post-conflict rebuilding efforts in Sudan." },
+        { icon: <Layers className="text-gray-600" size={28} />, title: "Smart Investments", desc: "Investing in impactful sectors that drive innovation." },
+        { icon: <Users className="text-gray-600" size={28} />, title: "Talent Development", desc: "Nurturing innovation and Sudanese professionals." },
+        { icon: <Target className="text-gray-600" size={28} />, title: "Social Responsibility", desc: "Building community connections across generations." },
+        { icon: <Globe className="text-gray-600" size={28} />, title: "Smart Partnerships", desc: "Expanding impact through collaboration and strong asset management." },
       ].map((goal, i) => (
-        <div key={i} className="bg-blue-50 p-6 rounded-xl shadow hover:shadow-md transition text-left">
+        <div key={i} className="bg-gray-50 p-6 rounded-xl shadow hover:shadow-md transition text-left">
           <div className="flex items-center gap-4 mb-3">
             {goal.icon}
-            <h4 className="text-md font-semibold text-blue-800">{goal.title}</h4>
+            <h4 className="text-md font-semibold text-gray-800">{goal.title}</h4>
           </div>
           <p className="text-gray-700 text-sm">{goal.desc}</p>
         </div>
@@ -92,7 +92,7 @@ export default function Home() {
   </div>
 </section>
 
-<section id="services" className="px-8 sm:px-20 py-24 bg-gradient-to-br from-[#f0f4fa] to-[#e8f0fc]">
+<section id="services" className="px-8 sm:px-20 py-24 bg-gray-100">
   <div className="max-w-6xl mx-auto text-center">
     <h2 className="text-4xl font-bold text-gray-900 mb-4">Fields of Operation</h2>
     <p className="text-lg text-gray-700 mb-12">
@@ -104,28 +104,28 @@ export default function Home() {
         {
           title: "Telecom & Technology",
           desc: "Empowering connectivity and innovation through advanced ICT infrastructure.",
-          icon: <Wifi className="text-blue-600" size={32} />
+          icon: <Wifi className="text-gray-600" size={32} />
         },
         {
           title: "Real Estate & Development",
           desc: "Planning and managing sustainable urban and commercial growth.",
-          icon: <Building className="text-blue-600" size={32} />
+          icon: <Building className="text-gray-600" size={32} />
         },
         {
           title: "Supply Chain & Logistics",
           desc: "Streamlining procurement, storage, and distribution systems nationwide.",
-          icon: <Truck className="text-blue-600" size={32} />
+          icon: <Truck className="text-gray-600" size={32} />
         },
         {
           title: "Facility Management",
           desc: "Delivering integrated smart solutions for modern infrastructure.",
-          icon: <Hammer className="text-blue-600" size={32} />
+          icon: <Hammer className="text-gray-600" size={32} />
         }
       ].map((item, idx) => (
         <div key={idx} className="bg-white p-6 rounded-xl shadow hover:shadow-lg transition text-left">
           <div className="flex items-center gap-4 mb-4">
             {item.icon}
-            <h4 className="text-lg font-semibold text-blue-800">{item.title}</h4>
+            <h4 className="text-lg font-semibold text-gray-800">{item.title}</h4>
           </div>
           <p className="text-sm text-gray-700">{item.desc}</p>
         </div>
@@ -156,7 +156,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="vision" className="px-8 sm:px-20 py-24 bg-gradient-to-br from-[#e6f0ff] via-[#f0f9ff] to-white">
+      <section id="vision" className="px-8 sm:px-20 py-24 bg-gray-100">
   <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 items-center gap-12">
 
     {/* Image / Illustration */}
@@ -172,11 +172,11 @@ export default function Home() {
 
     {/* Text Content */}
     <div className="text-center md:text-left">
-      <h2 className="text-4xl sm:text-5xl font-extrabold text-blue-900 mb-4 leading-tight">
-        Building the <span className="text-blue-600">Foundations</span> of a <span className="text-blue-600">Better Future</span>
+      <h2 className="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-4 leading-tight">
+        Building the <span className="text-gray-600">Foundations</span> of a <span className="text-gray-600">Better Future</span>
       </h2>
       <p className="text-lg text-gray-700 leading-relaxed">
-        At KSHC, we strive to shape a resilient and thriving economy through innovation, integrated ventures, and transformative partnerships. Our focus is on <span className="font-medium text-blue-700">long-term impact</span>, <span className="font-medium text-blue-700">community upliftment</span>, and preparing Sudan for the opportunities of tomorrow.
+        At KSHC, we strive to shape a resilient and thriving economy through innovation, integrated ventures, and transformative partnerships. Our focus is on <span className="font-medium text-gray-700">long-term impact</span>, <span className="font-medium text-gray-700">community upliftment</span>, and preparing Sudan for the opportunities of tomorrow.
       </p>
     </div>
   </div>
@@ -185,7 +185,7 @@ export default function Home() {
 
 <section className="px-8 sm:px-20 py-24 bg-gradient-to-br from-[#f7faff] via-white to-[#f4f8ff]">
   <div className="max-w-5xl mx-auto text-center">
-    <h2 className="text-4xl font-bold text-blue-900 mb-4">Establishment & Leadership</h2>
+    <h2 className="text-4xl font-bold text-gray-900 mb-4">Establishment & Leadership</h2>
     <p className="text-gray-600 text-lg mb-12">
       Officially established under the <strong>Sudanese Companies Law</strong>, KSHC is governed by an experienced board of visionaries.
     </p>
@@ -217,7 +217,7 @@ export default function Home() {
             height={100}
             className="rounded-full mx-auto mb-4 object-cover"
           />
-          <h3 className="text-lg font-semibold text-blue-800">{member.name}</h3>
+          <h3 className="text-lg font-semibold text-gray-800">{member.name}</h3>
           <p className="text-sm text-gray-500">{member.role}</p>
         </div>
       ))}
@@ -246,7 +246,7 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer id="contact" className="text-center py-10 bg-[#f0f9ff] border-t border-gray-200">
+      <footer id="contact" className="text-center py-10 bg-gray-100 border-t border-gray-200">
         <p className="text-sm text-gray-500">
           © 2025 Kuwaiti Sudanese Holding Company (KSHC). All rights reserved.
         </p>
