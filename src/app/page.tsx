@@ -46,6 +46,7 @@ export default async function Home() {
                       alt={project.heroImage.alt || project.title}
                       fill
                       className="object-cover rounded-lg"
+                      sizes="(max-width: 768px) 100vw, (min-width: 768px) 50vw"
                     />
                   </div>
                 )}

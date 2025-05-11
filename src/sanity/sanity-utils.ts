@@ -6,6 +6,9 @@ const client = createClient({
   apiVersion: '2025-04-29',
   useCdn: process.env.NODE_ENV === 'production',
 });
+console.log("Sanity Project ID:", process.env.NEXT_PUBLIC_SANITY_PROJECT_ID);
+console.log("Sanity Dataset:", process.env.NEXT_PUBLIC_SANITY_DATASET);
+
 
 export async function getProjects() {
   return client.fetch(groq`*[_type == "project"]{
