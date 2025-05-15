@@ -11,28 +11,26 @@ export default function Home() {
   return (
     <div className="min-h-screen text-gray-900 font-sans bg-[#f5f7fa]">
       {/* Header */}
-      <header className="flex justify-between items-center px-8 sm:px-20 py-6 bg-white shadow-md sticky top-0 z-50">
-        <div className="text-2xl font-bold text-primary">KSHC</div>
-        <nav className="hidden sm:flex gap-8 text-md font-medium">
-          <a href="#about" className="text-gray-700 hover:text-primary transition">About</a>
-          <a href="#sectors" className="text-gray-700 hover:text-primary transition">Sectors</a>
-          <a href="#subsidiaries" className="text-gray-700 hover:text-primary transition">Subsidiaries</a>
-          <a href="#news" className="text-gray-700 hover:text-primary transition">News</a>
-          <a href="#contact" className="text-gray-700 hover:text-primary transition">Contact</a>
-        </nav>
-        <button onClick={() => setIsOpen(!isOpen)} className="sm:hidden text-gray-800">
-          {isOpen ? <X size={28} /> : <Menu size={28} />}
-        </button>
-        {isOpen && (
-          <div className="absolute top-20 right-8 bg-white shadow-lg p-6 rounded-xl flex flex-col gap-4 sm:hidden">
-            <a href="#about" className="text-gray-700 hover:text-primary transition">About</a>
-            <a href="#sectors" className="text-gray-700 hover:text-primary transition">Sectors</a>
-            <a href="#subsidiaries" className="text-gray-700 hover:text-primary transition">Subsidiaries</a>
-            <a href="#news" className="text-gray-700 hover:text-primary transition">News</a>
-            <a href="#contact" className="text-gray-700 hover:text-primary transition">Contact</a>
-          </div>
-        )}
-      </header>
+      <header className="flex justify-between items-center px-8 sm:px-20 py-6 bg-white/30 backdrop-blur-md shadow-md sticky top-0 z-50 border-b border-white/20">
+  <a href="/"><div className="text-2xl font-bold text-primary">KSHC</div></a>
+  <nav className="hidden sm:flex gap-8 text-md font-medium">
+    <a href="/about" className="text-gray-700 hover:text-primary hover:underline transition">About</a>
+    <a href="/subsidiaries" className="text-gray-700 hover:text-primary hover:underline transition">Subsidiaries</a>
+    <a href="/news" className="text-gray-700 hover:text-primary hover:underline transition">News</a>
+    <a href="/contact" className="text-gray-700 hover:text-primary hover:underline transition">Contact</a>
+  </nav>
+  <button onClick={() => setIsOpen(!isOpen)} className="sm:hidden text-gray-800">
+    {isOpen ? <X size={28} /> : <Menu size={28} />}
+  </button>
+  {isOpen && (
+    <div className="absolute top-20 right-8 bg-white/80 backdrop-blur-md shadow-lg p-6 rounded-xl flex flex-col gap-4 sm:hidden border border-white/30">
+      <a href="/about" className="text-gray-700 hover:text-primary transition">About</a>
+      <a href="/subsidiaries" className="text-gray-700 hover:text-primary transition">Subsidiaries</a>
+      <a href="/news" className="text-gray-700 hover:text-primary transition">News</a>
+      <a href="/contact" className="text-gray-700 hover:text-primary transition">Contact</a>
+    </div>
+  )}
+</header>
 
       {/* Hero Section */}
       <section id="home" className="text-center px-8 sm:px-20 py-40 min-h-[600px] bg-[url('/banner.png')] bg-cover bg-center">
@@ -206,7 +204,9 @@ export default function Home() {
           <h2 className="text-3xl font-bold mb-6 text-primary">CEO's Message</h2>
           <p className="text-lg text-gray-600">
             At KSHC, we pride ourselves on being a Kuwaiti-backed company contributing to Sudan’s economy. We strive for sustainable growth, market-aligned investments, and empowering Sudanese talent. Our values and vision guide us toward making a lasting impact on our country and community.
-          <p className="mt-6 text-gray-700 font-medium">— Mahmoud Alassad</p>
+            <br />
+            <br />
+          <span className="mt-6 text-gray-700 font-medium">— Mahmoud Alassad</span>
           </p>
         </div>
       </section>
