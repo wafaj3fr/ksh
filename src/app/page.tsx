@@ -13,33 +13,29 @@ export default function Home() {
       {/* Header */}
       <header className="flex justify-between items-center px-8 sm:px-20 py-6 bg-white shadow-md sticky top-0 z-50">
         <div className="text-2xl font-bold text-primary">KSHC</div>
-
-        {/* Desktop Nav */}
         <nav className="hidden sm:flex gap-8 text-md font-medium">
           <a href="#about" className="text-gray-700 hover:text-primary transition">About</a>
-          <a href="#services" className="text-gray-700 hover:text-primary transition">Services</a>
-          <a href="#vision" className="text-gray-700 hover:text-primary transition">Vision</a>
+          <a href="#sectors" className="text-gray-700 hover:text-primary transition">Sectors</a>
+          <a href="#subsidiaries" className="text-gray-700 hover:text-primary transition">Subsidiaries</a>
+          <a href="#news" className="text-gray-700 hover:text-primary transition">News</a>
           <a href="#contact" className="text-gray-700 hover:text-primary transition">Contact</a>
         </nav>
-
-        {/* Mobile Menu Button */}
         <button onClick={() => setIsOpen(!isOpen)} className="sm:hidden text-gray-800">
           {isOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
-
-        {/* Mobile Nav Dropdown */}
         {isOpen && (
           <div className="absolute top-20 right-8 bg-white shadow-lg p-6 rounded-xl flex flex-col gap-4 sm:hidden">
             <a href="#about" className="text-gray-700 hover:text-primary transition">About</a>
-            <a href="#services" className="text-gray-700 hover:text-primary transition">Services</a>
-            <a href="#vision" className="text-gray-700 hover:text-primary transition">Vision</a>
+            <a href="#sectors" className="text-gray-700 hover:text-primary transition">Sectors</a>
+            <a href="#subsidiaries" className="text-gray-700 hover:text-primary transition">Subsidiaries</a>
+            <a href="#news" className="text-gray-700 hover:text-primary transition">News</a>
             <a href="#contact" className="text-gray-700 hover:text-primary transition">Contact</a>
           </div>
         )}
       </header>
 
       {/* Hero Section */}
-      <section id="home" className="text-center px-8 sm:px-20 py-24 bg-[url('/banner.png')] bg-cover bg-center">
+      <section id="home" className="text-center px-8 sm:px-20 py-40 min-h-[600px] bg-[url('/banner.png')] bg-cover bg-center">
         <h1 className="text-5xl sm:text-6xl font-extrabold mb-6 text-primary leading-tight text-white">
           We Aspire to Excellence<br />Through Integration
         </h1>
@@ -48,11 +44,39 @@ export default function Home() {
         </p>
       </section>
 
+      <section id="vision" className="px-8 sm:px-20 py-24 bg-gray-100">
+  <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 items-center gap-12">
+    <h2 className="text-4xl font-bold text-gray-900">The Kuwaiti Sudanese Holding Company</h2>
+    <p className="text-lg text-gray-600">KSHC is an innovative investment group advancing economic development in Sudan through strategic and integrated ventures.</p>
+
+    {/* Image / Illustration */}
+    <div className="flex justify-center">
+      <Image
+        src="/20824346_6342383.svg"
+        alt="Vision illustration"
+        width={400}
+        height={400}
+        
+      />
+    </div>
+
+    {/* Text Content */}
+    <div className="text-center md:text-left">
+      <h2 className="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-4 leading-tight">
+        Building the <span className="text-gray-600">Foundations</span> of a <span className="text-gray-600">Better Future</span>
+      </h2>
+      <p className="text-lg text-gray-700 leading-relaxed">
+        At KSHC, we strive to shape a resilient and thriving economy through innovation, integrated ventures, and transformative partnerships. Our focus is on <span className="font-medium text-gray-700">long-term impact</span>, <span className="font-medium text-gray-700">community upliftment</span>, and preparing Sudan for the opportunities of tomorrow.
+      </p>
+    </div>
+  </div>
+</section>
+
       {/* About Section */}
 <section id="about" className="px-8 sm:px-20 py-24 bg-white text-gray-800">
   <div className="max-w-6xl mx-auto text-center space-y-12">
-    <h2 className="text-4xl font-bold text-gray-900">The Kuwaiti Sudanese Holding Company</h2>
-    <p className="text-lg text-gray-600">KSHC is an innovative investment group advancing economic development in Sudan through strategic and integrated ventures.</p>
+    {/* <h2 className="text-4xl font-bold text-gray-900">The Kuwaiti Sudanese Holding Company</h2>
+    <p className="text-lg text-gray-600">KSHC is an innovative investment group advancing economic development in Sudan through strategic and integrated ventures.</p> */}
 
     <div className="grid sm:grid-cols-2 gap-8">
       <div className="bg-gray-50 p-6 rounded-xl shadow hover:shadow-md transition text-left">
@@ -94,7 +118,7 @@ export default function Home() {
 
 <section id="services" className="px-8 sm:px-20 py-24 bg-gray-100">
   <div className="max-w-6xl mx-auto text-center">
-    <h2 className="text-4xl font-bold text-gray-900 mb-4">Fields of Operation</h2>
+    <h2 className="text-4xl font-bold text-gray-900 mb-4">Key Investment Sectors</h2>
     <p className="text-lg text-gray-700 mb-12">
       Driving progress across essential sectors through strategic and specialized investment.
     </p>
@@ -156,31 +180,36 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="vision" className="px-8 sm:px-20 py-24 bg-gray-100">
-  <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 items-center gap-12">
+      {/* News & Updates */}
+      <section id="news" className="px-8 sm:px-20 py-20 bg-gray-100">
+        <div className="max-w-5xl mx-auto text-center">
+          <h2 className="text-3xl font-bold mb-8 text-primary">News & Updates</h2>
+          {/* Placeholder for dynamic news - replace with dynamic content */}
+          <div className="grid sm:grid-cols-2 gap-8">
+            <div className="bg-white rounded-xl shadow p-6 text-left">
+              <h4 className="font-semibold text-lg mb-2">KSHC Launches New Investment Initiative</h4>
+              <p className="text-gray-600 text-sm mb-2">May 2025</p>
+              <p className="text-gray-700 text-sm">KSHC announces a new investment initiative focused on sustainable infrastructure in Sudan.</p>
+            </div>
+            <div className="bg-white rounded-xl shadow p-6 text-left">
+              <h4 className="font-semibold text-lg mb-2">Partnership with Global Tech Leaders</h4>
+              <p className="text-gray-600 text-sm mb-2">April 2025</p>
+              <p className="text-gray-700 text-sm">KSHC partners with leading technology firms to drive digital transformation in the region.</p>
+            </div>
+          </div>
+        </div>
+      </section>
 
-    {/* Image / Illustration */}
-    <div className="flex justify-center">
-      <Image
-        src="/20824346_6342383.svg"
-        alt="Vision illustration"
-        width={400}
-        height={400}
-        
-      />
-    </div>
-
-    {/* Text Content */}
-    <div className="text-center md:text-left">
-      <h2 className="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-4 leading-tight">
-        Building the <span className="text-gray-600">Foundations</span> of a <span className="text-gray-600">Better Future</span>
-      </h2>
-      <p className="text-lg text-gray-700 leading-relaxed">
-        At KSHC, we strive to shape a resilient and thriving economy through innovation, integrated ventures, and transformative partnerships. Our focus is on <span className="font-medium text-gray-700">long-term impact</span>, <span className="font-medium text-gray-700">community upliftment</span>, and preparing Sudan for the opportunities of tomorrow.
-      </p>
-    </div>
-  </div>
-</section>
+      {/* CEO Message */}
+      <section className="px-8 sm:px-20 py-20 bg-[#f7f9fc]">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 items-center gap-12">
+          <h2 className="text-3xl font-bold mb-6 text-primary">CEO's Message</h2>
+          <p className="text-lg text-gray-600">
+            At KSHC, we pride ourselves on being a Kuwaiti-backed company contributing to Sudan’s economy. We strive for sustainable growth, market-aligned investments, and empowering Sudanese talent. Our values and vision guide us toward making a lasting impact on our country and community.
+          <p className="mt-6 text-gray-700 font-medium">— Mahmoud Alassad</p>
+          </p>
+        </div>
+      </section>
 
 
 <section className="px-8 sm:px-20 py-24 bg-gradient-to-br from-[#f7faff] via-white to-[#f4f8ff]">
@@ -226,23 +255,23 @@ export default function Home() {
 </section>
 
 
-      {/* CEO Message */}
-      <section className="px-8 sm:px-20 py-20 bg-[#f7f9fc]">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl font-bold mb-6 text-primary">CEO's Message</h2>
-          <p className="text-lg text-gray-600">
-            At KSHC, we pride ourselves on being a Kuwaiti-backed company contributing to Sudan’s economy. We strive for sustainable growth, market-aligned investments, and empowering Sudanese talent. Our values and vision guide us toward making a lasting impact on our country and community.
-          </p>
-          <p className="mt-6 text-gray-700 font-medium">— Mahmoud Alassad</p>
-        </div>
-      </section>
-
       {/* Why Us */}
       <section className="px-8 sm:px-20 py-20 bg-white">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 items-center gap-12">
         <h2 className="text-3xl font-bold mb-8 text-center text-primary">Why Choose KSHC?</h2>
         <p className="text-center text-lg text-gray-600 max-w-4xl mx-auto">
           We follow a strategic, credible, and innovative investment methodology to build a sustainable and impactful legacy through comprehensive services and long-term trust with our partners.
         </p>
+        </div>
+      </section>
+
+      {/* Call to Action */}
+      <section className="px-8 sm:px-20 py-16 bg-primary text-center">
+        <h2 className="text-3xl font-bold mb-4">Ready to Partner or Invest?</h2>
+        <p className="text-lg mb-6">Contact us to explore investment opportunities or join our growing team.</p>
+        <a href="#contact" className="inline-block px-8 py-3 bg-white text-primary rounded-full font-semibold shadow hover:bg-gray-100 transition">
+          Get in Touch
+        </a>
       </section>
 
       {/* Footer */}
