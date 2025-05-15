@@ -1,9 +1,11 @@
-import project from "./project-schema";
-import company from './company';
-import ceoMessage from './ceoMessage';
-import visionSection from './visionSection';
-import whyUs from './whyUs';
+import ceoMessage from './ceoMessage';import whyUs from './whyUs';
+import news from "./news";
+import subsidiary from "./subsidiary";
+import settings from "./setting";
+import csr from "./csr";
+import missionVisionGoals from "./missionVisionGoals";
 
-const schemas = [project, company, ceoMessage, visionSection, whyUs];
+
+const schemas = [ceoMessage, missionVisionGoals, whyUs, news, subsidiary, settings, csr];
 
 export default schemas;
