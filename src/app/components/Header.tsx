@@ -4,17 +4,17 @@ import { Menu, X } from "lucide-react";
 import Image from "next/image";
 
 interface HeaderProps {
-  logoUrl?: string;
+  logo?: { asset: { url: string }; alt?: string };
 }
 
-export default function Header({ logoUrl }: HeaderProps) {
+export default function Header({ logo }: HeaderProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <header className="flex justify-between items-center px-8 sm:px-20 py-6 bg-white shadow-md sticky top-0 z-50">
       <div className="text-2xl font-bold text-primary">
-        {logoUrl ? (
-          <Image src={logoUrl} alt="KSHC Logo" width={150} height={50} />
+        {logo ? (
+          <Image src={logo.asset.url} alt={logo.alt || "KSHC Logo"} width={150} height={50} />
         ) : (
           "KSHC"
         )}

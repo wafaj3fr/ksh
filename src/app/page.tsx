@@ -19,10 +19,11 @@ export default async function Home() {
 
   return (
     <div className="min-h-screen text-gray-900 font-sans bg-[#f5f7fa]">
-      <Header logoUrl={settings?.logo?.asset?.url} />
+      <Header logo={settings?.logo} />
       <Hero
-        title={settings?.heroSection?.title || "We Aspire to Excellence Through Integration"}
-        subtitle={settings?.heroSection?.subtitle || "A Leading Investment Group Driven by Innovation and Vision"}
+        heroImage={settings?.heroImage}
+        heroTitle={settings?.heroTitle}
+        heroSubtitle={settings?.heroSubtitle}
       />
       <MissionVision mission={missionData?.mission} vision={missionData?.vision} />
       <Subsidiaries subsidiaries={subsidiaries} />
