@@ -178,3 +178,53 @@ export async function getCEOMessage() {
     return null;
   }
 }
+
+export async function getAboutUs() {
+  try {
+    const data = await client.fetch(groq`
+      *[_type == "about"][0]{
+        title,
+        content
+      }
+    `);
+    return data;
+  } catch (error) {
+    console.error("Error fetching About Us:", error);
+    return null;
+  }
+}
+
+export async function getInvestmentSectors() {
+  try {
+    const data = await client.fetch(groq`
+      *[_type == "investmentSector"]{
+        title,
+        description,
+        icon
+      }
+    `);
+    return data;
+  } catch (error) {
+    console.error("Error fetching Investment Sectors:", error);
+    return [];
+  }
+}
+
+export async function getContactInfo() {
+  try {
+    const data = await client.fetch(groq`
+      *[_type == "contact"][0]{
+        title,
+        phone,
+        email,
+        address,
+        map
+      }
+    `);
+    return data;
+  } catch (error) {
+    console.error("Error fetching Contact Info:", error);
+    return null;
+  }
+}
+
