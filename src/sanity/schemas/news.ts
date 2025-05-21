@@ -1,76 +1,68 @@
-// src/schemas/news.ts
-export default {
+const news = {
   name: "news",
   title: "News",
   type: "document",
   fields: [
     {
       name: "title",
-      title: "Title",
+      title: "News Title",
       type: "string",
-      validation: (Rule) => Rule.required().min(5).max(100),
+      validation: (Rule) => Rule.required(),
     },
     {
       name: "slug",
       title: "Slug",
       type: "slug",
-      options: {
-        source: "title",
-        maxLength: 96,
-      },
+      options: { source: "title", maxLength: 96 },
       validation: (Rule) => Rule.required(),
     },
     {
       name: "date",
       title: "Date",
-      type: "datetime",
+      type: "date",
       validation: (Rule) => Rule.required(),
-    },
-    {
-      name: "content",
-      title: "Content",
-      type: "array",
-      of: [{ type: "block" }],
     },
     {
       name: "mainImage",
       title: "Main Image",
       type: "image",
-      options: {
-        hotspot: true,
-      },
+      options: { hotspot: true },
       fields: [
         {
           name: "alt",
-          title: "Alternative Text",
+          title: "Alt Text",
           type: "string",
-          description: "مهم للسيو وللوصول",
         },
       ],
     },
     {
+      name: "content",
+      title: "Full Content",
+      type: "array",
+      of: [{ type: "block" }],
+    },
+    {
       name: "gallery",
-      title: "Image Gallery",
+      title: "Additional Gallery Images",
       type: "array",
       of: [
         {
           type: "image",
           options: { hotspot: true },
           fields: [
-            {
-              name: "alt",
-              title: "Alternative Text",
-              type: "string",
-            },
-          ],
-        },
-      ],
+            { name: "alt", type: "string", title: "Alt Text" }
+          ]
+        }
+      ]
     },
   ],
   preview: {
     select: {
       title: "title",
+      subtitle: "date",
       media: "mainImage",
     },
   },
 };
+
+export default news;
