@@ -1,8 +1,10 @@
 // schemas/settings.ts
 
+import { init } from "next/dist/compiled/webpack/webpack";
+
 const settings = {
   name: "settings",
-  title: "Settings",
+  title: "WebsiteSettings",
   type: "document",
   fields: [
     {
@@ -20,9 +22,25 @@ const settings = {
       ],
     },
     {
+      name: "heroMediaImage",
+      title: "Hero Media Image",
+      type: "string",
+      options: {
+        list: [
+          { title: "Image", value: "image" },
+          { title: "Video", value: "video" },
+          { title: "Audio", value: "audio" },
+        ],
+        layout: "radio",
+        direction: "horizontal",
+      },
+      initialValue: "image",
+    },
+    {
       name: "heroImage",
       title: "Hero Image",
       type: "image",
+      hidden: ({ parent }) => parent?.heroMediaImage !== "image",
       options: { hotspot: true },
       fields: [
         {
@@ -32,6 +50,22 @@ const settings = {
           description: "Alternative text for the hero image.",
         },
       ],
+    },
+    {
+      name: "heroVideoFile",
+      title: "Hero Video File",
+      type: "file",
+      hidden: ({ parent }) => parent?.heroMediaType !== "videoFile",
+      options: {
+        accept: "video/mp4,video/webm",
+      },
+    },
+    {
+      name: "heroVideoUrl",
+      title: "Hero Video URL",
+      type: "url",
+      hidden: ({ parent }) => parent?.heroMediaType !== "videoUrl",
+      description: "e.g. YouTube or Vimeo embed link",
     },
     {
       name: "heroTitle",
@@ -45,6 +79,30 @@ const settings = {
       type: "string",
       description: "The subtitle displayed on the hero section of the website.",
     },
+    {
+      name: "contactInfo",
+      title: "Contact Information",
+      type: "object",
+      fields: [
+        { name: "phone", title: "Phone", type: "string" },
+        { name: "email", title: "Email", type: "string" },
+        { name: "address", title: "Address", type: "string" },
+        {
+          name: "socialMedia",
+          title: "Social Media Links",
+          type: "array",
+          of: [
+            {
+              type: "object",
+              fields: [
+                { name: "platform", title: "Platform", type: "string" },
+                { name: "url", title: "URL", type: "url" },
+              ],
+            },
+          ],
+        },
+      ],
+    },
   ],
   preview: {
     select: {
@@ -53,7 +111,7 @@ const settings = {
     },
     prepare({ title, media }) {
       return {
-        title: title || "Settings",
+        title: title || "Website Settings",
         media,
       };
     },
