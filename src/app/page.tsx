@@ -31,7 +31,7 @@ export default function Home() {
   ];
 
   const subsidiaries = [
-    { name: "QAST", desc: "ICT & Network Services", image: "/cpu.png", link: "https://qasthub.com" },
+    { name: "QAST", desc: "ICT & Network Services", image: "/qast-logo.png", link: "https://qasthub.com" },
     { name: "CUBES", desc: "Construction & Real Estate", image: "/fac1.png" },
     { name: "TAD", desc: "Facility Management Solutions", image: "/fac2.png" },
   ];
@@ -75,7 +75,7 @@ export default function Home() {
     {/* Right - Illustration */}
     <div className="flex justify-center">
       <Image
-        src="/vision-graphic.svg"
+        src="/Frame 54.png"
         alt="About illustration"
         width={420}
         height={420}
@@ -185,11 +185,11 @@ export default function Home() {
 
       {/* Subsidiaries */}
       <section className="bg-white py-20 px-6 sm:px-20 text-center">
-        <h2 className="text-2xl font-bold mb-10">Subsidiaries</h2>
-        <div className="grid sm:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        <h2 className="text-2xl font-bold mb-10 underline">Subsidiaries</h2>
+        <div className="grid sm:grid-cols-3 gap-12 max-w-5xl mx-auto">
           {subsidiaries.map((sub, i) => (
-            <a key={i} href={sub.link || "#"} target="_blank" rel="noopener noreferrer" className="bg-[#f1f3f5] p-6 rounded-xl shadow hover:shadow-lg transition-all">
-              <Image src={sub.image} alt={sub.name} width={80} height={80} className="mx-auto mb-4" />
+            <a key={i} href={sub.link || "#"} target="_blank" rel="noopener noreferrer" className="bg-[#f1f3f5] p-6 rounded-xl border-[#B49C5B] shadow hover:shadow-lg transition-all">
+              {/* <Image src={sub.image} alt={sub.name} width={80} height={80} className="mx-auto mb-4" /> */}
               <h3 className="font-semibold text-gray-800">{sub.name}</h3>
               <p className="text-sm text-gray-600">{sub.desc}</p>
             </a>
