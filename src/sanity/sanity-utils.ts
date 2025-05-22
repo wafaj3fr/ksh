@@ -48,27 +48,6 @@ export async function getSettings() {
     return null;
   }
 }
-
-/**
- * Fetch Mission, Vision, Goals
- */
-export async function getMissionVisionGoals() {
-  try {
-    const data = await client.fetch(groq`
-      *[_type == "missionVisionGoals"][0]{
-        mission,
-        vision,
-        goals
-      }
-    `);
-    return data;
-
-  } catch (error) {
-    console.error("Error fetching Mission, Vision, Goals:", error);
-    return null;
-  }
-}
-
 /**
  * Fetch Subsidiaries
  */
@@ -95,29 +74,6 @@ export async function getSubsidiaries() {
 
   } catch (error) {
     console.error("Error fetching Subsidiaries:", error);
-    return [];
-  }
-}
-
-/**
- * Fetch CSR
- */
-export async function getCSR() {
-  try {
-    const data = await client.fetch(groq`
-      *[_type == "csr"]{
-        title,
-        description,
-        projects[] {
-          name,
-          impact
-        }
-      }
-    `);
-    return data;
-
-  } catch (error) {
-    console.error("Error fetching CSR:", error);
     return [];
   }
 }
@@ -182,21 +138,6 @@ export async function getCEOMessage() {
   }
 }
 
-export async function getAboutUs() {
-  try {
-    const data = await client.fetch(groq`
-      *[_type == "about"][0]{
-        title,
-        content
-      }
-    `);
-    return data;
-  } catch (error) {
-    console.error("Error fetching About Us:", error);
-    return null;
-  }
-}
-
 export async function getInvestmentSectors() {
   try {
     const data = await client.fetch(groq`
@@ -210,24 +151,6 @@ export async function getInvestmentSectors() {
   } catch (error) {
     console.error("Error fetching Investment Sectors:", error);
     return [];
-  }
-}
-
-export async function getContactInfo() {
-  try {
-    const data = await client.fetch(groq`
-      *[_type == "contact"][0]{
-        title,
-        phone,
-        email,
-        address,
-        map
-      }
-    `);
-    return data;
-  } catch (error) {
-    console.error("Error fetching Contact Info:", error);
-    return null;
   }
 }
 
