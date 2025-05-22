@@ -11,7 +11,7 @@ export default function Header({ logo }: HeaderProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header className="flex justify-between items-center px-8 sm:px-20 py-6 bg-white shadow-md sticky top-0 z-50">
+    <header className="flex justify-between items-center px-8 sm:px-20 py-2 bg-white/70 shadow-md sticky top-0 z-50">
       <div className="text-2xl font-bold text-primary">
         {logo ? (
           <Image src={logo.asset.url} alt={logo.alt || "KSHC Logo"} width={150} height={50} />

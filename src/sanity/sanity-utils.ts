@@ -17,37 +17,34 @@ export async function getSettings() {
   try {
     const data = await client.fetch(groq`
       *[_type == "settings"][0]{
-        logo {
+        heroMediaType,
+        videoSource,
+        heroVideoUrl,
+        heroVideoFile {
           asset->{
             url
-          },
-          alt
+          }
         },
         heroImage {
-          asset->{
-            url
-          },
-          alt
-        },
-        heroVideo {
-          asset->{
-            url
-          },
+          asset->{ url },
           alt
         },
         heroTitle,
         heroSubtitle,
+        logo {
+          asset->{ url },
+          alt
+        },
         contactInfo,
-        socialMedia
       }
     `);
     return data;
-
   } catch (error) {
     console.error("Error fetching settings:", error);
     return null;
   }
 }
+
 /**
  * Fetch Subsidiaries
  */

@@ -1,10 +1,6 @@
-// schemas/settings.ts
-
-import { init } from "next/dist/compiled/webpack/webpack";
-
 const settings = {
   name: "settings",
-  title: "WebsiteSettings",
+  title: "Website Settings",
   type: "document",
   fields: [
     {
@@ -21,63 +17,87 @@ const settings = {
         },
       ],
     },
+
+    // 🟡 نوع الوسائط: صورة أو فيديو
     {
-      name: "heroMediaImage",
-      title: "Hero Media Image",
+      name: "heroMediaType",
+      title: "Hero Media Type",
       type: "string",
       options: {
         list: [
           { title: "Image", value: "image" },
           { title: "Video", value: "video" },
-          { title: "Audio", value: "audio" },
         ],
         layout: "radio",
         direction: "horizontal",
       },
       initialValue: "image",
     },
+
+    // 🟢 صورة الهيرو (تظهر فقط لو اخترت image)
     {
       name: "heroImage",
       title: "Hero Image",
       type: "image",
-      hidden: ({ parent }) => parent?.heroMediaImage !== "image",
+      hidden: ({ parent }) => parent?.heroMediaType !== "image",
       options: { hotspot: true },
       fields: [
         {
           name: "alt",
           title: "Alt Text",
           type: "string",
-          description: "Alternative text for the hero image.",
         },
       ],
     },
+
+    // 🟠 نوع الفيديو: رابط أو رفع
+    {
+      name: "videoSource",
+      title: "Video Source",
+      type: "string",
+      options: {
+        list: [
+          { title: "Upload File", value: "file" },
+          { title: "Embed URL", value: "url" },
+        ],
+        layout: "radio",
+        direction: "horizontal",
+      },
+      hidden: ({ parent }) => parent?.heroMediaType !== "video",
+    },
+
+    // 🔵 رفع ملف الفيديو (لو اخترت file)
     {
       name: "heroVideoFile",
       title: "Hero Video File",
       type: "file",
-      hidden: ({ parent }) => parent?.heroMediaType !== "videoFile",
       options: {
         accept: "video/mp4,video/webm",
       },
+      hidden: ({ parent }) =>
+        parent?.heroMediaType !== "video" || parent?.videoSource !== "file",
     },
+
+    // 🔴 رابط الفيديو (لو اخترت url)
     {
       name: "heroVideoUrl",
       title: "Hero Video URL",
       type: "url",
-      hidden: ({ parent }) => parent?.heroMediaType !== "videoUrl",
-      description: "e.g. YouTube or Vimeo embed link",
+      hidden: ({ parent }) =>
+        parent?.heroMediaType !== "video" || parent?.videoSource !== "url",
+      description: "YouTube/Vimeo embed link",
     },
+
+    // باقي الحقول
     {
       name: "heroTitle",
       title: "Hero Title",
       type: "string",
-      description: "The title displayed on the hero section of the website.",
     },
     {
       name: "heroSubtitle",
       title: "Hero Subtitle",
       type: "string",
-      description: "The subtitle displayed on the hero section of the website.",
     },
     {
       name: "contactInfo",

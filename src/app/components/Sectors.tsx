@@ -1,7 +1,7 @@
 'use client';
 
-import Image from "next/image";
-import * as LucideIcons from "lucide-react";
+
+import { iconMap } from "../../utills/icons";
 
 export interface InvestmentSectorProps {
   _id: string;
@@ -14,24 +14,22 @@ export default function Sectors({ sectors }: { sectors: InvestmentSectorProps[] 
   return (
     <section id="sectors" className="px-8 sm:px-20 py-24 bg-white text-gray-800">
       <div className="max-w-6xl mx-auto text-center space-y-12">
-        <h2 className="text-4xl font-bold text-gray-900">Key Investment Sectors</h2>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
-          {sectors.map((sector) => {
-            // Try to get the Lucide icon component by name
-            const LucideIcon = sector.icon && (LucideIcons as any)[sector.icon];
+        <h2 className="text-3xl font-bold mb-8 text-primary">Key Investment Sectors</h2>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          {sectors.map((sector, index) => {
+            const IconComponent = sector.icon && iconMap[sector.icon];
+
             return (
-              <div key={sector._id} className="bg-gray-50 p-6 rounded-xl shadow hover:shadow-md transition text-left">
+              <div key={index} className="bg-gray-50 p-6 rounded-xl shadow hover:shadow-md transition text-left">
                 <div className="flex items-center gap-4 mb-3">
-                  {LucideIcon ? (
-                    <LucideIcon size={40} className="text-gray-700" />
-                  ) : sector.icon?.startsWith('http') ? (
-                    <Image src={sector.icon} alt={sector.title} width={40} height={40} />
+                  {IconComponent ? (
+                    <IconComponent className="text-gray-600 w-6 h-6" />
                   ) : (
-                    <span className="text-2xl text-gray-700">{sector.icon}</span>
+                    <div className="w-6 h-6 bg-gray-300 rounded-full" />
                   )}
                   <h3 className="text-xl font-semibold text-gray-800">{sector.title}</h3>
                 </div>
-                <p className="text-gray-700 text-sm">{sector.description}</p>
+                <p className="text-gray-700">{sector.description}</p>
               </div>
             );
           })}

@@ -20,9 +20,13 @@ export default async function Home() {
     <div className="min-h-screen text-gray-900 font-sans bg-[#f5f7fa]">
       <Header logo={settings?.logo} />
       <Hero
-        heroImage={settings?.heroImage}
-        heroTitle={settings?.heroTitle}
-        heroSubtitle={settings?.heroSubtitle}
+       heroMediaType={settings.heroMediaType}
+       videoSource={settings.videoSource}
+       heroImage={settings.heroImage}
+       heroVideoFile={settings.heroVideoFile}
+       heroVideoUrl={settings.heroVideoUrl}
+       heroTitle={settings.heroTitle}
+       heroSubtitle={settings.heroSubtitle}
       />
       <Sectors sectors={sectors} />
       <Subsidiaries subsidiaries={subsidiaries} />
