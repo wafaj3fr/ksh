@@ -32,6 +32,11 @@ export default async function Home() {
       <Subsidiaries subsidiaries={subsidiaries} />
       <News news={news} />
       <CEOMessage message={ceoMessage?.message} imageUrl={ceoMessage?.image?.asset?.url} />
+      <footer className="bg-gray-800 text-white py-8">
+  <div className="container mx-auto text-center">
+    &copy; 2025 My Company. All rights reserved.
+  </div>
+</footer>
     </div>
   );
 }
