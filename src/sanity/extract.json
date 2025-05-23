@@ -358,7 +358,7 @@
         },
         "optional": true
       },
-      "heroMediaImage": {
+      "heroMediaType": {
         "type": "objectAttribute",
         "value": {
           "type": "union",
@@ -370,10 +370,6 @@
             {
               "type": "string",
               "value": "video"
-            },
-            {
-              "type": "string",
-              "value": "audio"
             }
           ]
         },
@@ -452,6 +448,23 @@
               }
             }
           }
+        },
+        "optional": true
+      },
+      "videoSource": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "union",
+          "of": [
+            {
+              "type": "string",
+              "value": "file"
+            },
+            {
+              "type": "string",
+              "value": "url"
+            }
+          ]
         },
         "optional": true
       },
