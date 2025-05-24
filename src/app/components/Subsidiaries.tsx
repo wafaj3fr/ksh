@@ -15,7 +15,10 @@ interface SubsidiariesProps {
 export default function Subsidiaries({ subsidiaries }: SubsidiariesProps) {
   return (
     <section id="subsidiaries" className="px-8 sm:px-20 py-20 bg-white">
-      <h2 className="text-3xl font-bold mb-8 text-center text-primary">KSHC Subsidiaries</h2>
+      <h2 className="text-3xl font-bold mb-2 text-center text-primary">KSHC Subsidiaries</h2>
+      <span className="block mx-auto w-70 h-1 rounded bg-[#B49C5B] mb-12" />
+      
+      {/* Subsidiaries Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {subsidiaries.map((sub) => (
           <a key={sub._id} href={sub.link || "#"} target="_blank" rel="noreferrer" className="bg-[#f9fafb] p-6 rounded-xl shadow hover:shadow-md transition-all block">

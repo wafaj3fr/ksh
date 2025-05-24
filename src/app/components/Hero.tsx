@@ -67,11 +67,11 @@ export default function Hero({
       {/* Content */}
       <div className="relative z-10 text-center px-4 sm:px-10">
         <h1 className="text-4xl sm:text-6xl font-bold mb-4">{heroTitle}</h1>
-        <p className="text-lg sm:text-2xl max-w-2xl mx-auto">{heroSubtitle}</p>
+        <p className="text-lg text-[#B49C5B] sm:text-2xl max-w-2xl mx-auto">{heroSubtitle}</p>
         <div className="mt-8">
           <a
             href="#contact"
-            className="bg-blue-500 text-white py-3 px-6 rounded-full hover:bg-blue-600 transition"
+            className="border border-[#B49C5B] text-white py-3 px-6 rounded-full hover:bg-[#B49C5B] hover:text-gray-800 transition"
           >
             Contact Us
           </a>
