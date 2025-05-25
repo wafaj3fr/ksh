@@ -9,7 +9,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "typegen": "sanity schema extract --path=src/sanity/extract.json --project your-project-id && sanity typegen generate"
+    "typegen": "sanity schema extract --path=src/sanity/extract.json --project uyljjpk1 --dataset production && sanity typegen generate"
+
   },
   "dependencies": {
     "@sanity/client": "^6.29.1",
