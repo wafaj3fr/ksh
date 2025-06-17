@@ -49,7 +49,7 @@ export default function Header({ logo }: HeaderProps) {
           {["About", "Sectors", "Subsidiaries", "News", "Contact"].map((item) => (
             <a
               key={item}
-              href={`#${item.toLowerCase()}`}
+              href={`/${item.toLowerCase()}`}
               className={`${navText} ${hoverText} transition duration-200 relative group`}
             >
               {item}
@@ -77,7 +77,7 @@ export default function Header({ logo }: HeaderProps) {
             {["About", "Sectors", "Subsidiaries", "News", "Contact"].map((item) => (
               <a
                 key={item}
-                href={`#${item.toLowerCase()}`}
+                href={`/${item.toLowerCase()}`}
                 className="text-gray-800 font-medium hover:text-[#B49C5B] transition"
               >
                 {item}
