@@ -53,9 +53,9 @@ export default function Header({ logo }: HeaderProps) {
               href={`/${item.toLowerCase()}`}
               className={`${navText} ${hoverText} transition duration-200 relative group`}
             >
-              {item.label}
+              {item}
               <span className="absolute left-0 bottom-0 w-full h-[2px] bg-[#B49C5B] scale-x-0 group-hover:scale-x-100 transition-transform duration-200"></span>
-            </Link>
+            </a>
           ))}
 
         </nav>
