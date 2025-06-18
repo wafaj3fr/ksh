@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import Image from "next/image";
@@ -46,18 +47,23 @@ export default function Header({ logo }: HeaderProps) {
 
         {/* Desktop Nav */}
         <nav className="hidden sm:flex items-center gap-8 text-sm font-medium">
-          {["About", "Sectors", "Subsidiaries", "News", "Contact"].map((item) => (
-            <a
-              key={item}
-              href={`#${item.toLowerCase()}`}
+          {[
+            { label: "About", href: "/about" },
+            { label: "Sectors", href: "/sectors" },
+            { label: "Subsidiaries", href: "/subsidiaries" },
+            { label: "News", href: "/news" },
+            { label: "Contact", href: "/contact" },
+          ].map((item) => (
+            <Link
+              key={item.label}
+              href={item.href}
               className={`${navText} ${hoverText} transition duration-200 relative group`}
             >
-              {item}
-              <span
-                className={`absolute left-0 -bottom-1 w-0 h-0.5 bg-[#B49C5B] transition-all group-hover:w-full`}
-              />
-            </a>
+              {item.label}
+              <span className="absolute left-0 bottom-0 w-full h-[2px] bg-[#B49C5B] scale-x-0 group-hover:scale-x-100 transition-transform duration-200"></span>
+            </Link>
           ))}
+
         </nav>
 
         {/* Mobile Menu Button */}
