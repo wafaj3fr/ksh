@@ -47,16 +47,10 @@ export default function Header({ logo }: HeaderProps) {
 
         {/* Desktop Nav */}
         <nav className="hidden sm:flex items-center gap-8 text-sm font-medium">
-          {[
-            { label: "About", href: "/about" },
-            { label: "Sectors", href: "/sectors" },
-            { label: "Subsidiaries", href: "/subsidiaries" },
-            { label: "News", href: "/news" },
-            { label: "Contact", href: "/contact" },
-          ].map((item) => (
-            <Link
-              key={item.label}
-              href={item.href}
+          {["About", "Sectors", "Subsidiaries", "News", "Contact"].map((item) => (
+            <a
+              key={item}
+              href={`/${item.toLowerCase()}`}
               className={`${navText} ${hoverText} transition duration-200 relative group`}
             >
               {item.label}
@@ -83,7 +77,7 @@ export default function Header({ logo }: HeaderProps) {
             {["About", "Sectors", "Subsidiaries", "News", "Contact"].map((item) => (
               <a
                 key={item}
-                href={`#${item.toLowerCase()}`}
+                href={`/${item.toLowerCase()}`}
                 className="text-gray-800 font-medium hover:text-[#B49C5B] transition"
               >
                 {item}
