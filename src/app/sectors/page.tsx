@@ -1,5 +1,4 @@
 import { Building, Leaf, HeartPulse, Banknote, Globe2, Wrench } from "lucide-react";
-import Header from "../components/Header";
 
 const sectors = [
   {
@@ -37,7 +36,6 @@ const sectors = [
 export default function SectorsPage() {
   return (
     <main className="min-h-screen bg-[#f5f7fa] text-gray-900 font-sans">
-      <Header />
       <section className="px-6 sm:px-20 pt-32 pb-20 bg-[#e7ebf0]">
         <div className="max-w-6xl mx-auto">
           <h1 className="text-4xl font-extrabold text-primary mb-4 text-center">Our Investment Sectors</h1>

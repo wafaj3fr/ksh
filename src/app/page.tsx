@@ -8,8 +8,6 @@ import Sectors from "./components/Sectors";
 import { Award, Eye, Globe, Mountain, Target, TrendingUp, Users, Layers } from "lucide-react";
 import Image from "next/image";
 import WhyUs from "./components/WhyUs";
-import Footer from "./components/Footer";
-
 
 export default async function Home() {
   const [settings, subsidiaries, news, ceoMessage, sectors] = await Promise.all([
@@ -22,7 +20,7 @@ export default async function Home() {
 
   return (
     <div className="min-h-screen text-gray-900 font-sans bg-[#f5f7fa]">
-      <Header logo={settings?.logo} />
+
       <Hero
        heroMediaType={settings.heroMediaType}
        videoSource={settings.videoSource}
@@ -137,7 +135,6 @@ export default async function Home() {
       <WhyUs />
       <News news={news} />
       <CEOMessage message={ceoMessage?.message} imageUrl={ceoMessage?.image?.asset?.url} />
-      <Footer />
     </div>
   );
 }

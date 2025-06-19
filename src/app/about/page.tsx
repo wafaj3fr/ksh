@@ -1,11 +1,14 @@
 import Image from "next/image";
-import Header from "../components/Header";
-import settings from "../../sanity/schemas/setting";
+import PageHero from "../components/PageHero";
 
 export default function AboutPage() {
   return (
     <main className="min-h-screen bg-[#f5f7fa] text-gray-900 font-sans">
-        <Header />
+      <PageHero
+        title="About Us"
+        subtitle="Learn more about our mission, values, and what makes KSHC unique."
+        image="/public/about.png" // استبدله بصورتك الفعلية أو ضع illustation
+      />
       <section className="relative bg-[#e7ebf0] px-6 sm:px-20 pt-32 pb-24">
         <div className="max-w-7xl mx-auto grid md:grid-cols-2 items-center gap-12">
           {/* Left - About Content */}

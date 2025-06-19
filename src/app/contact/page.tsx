@@ -1,10 +1,8 @@
-import Header from "../components/Header";
 import { Mail, Phone, MapPin } from "lucide-react";
 
 export default function ContactPage() {
   return (
     <main className="min-h-screen bg-[#f5f7fa] text-gray-900 font-sans">
-      <Header />
       <section className="px-6 sm:px-20 pt-32 pb-20 bg-[#e7ebf0]">
         <div className="max-w-3xl mx-auto">
           <h1 className="text-4xl font-extrabold text-primary mb-4 text-center">Contact Us</h1>
