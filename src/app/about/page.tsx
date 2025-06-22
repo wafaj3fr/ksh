@@ -7,7 +7,9 @@ export default function AboutPage() {
       <PageHero
         title="About Us"
         subtitle="Learn more about our mission, values, and what makes KSHC unique."
-        image="/herobg.jpg" // استبدله بصورتك الفعلية أو ضع illustation
+        image="/about-hero.jpg"
+        imageAlt="KSHC Hero Image"
+        // videoSrc="/herovid.mp4"
       />
       <section className="relative bg-[#e7ebf0] px-6 sm:px-20 pt-32 pb-24">
         <div className="max-w-7xl mx-auto grid md:grid-cols-2 items-center gap-12">
@@ -27,7 +29,7 @@ export default function AboutPage() {
           {/* Right - Illustration */}
           <div className="flex justify-center">
             <Image
-              src="/Frame 54.png"
+              src="/undraw_profile.svg"
               alt="About illustration"
               width={420}
               height={420}

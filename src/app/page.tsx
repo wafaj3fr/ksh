@@ -76,7 +76,7 @@ export default async function Home() {
       ].map((item, i) => (
         <div
           key={i}
-          className="bg-white rounded-2xl shadow-xl p-6 text-center border border-[#B49C5B] flex flex-col items-center"
+          className="bg-white rounded-2xl border border-[#B49C5B] p-6 text-center flex flex-col items-center shadow transition duration-300 hover:shadow-lg hover:-translate-y-1 hover:bg-[#fdfbf5]"
         >
           <div className="bg-primary/10 rounded-full p-4 mb-4 flex items-center justify-center">
             {item.icon}

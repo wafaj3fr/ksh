@@ -15,7 +15,6 @@ interface HeaderProps {
 
 const navItems = [
   { name: "About", href: "/about" },
-  { name: "Sectors", href: "/sectors" },
   { name: "Subsidiaries", href: "/subsidiaries" },
   { name: "News", href: "/news" },
   { name: "Contact", href: "/contact" },

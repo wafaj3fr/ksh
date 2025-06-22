@@ -4,25 +4,28 @@ interface PageHeroProps {
   title: string;
   subtitle?: string;
   image?: string;
+  imageAlt?: string;
+  videoSrc?: string;
+  
 }
 
-export default function PageHero({ title, subtitle, image }: PageHeroProps) {
+export default function PageHero({ title, subtitle, image, imageAlt, videoSrc }: PageHeroProps) {
   return (
     <section className="relative h-[300px] sm:h-[500px] overflow-hidden text-white font-sans">
       {/* Background Image or Gradient */}
       {image ? (
         <Image
           src={image}
-          alt={title}
+          alt={imageAlt || title}
           fill
           // className="object-cover opacity-30"
         />
       ) : (
-        <div className="absolute inset-0 bg-gradient-to-tr from-[#0f172a] to-[#1e293b] opacity-80" />
+        <div className="absolute inset-0 bg-gradient-to-tr from-[#0f172a] to-[#1e293b] opacity-20" />
       )}
 
       {/* Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/50 to-black/90 z-0" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/20 to-black/60 z-0" />
 
       {/* Text Content */}
       <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-4 sm:px-10">
