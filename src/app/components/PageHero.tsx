@@ -1,4 +1,3 @@
-// components/PageHero.tsx
 import Image from "next/image";
 
 interface PageHeroProps {
@@ -9,27 +8,31 @@ interface PageHeroProps {
 
 export default function PageHero({ title, subtitle, image }: PageHeroProps) {
   return (
-    <section className="relative h-[300px] sm:h-[400px] bg-[#0f172a] overflow-hidden">
-      {/* Background Illustration */}
+    <section className="relative h-[300px] sm:h-[500px] overflow-hidden text-white font-sans">
+      {/* Background Image or Gradient */}
       {image ? (
         <Image
           src={image}
           alt={title}
           fill
-          className="object-cover opacity-40"
+          // className="object-cover opacity-30"
         />
       ) : (
         <div className="absolute inset-0 bg-gradient-to-tr from-[#0f172a] to-[#1e293b] opacity-80" />
       )}
 
-      {/* Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+      {/* Gradient Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/50 to-black/90 z-0" />
 
-      {/* Content */}
-      <div className="relative z-10 flex flex-col justify-end items-center h-full text-center px-6 sm:px-10 pb-12">
-        <h1 className="text-white text-3xl sm:text-5xl font-extrabold drop-shadow">{title}</h1>
+      {/* Text Content */}
+      <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-4 sm:px-10">
+        <h1 className="text-white text-3xl sm:text-5xl font-extrabold tracking-tight drop-shadow-lg">
+          {title}
+        </h1>
         {subtitle && (
-          <p className="text-gray-200 text-sm sm:text-lg mt-3 max-w-2xl">{subtitle}</p>
+          <p className="text-[#B49C5B] text-base sm:text-xl font-medium mt-4 max-w-2xl drop-shadow-md">
+            {subtitle}
+          </p>
         )}
       </div>
     </section>

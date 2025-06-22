@@ -1,4 +1,5 @@
 import { Building2, Briefcase, Globe2, Users, Banknote, Leaf } from "lucide-react";
+import PageHero from "../components/PageHero";
 
 const subsidiaries = [
   {
@@ -42,6 +43,10 @@ const subsidiaries = [
 export default function SubsidiariesPage() {
   return (
     <main className="min-h-screen bg-gradient-to-br from-[#f5f7fa] via-[#f7f9fc] to-[#e7ebf0] text-gray-900 font-sans">
+      <PageHero
+              title="Our Subsidiaries"
+              subtitle="Explore the diverse companies under the Kuwaiti Sudanese Holding Company, each contributing to Sudan's growth and development."
+            />
       <section className="px-6 sm:px-20 pt-32 pb-20">
         <div className="max-w-6xl mx-auto">
           <h1 className="text-4xl font-extrabold text-primary mb-2 text-center">Our Subsidiaries</h1>

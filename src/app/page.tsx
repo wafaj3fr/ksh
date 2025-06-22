@@ -1,5 +1,4 @@
 import { getCEOMessage, getInvestmentSectors, getNews, getSettings, getSubsidiaries } from "../sanity/sanity-utils";
-import Header from "./components/Header";
 import Hero from "./components/Hero";
 import Subsidiaries from "./components/Subsidiaries";
 import News from "./components/News";
@@ -46,7 +45,7 @@ export default async function Home() {
     {/* Right - Illustration */}
     <div className="flex justify-center">
       <Image
-        src="/Frame 54.png"
+        src="/about.png"
         alt="About illustration"
         width={420}
         height={420}
