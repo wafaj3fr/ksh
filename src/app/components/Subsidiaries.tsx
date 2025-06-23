@@ -5,7 +5,7 @@ interface Subsidiary {
   name: string;
   description: string;
   logo?: { asset: { url: string } };
-  link?: string;
+  website?: string;
 }
 
 interface SubsidiariesProps {
@@ -41,7 +41,7 @@ export default function Subsidiaries({ subsidiaries }: SubsidiariesProps) {
             <p className="text-sm text-gray-600 mb-4">{sub.description}</p>
 
             <a
-  href={sub.link || "https://qasthub.com/"}
+  href={sub.website || "#"}
   target="_blank"
   rel="noopener noreferrer"
   className="inline-flex items-center gap-1 mt-auto text-sm font-medium text-[#B49C5B] border border-[#B49C5B] px-4 py-1.5 rounded hover:bg-[#B49C5B] hover:text-white transition"
