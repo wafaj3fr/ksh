@@ -1,5 +1,5 @@
 import { Mail, Phone, MapPin } from "lucide-react";
-import PageHero from "../components/PageHero";
+import PageHero from "../components/UnifiedHero";
 
 export default function ContactPage() {
   return (

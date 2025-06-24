@@ -8,6 +8,8 @@ import { Award, Eye, Globe, Mountain, Target, TrendingUp, Users, Layers } from "
 import WhyUs from "./components/WhyUs";
 import AboutTeaser from "./components/AboutTeaser";
 import BackToTopButton from "./components/BackToTopButton";
+import MissionVision from "./components/MissionVision";
+import UnifiedHero from "./components/UnifiedHero";
 
 export default async function Home() {
   const [settings, subsidiaries, news, ceoMessage, sectors] = await Promise.all([
@@ -21,53 +23,25 @@ export default async function Home() {
   return (
     <div className="min-h-screen text-gray-900 font-sans bg-[#f5f7fa]">
 
-      <Hero
+      <UnifiedHero
+       title={settings.heroTitle}
+       subtitle={settings.heroSubtitle}
        heroMediaType={settings.heroMediaType}
        videoSource={settings.videoSource}
        heroImage={settings.heroImage}
        heroVideoFile={settings.heroVideoFile}
        heroVideoUrl={settings.heroVideoUrl}
-       heroTitle={settings.heroTitle}
-       heroSubtitle={settings.heroSubtitle}
+       ctaText={settings.ctaText}
+       ctaHref={settings.ctaHref}
       />
       <section id="about" className="relative bg-[#e7ebf0] px-6 sm:px-20 pt-24 pb-48">
-      <AboutTeaser />
-
-  {/* Vision / Mission / Goal Cards */}
-  <div className="absolute left-1/2 transform -translate-x-1/2 translate-y-1/2 w-full max-w-5xl px-4">
-    <div className="grid sm:grid-cols-3 gap-6 justify-center">
-      {[
-        {
-          title: "Vision",
-          desc: "To establish the largest economic group with foreign capital contributing to Sudan’s growth.",
-          icon: <Eye className="text-primary w-8 h-8 mx-auto" />
-        },
-        {
-          title: "Mission",
-          desc: "Bringing global technologies and business practices to Sudan, aligning the country with global advancements.",
-          icon: <Mountain className="text-primary w-8 h-8 mx-auto" />
-        },
-        {
-          title: "Goal",
-          desc: "Strengthening Kuwait–Sudan ties, rebuilding post-conflict Sudan, and investing in high-impact sectors.",
-          icon: <Target className="text-primary w-8 h-8 mx-auto" />
-        },
-      ].map((item, i) => (
-        <div
-          key={i}
-          className="bg-white rounded-2xl border border-[#B49C5B] p-6 text-center flex flex-col items-center shadow transition duration-300 hover:shadow-lg hover:-translate-y-1 hover:bg-[#fdfbf5]"
-        >
-          <div className="bg-primary/10 rounded-full p-4 mb-4 flex items-center justify-center">
-            {item.icon}
-          </div>
-          <h3 className="text-lg font-bold text-primary mb-2">{item.title}</h3>
-          <p className="text-sm text-gray-700 leading-relaxed">{item.desc}</p>
-        </div>
-      ))}
-    </div>
-  </div>
-</section>
-
+        <AboutTeaser />
+        <MissionVision
+          vision="To establish the largest economic group with foreign capital contributing to Sudan’s growth."
+          mission="Bringing global technologies and business practices to Sudan, aligning the country with global advancements."
+          goal="Strengthening Kuwait–Sudan ties, rebuilding post-conflict Sudan, and investing in high-impact sectors."
+        />
+      </section>
 
       {/* Objectives */}
       <section id="objectives" className="bg-white pt-48 pb-24 px-6 sm:px-20">

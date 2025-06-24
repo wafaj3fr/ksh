@@ -1,17 +1,29 @@
 import Image from "next/image";
-import PageHero from "../components/PageHero";
+import PageHero from "../components/UnifiedHero";
 import { Building2, Server, Globe, ShieldCheck } from "lucide-react";
 import BackToTopButton from "../components/BackToTopButton";
+import UnifiedHero from "../components/UnifiedHero";
+import settings from "../../sanity/schemas/setting";
+import { getSettings } from "../../sanity/sanity-utils";
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  // Fetch settings from Sanity or any other source
+  const settings = await getSettings();
+
   return (
     <main className="min-h-screen bg-[#f5f7fa] text-gray-900 font-sans">
-      <PageHero
+      {/* Hero Section */}
+      <UnifiedHero
         title="Rooted in Vision, Driven by Legacy"
         subtitle="Explore our journey, leadership, and vision for building a better future for Sudan and the region."
-        image="/about-hero.jpg"
+        heroMediaType={settings.heroMediaType}
+        videoSource={settings.videoSource}
+        heroImage={settings.heroImage}
+        heroVideoFile={settings.heroVideoFile}
+        heroVideoUrl={settings.heroVideoUrl}
+        ctaText={settings.ctaText}
+        ctaHref={settings.ctaHref}
       />
-
       {/* Company Journey */}
       <section className="bg-[#e7ebf0] px-6 sm:px-20 py-20">
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 items-center gap-12">

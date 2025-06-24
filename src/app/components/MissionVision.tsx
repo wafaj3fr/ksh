@@ -1,11 +1,14 @@
-import { Eye, Mountain } from "lucide-react";
+"use client";
+
+import { Eye, Goal, Mountain, Target } from "lucide-react";
 
 interface MissionVisionProps {
   mission?: string;
   vision?: string;
+  goal?: string;
 }
 
-export default function MissionVision({ mission, vision }: MissionVisionProps) {
+export default function MissionVision({ mission, vision, goal }: MissionVisionProps) {
   return (
     <section
       id="mission-vision"
@@ -16,11 +19,9 @@ export default function MissionVision({ mission, vision }: MissionVisionProps) {
           Our Vision & Mission
         </h2>
 
-        <div className="grid sm:grid-cols-2 gap-10 text-left">
-          {/* Vision Card */}
-          <div className="group bg-white rounded-2xl border border-[#B49C5B] shadow-md p-8 
-  transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
-
+        <div className="flex flex-col lg:flex-row gap-8 justify-center items-stretch">
+          {/* Vision */}
+          <div className="group flex-1 bg-white rounded-2xl border border-[#B49C5B] shadow-md p-8 transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
             <div className="flex items-center gap-4 mb-4">
               <div className="bg-primary/10 p-3 rounded-full text-primary group-hover:bg-[#B49C5B]/20 transition">
                 <Eye size={28} />
@@ -32,8 +33,8 @@ export default function MissionVision({ mission, vision }: MissionVisionProps) {
             </p>
           </div>
 
-          {/* Mission Card */}
-          <div className="group bg-white rounded-2xl border border-[#B49C5B] shadow-md p-8 transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl cursor-pointer">
+          {/* Mission */}
+          <div className="group flex-1 bg-white rounded-2xl border border-[#B49C5B] shadow-md p-8 transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
             <div className="flex items-center gap-4 mb-4">
               <div className="bg-primary/10 p-3 rounded-full text-primary group-hover:bg-[#B49C5B]/20 transition">
                 <Mountain size={28} />
@@ -42,6 +43,19 @@ export default function MissionVision({ mission, vision }: MissionVisionProps) {
             </div>
             <p className="text-gray-700 leading-relaxed text-md">
               {mission}
+            </p>
+          </div>
+
+          {/* Goal */}
+          <div className="group flex-1 bg-white rounded-2xl border border-[#B49C5B] shadow-md p-8 transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
+            <div className="flex items-center gap-4 mb-4">
+              <div className="bg-primary/10 p-3 rounded-full text-primary group-hover:bg-[#B49C5B]/20 transition">
+                <Target size={28} />
+              </div>
+              <h3 className="text-xl font-bold text-primary">Our Goal</h3>
+            </div>
+            <p className="text-gray-700 leading-relaxed text-md">
+              {goal}
             </p>
           </div>
         </div>

@@ -1,5 +1,5 @@
 import { Building2, Briefcase, Globe2, Users, Banknote, Leaf } from "lucide-react";
-import PageHero from "../components/PageHero";
+import PageHero from "../components/UnifiedHero";
 import Subsidiaries from "../components/Subsidiaries";
 
 const subsidiaries = [
