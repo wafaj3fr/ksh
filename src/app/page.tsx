@@ -23,16 +23,14 @@ export default async function Home() {
   return (
     <div className="min-h-screen text-gray-900 font-sans bg-[#f5f7fa]">
 
-      <UnifiedHero
-       title={settings.heroTitle}
-       subtitle={settings.heroSubtitle}
+      <Hero
        heroMediaType={settings.heroMediaType}
        videoSource={settings.videoSource}
        heroImage={settings.heroImage}
        heroVideoFile={settings.heroVideoFile}
        heroVideoUrl={settings.heroVideoUrl}
-       ctaText={settings.ctaText}
-       ctaHref={settings.ctaHref}
+       heroTitle={settings.heroTitle}
+       heroSubtitle={settings.heroSubtitle}
       />
       <section id="about" className="relative bg-[#e7ebf0] px-6 sm:px-20 pt-24 pb-48">
         <AboutTeaser />

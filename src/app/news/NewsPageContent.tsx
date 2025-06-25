@@ -4,6 +4,7 @@ import { useState } from "react";
 import { CalendarDays, Newspaper } from "lucide-react";
 import Image from "next/image";
 import { PortableText } from "@portabletext/react";
+import BackToTopButton from "../components/BackToTopButton";
 
 interface NewsItem {
   _id: string;
@@ -36,6 +37,8 @@ export default function NewsPageContent({ news }: { news: NewsItem[] }) {
               Stay up to date with the latest news, announcements, and events from the Kuwaiti Sudanese Holding Company.
             </p>
           </div>
+        <BackToTopButton />
+          
 
           <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
             {news.map((item) => (

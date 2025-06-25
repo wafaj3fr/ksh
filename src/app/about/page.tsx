@@ -21,8 +21,7 @@ export default async function AboutPage() {
         heroImage={settings.heroImage}
         heroVideoFile={settings.heroVideoFile}
         heroVideoUrl={settings.heroVideoUrl}
-        ctaText={settings.ctaText}
-        ctaHref={settings.ctaHref}
+        height="medium"
       />
       {/* Company Journey */}
       <section className="bg-[#e7ebf0] px-6 sm:px-20 py-20">
