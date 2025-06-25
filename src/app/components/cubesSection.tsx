@@ -15,13 +15,13 @@ export default function CubesSection() {
           transition={{ duration: 0.7 }}
           className="text-5xl font-bold tracking-tight z-10 font-[serif]"
         >
-          Building the Future with <span className="text-[#fff]">Cubes</span>
+          Building the Future with <span className="text-[#075869]">Cubes</span>
         </motion.h2>
         <motion.p
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 0.7 }}
-          className="text-xl text-black mt-6 max-w-3xl z-10"
+          className="text-xl text-[#F4E7E1] mt-6 max-w-3xl z-10"
         >
           Transforming Sudan’s urban spaces with innovation and sustainability.
         </motion.p>
@@ -36,10 +36,10 @@ export default function CubesSection() {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7 }}
           >
-            <h3 className="text-3xl font-bold text-[#D25C15] mb-4">
+            <h3 className="text-3xl font-bold text-[#075869] mb-4">
               About Cubes
             </h3>
-            <span className="block w-20 h-1 bg-[#F8CBA6] rounded mb-6" />
+            <span className="block w-20 h-1 bg-[#D25C15] rounded mb-6" />
             <p className="text-lg leading-relaxed">
               Cubes is a construction and real estate development company committed
               to delivering modern, functional, and innovative buildings across Sudan.
