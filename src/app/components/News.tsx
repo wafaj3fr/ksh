@@ -1,12 +1,17 @@
-"use client";
+
+'use client';
 
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 
 interface NewsItem {
   _id: string;
   title: string;
   date: string;
+  slug: {
+    current: string;
+  };
   content: any[];
   mainImage?: {
     asset: { url: string };
@@ -105,6 +110,8 @@ export default function News({ news }: NewsProps) {
 }
 
 function NewsCard({ item, faded = false }: { item: NewsItem; faded?: boolean }) {
+  const slug = item.slug?.current;
+
   return (
     <div
       className={`
@@ -117,38 +124,36 @@ function NewsCard({ item, faded = false }: { item: NewsItem; faded?: boolean }) 
         maxWidth: 400,
       }}
     >
-      <h4 className="font-semibold text-lg mb-1">{item.title}</h4>
+      <h4 className="font-semibold text-xl text-gray-800 mb-1">{item.title}</h4>
       <span className="block w-12 h-1 rounded bg-[#B49C5B] mb-3" />
-      <p className="text-gray-600 text-sm mb-2">
-        {new Date(item.date).toLocaleDateString()}
+      <p className="text-gray-500 text-xs mb-2">
+        {new Date(item.date).toLocaleDateString("en-US", {
+          year: "numeric",
+          month: "short",
+          day: "numeric",
+        })}
       </p>
       {item.mainImage?.asset.url && (
-        <div className="mb-4">
+        <div className="mb-4 rounded-lg overflow-hidden">
           <Image
             src={item.mainImage.asset.url}
             alt={item.mainImage.alt || "News Image"}
             width={400}
             height={200}
-            className="rounded-lg object-cover"
+            className="object-cover w-full h-48"
           />
         </div>
       )}
       <p className="text-gray-700 text-sm mb-4 line-clamp-3">
-        {item.content[0]?.children[0]?.text || ""}
+        {item.content?.[0]?.children?.[0]?.text || ""}
       </p>
-      {item.gallery?.length > 0 && (
-        <div className="grid grid-cols-2 gap-4">
-          {item.gallery.map((img, gidx) => (
-            <Image
-              key={gidx}
-              src={img.asset.url}
-              alt={img.alt || "Gallery Image"}
-              width={200}
-              height={150}
-              className="rounded-lg object-cover"
-            />
-          ))}
-        </div>
+      {slug && (
+        <Link
+          href={`/news`}
+          className="mt-auto inline-block text-sm font-semibold text-[#B49C5B] hover:text-[#a88a46] transition"
+        >
+          Read More &rarr;
+        </Link>
       )}
     </div>
   );

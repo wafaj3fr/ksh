@@ -1,15 +1,19 @@
-import Header from "../components/Header";
 import { Mail, Phone, MapPin } from "lucide-react";
+import BackToTopButton from "../components/BackToTopButton";
+// import PageHero from "../components/UnifiedHero";
 
 export default function ContactPage() {
   return (
-    <main className="min-h-screen bg-[#f5f7fa] text-gray-900 font-sans">
-      <Header />
-      <section className="px-6 sm:px-20 pt-32 pb-20 bg-[#e7ebf0]">
+    <main className="min-h-screen bg-gray-900 text-gray-100 font-sans">
+      {/* <PageHero
+        title="Contact Us"
+        subtitle="Get in touch with us for any inquiries or support."
+      /> */}
+      <section className="px-6 sm:px-20 pt-32 pb-20 bg-gray-800">
         <div className="max-w-3xl mx-auto">
           <h1 className="text-4xl font-extrabold text-primary mb-4 text-center">Contact Us</h1>
           <div className="w-24 h-1 bg-[#B49C5B] rounded mb-10 mx-auto" />
-          <p className="text-lg text-gray-700 leading-relaxed text-center mb-12">
+          <p className="text-lg text-gray-300 leading-relaxed text-center mb-12">
             We’d love to hear from you. Reach out for partnership opportunities, investment inquiries, or general questions.
           </p>
           <div className="bg-white rounded-2xl shadow-xl p-8 border border-[#B49C5B] flex flex-col gap-8">
@@ -68,6 +72,9 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
+      <hr className="border-t border-[#B49C5B] opacity-60 mx-auto w-full" />
+      <BackToTopButton />
+      
     </main>
   );
 }

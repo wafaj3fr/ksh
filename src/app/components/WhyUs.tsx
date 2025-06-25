@@ -1,60 +1,47 @@
+'use client';
+
+import { Player } from '@lottiefiles/react-lottie-player';
+
 export default function WhyUs() {
   return (
     <section className="py-28 px-6 sm:px-20 bg-gradient-to-br from-[#f5f9ff] via-white to-[#edf2f7]">
-      <div className="max-w-6xl mx-auto">
-        {/* Section Title */}
-        <div className="mb-16 text-center sm:text-left">
+      <div className="max-w-7xl mx-auto grid md:grid-cols-2 items-center gap-12">
+        {/* Left - Text Content */}
+        <div>
           <h2 className="text-4xl sm:text-5xl font-extrabold text-primary tracking-tight mb-4">
             Why Us?
           </h2>
           <div className="w-24 h-1 bg-[#B49C5B] rounded mb-6 sm:mb-10" />
-          <p className="text-lg text-gray-700 leading-relaxed max-w-5xl">
+          <p className="text-lg text-gray-700 leading-relaxed mb-4">
             We follow a strategic and credible investment methodology to build a sustainable and impactful legacy. Our projects are guided by innovation, long-term vision, and a commitment to client trust and partnership excellence.
           </p>
-          <p className="text-lg text-gray-700 leading-relaxed mt-4 max-w-5xl">
+          <p className="text-lg text-gray-700 leading-relaxed">
             Our diverse investments and projects are based on credibility, excellence, and continuous innovation. We provide comprehensive and advanced services to our clients and partners, earning their respect and trust for the long term.
           </p>
         </div>
-        {/* Statistics */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 mt-12">
-          <StatCard
-            value="20+"
-            label="Years of Experience"
-            icon={
-              <svg className="w-10 h-10 text-[#B49C5B]" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-                <circle cx="12" cy="12" r="10" />
-                <path d="M12 6v6l4 2" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            }
-          />
-          <StatCard
-            value="15"
-            label="Subsidiaries"
-            icon={
-              <svg className="w-10 h-10 text-[#B49C5B]" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-                <rect x="3" y="3" width="7" height="7" rx="2" />
-                <rect x="14" y="3" width="7" height="7" rx="2" />
-                <rect x="14" y="14" width="7" height="7" rx="2" />
-                <rect x="3" y="14" width="7" height="7" rx="2" />
-              </svg>
-            }
-          />
-          <StatCard
-            value="$500M+"
-            label="Invested Capital"
-            icon={
-              <svg className="w-10 h-10 text-[#B49C5B]" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-                <path d="M12 8c-2.21 0-4 1.343-4 3s1.79 3 4 3 4-1.343 4-3-1.79-3-4-3zm0 0V4m0 12v4" />
-                <circle cx="12" cy="12" r="10" />
-              </svg>
-            }
+
+        {/* Right - Animation */}
+        <div className="flex justify-center">
+          <Player
+            autoplay
+            loop
+            src="/lottie/partnership.json"
+            className="w-full max-w-sm sm:max-w-md h-auto"
           />
         </div>
+      </div>
+
+      {/* Stats Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 mt-24 max-w-6xl mx-auto">
+        <StatCard value="20+" label="Years of Experience" icon={clockIcon} />
+        <StatCard value="15" label="Subsidiaries" icon={gridIcon} />
+        <StatCard value="$500M+" label="Invested Capital" icon={moneyIcon} />
       </div>
     </section>
   );
 }
 
+// === Helper Components ===
 function StatCard({
   value,
   label,
@@ -74,3 +61,27 @@ function StatCard({
     </div>
   );
 }
+
+// Icons
+const clockIcon = (
+  <svg className="w-10 h-10 text-[#B49C5B]" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="10" />
+    <path d="M12 6v6l4 2" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+const gridIcon = (
+  <svg className="w-10 h-10 text-[#B49C5B]" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+    <rect x="3" y="3" width="7" height="7" rx="2" />
+    <rect x="14" y="3" width="7" height="7" rx="2" />
+    <rect x="14" y="14" width="7" height="7" rx="2" />
+    <rect x="3" y="14" width="7" height="7" rx="2" />
+  </svg>
+);
+
+const moneyIcon = (
+  <svg className="w-10 h-10 text-[#B49C5B]" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+    <path d="M12 8c-2.21 0-4 1.343-4 3s1.79 3 4 3 4-1.343 4-3-1.79-3-4-3zm0 0V4m0 12v4" />
+    <circle cx="12" cy="12" r="10" />
+  </svg>
+);

@@ -9,26 +9,30 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "typegen":"sanity schema extract --path=src/sanity/extract.json --project $SANITY_PROJECT_ID --dataset $SANITY_DATASET && sanity typegen generate"
-
-
+    "typegen": "sanity schema extract --path=src/sanity/extract.json --project $SANITY_PROJECT_ID --dataset $SANITY_DATASET && sanity typegen generate"
   },
   "dependencies": {
+    "@lottiefiles/react-lottie-player": "^3.6.0",
+    "@portabletext/react": "^3.2.1",
     "@sanity/client": "^6.29.1",
     "@sanity/image-url": "^1.1.0",
     "@sanity/vision": "^3.86.1",
+    "aos": "^2.3.4",
+    "framer-motion": "^12.19.1",
     "lucide-react": "^0.503.0",
     "next": "^15.3.2",
     "next-sanity": "^9.10.2",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "sanity": "^3.86.1",
-    "styled-components": "^6.1.17"
+    "styled-components": "^6.1.17",
+    "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "^4.1.5",
+    "@tailwindcss/postcss": "^4.1.10",
     "autoprefixer": "^10.4.21",
-    "tailwindcss": "^4.1.5",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.10",
     "typescript": "5.8.3"
   }
 }

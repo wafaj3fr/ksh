@@ -7,15 +7,38 @@ interface CEOMessageProps {
 
 export default function CEOMessage({ message, imageUrl }: CEOMessageProps) {
   return (
-    <section className="px-8 sm:px-20 py-20 bg-[#f7f9fc]">
-      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 items-center gap-12">
-        <div className="flex flex-col items-start text-left mb-8">
-          <h2 className="text-3xl font-bold mb-2 text-primary">CEO's Message</h2>
-          <span className="block w-55 h-1 rounded bg-[#B49C5B]" />
+    <section className="bg-gradient-to-br from-[#f7f9fc] to-[#edf2f7] py-24 px-6 sm:px-20">
+      <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-12 items-start">
+        {/* Left - Heading and Message */}
+        <div className="md:col-span-2 space-y-6">
+          <div>
+            <h2 className="text-3xl font-extrabold text-primary mb-2">CEO's Message</h2>
+            <div className="w-20 h-1 bg-[#B49C5B] rounded" />
+          </div>
+
+          <div className="max-h-[300px] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-[#B49C5B] scrollbar-track-#B49C5B/10">
+            <p className="text-lg text-gray-700 leading-relaxed whitespace-pre-line">
+              {message}
+            </p>
+          </div>
+
+          <div className="pt-2">
+            <p className="text-sm font-semibold text-gray-800">Mahmoud Alassad</p>
+            <p className="text-xs text-gray-500">Chief Executive Officer</p>
+          </div>
         </div>
-        <p className="text-lg text-gray-600 max-w-2xl">{message}</p>
+
+        {/* Right - Image */}
         {imageUrl && (
-          <Image src={imageUrl} alt="CEO" width={100} height={100} className="rounded-full mx-auto" />
+          <div className="flex justify-center">
+            <Image
+              src={imageUrl}
+              alt="CEO"
+              width={180}
+              height={180}
+              className="rounded-full border border-[#B49C5B]/40 shadow-md"
+            />
+          </div>
         )}
       </div>
     </section>
