@@ -7,7 +7,7 @@ import 'aos/dist/aos.css';
 
 export default function TADSection() {
   useEffect(() => {
-    AOS.init({ once: true, duration: 1000 });
+    AOS.init({ once: false, duration: 1000 });
   }, []);
 
   return (

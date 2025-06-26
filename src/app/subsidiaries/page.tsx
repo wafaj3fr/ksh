@@ -56,15 +56,15 @@ export default async function SubsidiariesPage() {
       />
 
       {/* Cards Overview */}
-      <section className="px-6 sm:px-20 pt-32 pb-20">
-        <div className="max-w-6xl mx-auto text-center">
+      <section className="px-6 sm:px-20 pt-32 pb-20 min-h-screen flex items-center">
+        <div className="max-w-6xl mx-auto text-center w-full">
           <h1 className="text-4xl font-extrabold text-primary mb-2">Our Subsidiaries</h1>
           <div className="w-24 h-1 bg-[#B49C5B] rounded mb-8 mx-auto" />
           <p className="text-lg text-gray-700 leading-relaxed max-w-2xl mx-auto mb-16">
             Each of our subsidiaries is a leader in its field, working together to build a stronger, more innovative Sudan. Explore our group companies and their unique contributions.
           </p>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
             {subsidiaries.map((sub, i) => (
               <a
                 key={i}

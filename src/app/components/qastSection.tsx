@@ -24,7 +24,7 @@ export default function QASTSection() {
       </div>
 
       {/* Section 2 - Visual and Details */}
-      <div className="grid md:grid-cols-2 items-center px-6 sm:px-20 py-24 gap-16 bg-[#1a1a1a]">
+      <div className="min-h-screen grid md:grid-cols-2 items-center px-6 sm:px-20 py-24 gap-16 bg-[#1a1a1a]">
         {/* Text */}
         <motion.div
           initial={{ opacity: 0, x: -40 }}
@@ -54,7 +54,7 @@ export default function QASTSection() {
           className="w-full h-[300px] sm:h-[400px] relative rounded-xl overflow-hidden shadow-lg"
         >
           <Image
-            src="/telecom.jpg" 
+            src="/telecom.jpg"
             alt="QAST Technology Illustration"
             fill
             className="object-cover rounded-xl"
