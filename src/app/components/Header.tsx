@@ -1,63 +1,98 @@
 "use client";
+
 import Link from "next/link";
-import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
+import { Menu, X } from "lucide-react";
+import { useEffect, useState } from "react";
 
 interface HeaderProps {
-  logo?: { asset: { url: string }; alt?: string };
+  logo?: {
+    asset: { url: string };
+    alt?: string;
+  };
 }
+
+const navItems = [
+  { name: "About", href: "/about" },
+  { name: "Subsidiaries", href: "/subsidiaries" },
+  { name: "News", href: "/news" },
+];
 
 export default function Header({ logo }: HeaderProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [visible, setVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+  const pathname = usePathname();
 
   useEffect(() => {
-    const onScroll = () => setIsScrolled(window.scrollY > 10);
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      setIsScrolled(currentScrollY > 10);
+      setVisible(currentScrollY < lastScrollY || currentScrollY < 100);
+      setLastScrollY(currentScrollY);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [lastScrollY]);
 
-  const navText = isScrolled ? "text-gray-800" : "text-white";
-  const hoverText = isScrolled ? "hover:text-[#B49C5B]" : "hover:text-[#fcd34d]"; // light gold on dark
+  const navText = isScrolled ? "text-gray-100" : "text-white";
+  const hoverText = "hover:text-[#B49C5B]";
+  const bgColor = isScrolled ? "bg-gray-900 border-b border-gray-700" : "bg-transparent border-b border-[#B49C5B]";
 
   return (
     <header
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-        isScrolled
-          ? "bg-white/90 shadow-md backdrop-blur-md border-b border-gray-200"
-          : "bg-transparent"
-      }`}
+        bgColor
+      } ${visible ? "translate-y-0" : "-translate-y-full"}`}
     >
       <div className="flex justify-between items-center px-6 sm:px-20 py-4 max-w-screen-xl mx-auto">
         {/* Logo */}
-        <div className="flex items-center">
-          {logo ? (
+        <Link href="/" className="flex items-center">
+          {logo?.asset?.url ? (
             <Image
               src={logo.asset.url}
               alt={logo.alt || "KSHC Logo"}
               width={140}
               height={50}
               className="object-contain"
+              priority
             />
           ) : (
             <span className={`text-xl font-bold tracking-tight ${navText}`}>KSHC</span>
           )}
-        </div>
+        </Link>
 
         {/* Desktop Nav */}
-        <nav className="hidden sm:flex items-center gap-8 text-sm font-medium">
-          {["About", "Sectors", "Subsidiaries", "News", "Contact"].map((item) => (
-            <a
-              key={item}
-              href={`/${item.toLowerCase()}`}
-              className={`${navText} ${hoverText} transition duration-200 relative group`}
-            >
-              {item}
-              <span className="absolute left-0 bottom-0 w-full h-[2px] bg-[#B49C5B] scale-x-0 group-hover:scale-x-100 transition-transform duration-200"></span>
-            </a>
-          ))}
+        <nav className="hidden sm:flex items-center gap-6 text-sm font-medium">
+          {navItems.map(({ name, href }) => {
+            const isActive = pathname === href;
+            return (
+              <Link
+                key={name}
+                href={href}
+                className={`relative group transition duration-200 ${
+                  isActive ? "text-[#B49C5B]" : navText
+                } ${hoverText}`}
+              >
+                {name}
+                <span
+                  className={`absolute left-0 bottom-0 w-full h-[2px] bg-[#B49C5B] transition-transform duration-200 ${
+                    isActive ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
+                  }`}
+                ></span>
+              </Link>
+            );
+          })}
 
+          {/* CTA Contact Button */}
+          <Link
+            href="/contact"
+            className="ml-6 bg-[#B49C5B] text-black font-semibold text-sm px-5 py-2 rounded-full hover:bg-[#a4884a] transition"
+          >
+            Contact
+          </Link>
         </nav>
 
         {/* Mobile Menu Button */}
@@ -70,18 +105,21 @@ export default function Header({ logo }: HeaderProps) {
         </button>
       </div>
 
-      {/* Mobile Nav Dropdown */}
+      {/* Mobile Nav */}
       {isOpen && (
         <div className="sm:hidden px-6 pt-2 pb-4">
-          <div className="bg-white rounded-xl shadow-lg p-6 flex flex-col gap-4 border border-gray-200 animate-fadeIn">
-            {["About", "Sectors", "Subsidiaries", "News", "Contact"].map((item) => (
-              <a
-                key={item}
-                href={`/${item.toLowerCase()}`}
-                className="text-gray-800 font-medium hover:text-[#B49C5B] transition"
+          <div className="bg-white rounded-xl shadow-lg p-6 flex flex-col gap-4 border border-gray-200">
+            {[...navItems, { name: "Contact", href: "/contact" }].map(({ name, href }) => (
+              <Link
+                key={name}
+                href={href}
+                onClick={() => setIsOpen(false)}
+                className={`font-medium text-gray-800 hover:text-[#B49C5B] transition ${
+                  pathname === href ? "text-[#B49C5B]" : ""
+                }`}
               >
-                {item}
-              </a>
+                {name}
+              </Link>
             ))}
           </div>
         </div>

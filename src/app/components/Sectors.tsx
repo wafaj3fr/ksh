@@ -1,6 +1,5 @@
 'use client';
 
-
 import { iconMap } from "../../utills/icons";
 
 export interface InvestmentSectorProps {
@@ -21,7 +20,10 @@ export default function Sectors({ sectors }: { sectors: InvestmentSectorProps[] 
             const IconComponent = sector.icon && iconMap[sector.icon];
 
             return (
-              <div key={index} className="bg-gray-900 text-white p-6 rounded-xl shadow hover:shadow-md border border-[#B49C5B] transition text-left">
+              <div
+                key={index}
+                className="bg-gray-900 text-white p-6 rounded-xl shadow border border-[#B49C5B] transition-transform duration-300 transform hover:scale-110 hover:shadow-xl"
+              >
                 <div className="flex items-center gap-4 mb-3">
                   {IconComponent ? (
                     <IconComponent className="text-[#B49C5B] w-6 h-6" />
