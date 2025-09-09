@@ -40,7 +40,7 @@ export default function News({ news }: NewsProps) {
   const item = news[current];
 
   return (
-    <section id="news" className="px-8 sm:px-20 py-20 bg-gray-100">
+    <section id="news" className="px-8 sm:px-20 py-20 bg-white">
       <div className="max-w-5xl mx-auto text-center">
         <h2 className="text-3xl font-bold mb-2 text-primary">News & Updates</h2>
         <span className="block mx-auto w-60 h-1 rounded bg-[#B49C5B] mb-8" />

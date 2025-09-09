@@ -1,80 +1,122 @@
-import { Mail, Phone, MapPin } from "lucide-react";
-import BackToTopButton from "../components/BackToTopButton";
-// import PageHero from "../components/UnifiedHero";
+'use client';
+import { useState } from "react";
 
-export default function ContactPage() {
+export default function ContactForm() {
+  const [status, setStatus] = useState<'idle' | 'submitting' | 'ok' | 'error'>('idle');
+  const [error, setError] = useState('');
+
+async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+  e.preventDefault();
+  setStatus("submitting");
+  setError("");
+
+  const formEl = e.currentTarget; // ✅ خزن المرجع هنا
+  const fd = new FormData(formEl);
+
+  try {
+    const res = await fetch("/api/forms/contact", { method: "POST", body: fd });
+    if (!res.ok) {
+      const data = await res.json().catch(() => ({}));
+      throw new Error(data?.error || "Submit failed");
+    }
+
+    formEl.reset(); // ✅ استعمل المرجع المحفوظ
+    setStatus("ok");
+  } catch (err: any) {
+    setError(err.message || "Failed");
+    setStatus("error");
+  }
+}
+
+
   return (
-    <main className="min-h-screen bg-gray-900 text-gray-100 font-sans">
-      {/* <PageHero
-        title="Contact Us"
-        subtitle="Get in touch with us for any inquiries or support."
-      /> */}
-      <section className="px-6 sm:px-20 pt-32 pb-20 bg-gray-800">
-        <div className="max-w-3xl mx-auto">
-          <h1 className="text-4xl font-extrabold text-primary mb-4 text-center">Contact Us</h1>
-          <div className="w-24 h-1 bg-[#B49C5B] rounded mb-10 mx-auto" />
-          <p className="text-lg text-gray-300 leading-relaxed text-center mb-12">
-            We’d love to hear from you. Reach out for partnership opportunities, investment inquiries, or general questions.
-          </p>
-          <div className="bg-white rounded-2xl shadow-xl p-8 border border-[#B49C5B] flex flex-col gap-8">
-            <div className="flex flex-col sm:flex-row gap-8 justify-between">
-              <div className="flex items-center gap-3">
-                <Mail className="w-6 h-6 text-[#B49C5B]" />
-                <span className="text-gray-800 font-medium">info@kshc.com</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <Phone className="w-6 h-6 text-[#B49C5B]" />
-                <span className="text-gray-800 font-medium">+249 123 456 789</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <MapPin className="w-6 h-6 text-[#B49C5B]" />
-                <span className="text-gray-800 font-medium">Khartoum, Sudan</span>
-              </div>
+    <section className="bg-[#0F1626] py-16 px-6">
+      <div className="max-w-xl mx-auto">
+        {/* Card Container */}
+        <div className="bg-white border border-[#B49D5A]/40 rounded-xl shadow-lg p-8">
+          <h2 className="text-2xl font-bold text-center text-primary mb-6">
+            Get in Touch
+          </h2>
+
+          <form onSubmit={onSubmit} className="flex flex-col gap-6">
+            {/* Full Name */}
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">
+                Full Name
+              </label>
+              <input
+                name="fullName"
+                required
+                className="w-full px-4 py-3 rounded-lg border-2 border-[#B49D5A]/70 bg-white text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#B49D5A]/40 focus:border-[#B49D5A] transition-all"
+                placeholder="Enter your full name"
+              />
             </div>
-            <form className="mt-8 flex flex-col gap-6">
-              <div className="flex flex-col gap-2">
-                <label htmlFor="name" className="font-semibold text-gray-700">Name</label>
-                <input
-                  id="name"
-                  type="text"
-                  required
-                  className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#B49C5B] transition"
-                  placeholder="Your Name"
-                />
+
+            {/* Email */}
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">
+                Email
+              </label>
+              <input
+                type="email"
+                name="email"
+                required
+                className="w-full px-4 py-3 rounded-lg border-2 border-[#B49D5A]/70 bg-white text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#B49D5A]/40 focus:border-[#B49D5A] transition-all"
+                placeholder="Enter your email"
+              />
+            </div>
+
+            {/* Subject */}
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">
+                Subject
+              </label>
+              <input
+                name="subject"
+                className="w-full px-4 py-3 rounded-lg border-2 border-[#B49D5A]/70 bg-white text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#B49D5A]/40 focus:border-[#B49D5A] transition-all"
+                placeholder="Enter subject"
+              />
+            </div>
+
+            {/* Message */}
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">
+                Message
+              </label>
+              <textarea
+                name="message"
+                rows={5}
+                required
+                className="w-full px-4 py-3 rounded-lg border-2 border-[#B49D5A]/70 bg-white text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#B49D5A]/40 focus:border-[#B49D5A] transition-all resize-y"
+                placeholder="Write your message..."
+              />
+            </div>
+
+            {/* Submit */}
+            <button
+              type="submit"
+              disabled={status === "submitting"}
+              className="w-full bg-[#B49D5A] text-white font-semibold py-3 px-6 rounded-lg hover:bg-[#937c41] focus:outline-none focus:ring-2 focus:ring-[#B49D5A]/50 transition-all shadow-md hover:shadow-lg"
+            >
+              {status === "submitting" ? "Sending…" : "Send Message"}
+            </button>
+
+            {/* Status Messages */}
+            {status === "ok" && (
+              <div className="p-4 bg-green-50 border border-green-200 rounded-lg text-center">
+                <p className="text-green-700 text-sm font-medium">
+                  ✅ Message sent successfully!
+                </p>
               </div>
-              <div className="flex flex-col gap-2">
-                <label htmlFor="email" className="font-semibold text-gray-700">Email</label>
-                <input
-                  id="email"
-                  type="email"
-                  required
-                  className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#B49C5B] transition"
-                  placeholder="you@email.com"
-                />
+            )}
+            {status === "error" && (
+              <div className="p-4 bg-red-50 border border-red-200 rounded-lg text-center">
+                <p className="text-red-600 text-sm font-medium">❌ {error}</p>
               </div>
-              <div className="flex flex-col gap-2">
-                <label htmlFor="message" className="font-semibold text-gray-700">Message</label>
-                <textarea
-                  id="message"
-                  required
-                  rows={5}
-                  className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#B49C5B] transition"
-                  placeholder="How can we help you?"
-                />
-              </div>
-              <button
-                type="submit"
-                className="bg-[#B49C5B] text-white font-bold py-3 rounded-lg hover:bg-[#a88a46] transition"
-              >
-                Send Message
-              </button>
-            </form>
-          </div>
+            )}
+          </form>
         </div>
-      </section>
-      <hr className="border-t border-[#B49C5B] opacity-60 mx-auto w-full" />
-      <BackToTopButton />
-      
-    </main>
+      </div>
+    </section>
   );
 }

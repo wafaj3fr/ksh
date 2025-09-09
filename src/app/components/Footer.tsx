@@ -41,11 +41,11 @@ export default function Footer() {
             </li>
             <li>
               <span className="block text-gray-300">Phone:</span>
-              <a href="tel:+249123456789" className="hover:text-[#B49C5B] transition">+249 123 456 789</a>
+              <a href="tel:+249123456789" className="hover:text-[#B49C5B] transition">+249 900 922 906 | +249 900 922 905</a>
             </li>
             <li>
               <span className="block text-gray-300">Address:</span>
-              <span>123 KSHC Tower, Khartoum, Sudan</span>
+              <span> Al Amarat Street 1, Khartoum, Sudan</span>
             </li>
           </ul>
         </div>

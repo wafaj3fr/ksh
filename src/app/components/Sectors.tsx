@@ -1,6 +1,6 @@
 'use client';
 
-import { iconMap } from "../../utills/icons";
+import { iconMap } from "../../utils/icons";
 
 export interface InvestmentSectorProps {
   _id: string;

@@ -7,12 +7,12 @@ interface CEOMessageProps {
 
 export default function CEOMessage({ message, imageUrl }: CEOMessageProps) {
   return (
-    <section className="bg-gradient-to-br from-[#f7f9fc] to-[#edf2f7] py-24 px-6 sm:px-20">
+    <section className="bg-white py-24 px-6 sm:px-20">
       <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-12 items-start">
         {/* Left - Heading and Message */}
         <div className="md:col-span-2 space-y-6">
           <div>
-            <h2 className="text-3xl font-extrabold text-primary mb-2">CEO's Message</h2>
+            <h2 className="text-3xl font-extrabold text-primary mb-2">General Manager Message</h2>
             <div className="w-20 h-1 bg-[#B49C5B] rounded" />
           </div>
 

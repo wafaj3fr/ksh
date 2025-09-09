@@ -4,7 +4,7 @@ import { Player } from '@lottiefiles/react-lottie-player';
 
 export default function WhyUs() {
   return (
-    <section className="py-28 px-6 sm:px-20 bg-gradient-to-br from-[#f5f9ff] via-white to-[#edf2f7]">
+    <section className="py-28 px-6 sm:px-20 bg-white">
       <div className="max-w-7xl mx-auto grid md:grid-cols-2 items-center gap-12">
         {/* Left - Text Content */}
         <div>

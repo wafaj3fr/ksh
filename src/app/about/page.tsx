@@ -1,9 +1,7 @@
 import Image from "next/image";
-import PageHero from "../components/UnifiedHero";
-import { Building2, Server, Globe, ShieldCheck } from "lucide-react";
+import { Building2, Server, Globe, ShieldCheck, Award, TrendingUp, Users, Target, Layers } from "lucide-react";
 import BackToTopButton from "../components/BackToTopButton";
 import UnifiedHero from "../components/UnifiedHero";
-import settings from "../../sanity/schemas/setting";
 import { getSettings } from "../../sanity/sanity-utils";
 
 export default async function AboutPage() {
@@ -128,18 +126,72 @@ export default async function AboutPage() {
           </div>
         </section>
 
+{/* Objectives */}
+      <section id="objectives" className="py-16 px-6 sm:px-20 bg-white">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-extrabold text-primary mb-4">General Objectives</h2>
+            <span className="block mx-auto w-24 h-1 bg-[#B49C5B] rounded" />
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              {
+                title: "Kuwait–Sudan Ties",
+                description: "Introducing a unique model of foreign investment in Sudan.",
+                icon: <Globe className="text-primary w-7 h-7 mx-auto" />,
+              },
+              {
+                title: "Post-conflict Reconstruction",
+                description:
+                  "Establishing profitable institutions that contribute to development in areas like technology, services, and reconstruction.",
+                icon: <Award className="text-primary w-7 h-7 mx-auto" />,
+              },
+              {
+                title: "Smart Investments",
+                description: "Expanding and supporting effective initiatives through smart partnerships.",
+                icon: <TrendingUp className="text-primary w-7 h-7 mx-auto" />,
+              },
+              {
+                title: "Talent Development",
+                description: "Nurturing exceptional talent and supporting innovative ideas and projects.",
+                icon: <Users className="text-primary w-7 h-7 mx-auto" />,
+              },
+              {
+                title: "Social Responsibility",
+                description: "Focusing on social responsibility and fostering intergenerational connections.",
+                icon: <Target className="text-primary w-7 h-7 mx-auto" />,
+              },
+              {
+                title: "Smart Partnerships",
+                description: "Managing corporate assets efficiently.",
+                icon: <Layers className="text-primary w-7 h-7 mx-auto" />,
+              },
+            ].map((obj, idx) => (
+              <div key={idx} className="text-center space-y-4 p-6 bg-white rounded-xl shadow-sm">
+                <div className="bg-primary/10 p-4 rounded-full mb-4 flex items-center justify-center w-fit mx-auto">
+                  {obj.icon}
+                </div>
+                <h3 className="text-lg font-bold text-primary mb-2">{obj.title}</h3>
+                <p className="text-sm text-gray-700 leading-relaxed">{obj.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
 
       </section>
 
       {/* Board of Directors */}
-      <section className="bg-[#f0f4f9] px-6 sm:px-20 py-20">
+      <section className="bg-white px-6 sm:px-20 py-20">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl font-extrabold text-primary mb-4">Board of Directors</h2>
           <span className="block w-24 h-1 bg-[#B49C5B] rounded mx-auto mb-10" />
           <div className="grid sm:grid-cols-3 gap-10">
             {[
-              { name: "Maj. Gen. Pilot Al-Fateh Aroua", title: "Chairman", nationality: "Sudanese" },
-              { name: "Hisham Mustafa Allam", title: "Board Member", nationality: "Sudanese" },
+              { name: "Hisham Mustafa Allam", title: "Chairman", nationality: "Sudanese" },
+              { name: "Shaji", title: "Board Member", nationality: "Sudanese" },
               { name: "Osama Michel Matta", title: "Board Member", nationality: "Lebanese" },
             ].map((member, idx) => (
               <div key={idx} className="bg-white rounded-xl shadow p-6 border border-[#d8c99b]">
@@ -151,6 +203,43 @@ export default async function AboutPage() {
           </div>
         </div>
       </section>
+
+            {/* Management Structure */}
+      <section className="bg-white px-6 sm:px-20 py-20">
+        <div className="max-w-6xl mx-auto text-center">
+          <h2 className="text-3xl font-extrabold text-primary mb-4">Management Structure</h2>
+          <span className="block w-24 h-1 bg-[#B49C5B] rounded mx-auto mb-10" />
+
+          {/* Top Manager */}
+          <div className="flex justify-center mb-12">
+            <div className="bg-white rounded-xl shadow p-6 border border-[#d8c99b] w-64">
+              <h3 className="font-bold text-[#0a1f44]">Name</h3>
+              <p className="text-sm text-gray-600">Position</p>
+              <p className="text-xs text-gray-500">Sudanese</p>
+            </div>
+          </div>
+
+          {/* Sub Managers */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              { name: "Name", title: "Position", dept: "Nationality/Department" },
+              { name: "Name", title: "Position", dept: "Nationality/Department" },
+              { name: "Name", title: "Position", dept: "Nationality/Department" },
+              { name: "Name", title: "Position", dept: "Nationality/Department" },
+            ].map((m, idx) => (
+              <div
+                key={idx}
+                className="bg-white rounded-xl shadow p-6 border border-[#d8c99b]"
+              >
+                <h3 className="font-bold text-[#0a1f44]">{m.name}</h3>
+                <p className="text-sm text-gray-600">{m.title}</p>
+                <p className="text-xs text-gray-500">{m.dept}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
 
       {/* Future Vision */}
       <section className="bg-white px-6 sm:px-20 py-24">
@@ -174,7 +263,7 @@ export default async function AboutPage() {
       {/* CEO Message */}
       <section className="bg-[#f7f9fc] px-6 sm:px-20 py-24">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl font-extrabold text-primary mb-6">CEO’s Message</h2>
+          <h2 className="text-3xl font-extrabold text-primary mb-6">General Manager Message</h2>
           <span className="block w-20 h-1 bg-[#B49C5B] rounded mx-auto mb-6" />
           <p className="text-lg text-gray-700 leading-loose text-justify">
             The Kuwaiti Sudanese Holding Company takes pride in being a Kuwaiti company with foreign capital, dedicated to economic development in Sudan.

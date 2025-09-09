@@ -17,6 +17,8 @@ const navItems = [
   { name: "About", href: "/about" },
   { name: "Subsidiaries", href: "/subsidiaries" },
   { name: "News", href: "/news" },
+  { name: "Services", href: "/services" },
+  { name: "Careers", href: "/careers" },
 ];
 
 export default function Header({ logo }: HeaderProps) {
@@ -39,33 +41,39 @@ export default function Header({ logo }: HeaderProps) {
 
   const navText = isScrolled ? "text-gray-100" : "text-white";
   const hoverText = "hover:text-[#B49C5B]";
-  const bgColor = isScrolled ? "bg-gray-900 border-b border-gray-700" : "bg-transparent border-b border-[#B49C5B]";
+  const bgColor = isScrolled
+    ? "bg-gray-900 border-b border-gray-700"
+    : "bg-transparent border-b border-[#B49C5B]";
 
   return (
     <header
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-        bgColor
-      } ${visible ? "translate-y-0" : "-translate-y-full"}`}
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${bgColor} ${
+        visible ? "translate-y-0" : "-translate-y-full"
+      }`}
     >
-      <div className="flex justify-between items-center px-6 sm:px-20 py-4 max-w-screen-xl mx-auto">
+      <div className="flex justify-between items-center px-6 sm:px-16 py-2 max-w-screen-xl mx-auto">
         {/* Logo */}
         <Link href="/" className="flex items-center">
           {logo?.asset?.url ? (
             <Image
               src={logo.asset.url}
               alt={logo.alt || "KSHC Logo"}
-              width={140}
-              height={50}
+              width={100} // smaller logo
+              height={40}
               className="object-contain"
               priority
             />
           ) : (
-            <span className={`text-xl font-bold tracking-tight ${navText}`}>KSHC</span>
+            <span
+              className={`text-lg font-bold tracking-tight ${navText}`}
+            >
+              KSHC
+            </span>
           )}
         </Link>
 
         {/* Desktop Nav */}
-        <nav className="hidden sm:flex items-center gap-6 text-sm font-medium">
+        <nav className="hidden sm:flex items-center gap-5 text-xs font-medium">
           {navItems.map(({ name, href }) => {
             const isActive = pathname === href;
             return (
@@ -89,7 +97,7 @@ export default function Header({ logo }: HeaderProps) {
           {/* CTA Contact Button */}
           <Link
             href="/contact"
-            className="ml-6 bg-[#B49C5B] text-black font-semibold text-sm px-5 py-2 rounded-full hover:bg-[#a4884a] transition"
+            className="ml-4 bg-[#B49C5B] text-black font-semibold text-xs px-4 py-1.5 rounded-full hover:bg-[#a4884a] transition"
           >
             Contact
           </Link>
@@ -101,26 +109,28 @@ export default function Header({ logo }: HeaderProps) {
           className={`${navText} sm:hidden`}
           aria-label="Toggle menu"
         >
-          {isOpen ? <X size={26} /> : <Menu size={26} />}
+          {isOpen ? <X size={22} /> : <Menu size={22} />}
         </button>
       </div>
 
       {/* Mobile Nav */}
       {isOpen && (
         <div className="sm:hidden px-6 pt-2 pb-4">
-          <div className="bg-white rounded-xl shadow-lg p-6 flex flex-col gap-4 border border-gray-200">
-            {[...navItems, { name: "Contact", href: "/contact" }].map(({ name, href }) => (
-              <Link
-                key={name}
-                href={href}
-                onClick={() => setIsOpen(false)}
-                className={`font-medium text-gray-800 hover:text-[#B49C5B] transition ${
-                  pathname === href ? "text-[#B49C5B]" : ""
-                }`}
-              >
-                {name}
-              </Link>
-            ))}
+          <div className="bg-white rounded-xl shadow-lg p-6 flex flex-col gap-3 border border-gray-200 text-sm">
+            {[...navItems, { name: "Contact", href: "/contact" }].map(
+              ({ name, href }) => (
+                <Link
+                  key={name}
+                  href={href}
+                  onClick={() => setIsOpen(false)}
+                  className={`font-medium text-gray-800 hover:text-[#B49C5B] transition ${
+                    pathname === href ? "text-[#B49C5B]" : ""
+                  }`}
+                >
+                  {name}
+                </Link>
+              )
+            )}
           </div>
         </div>
       )}

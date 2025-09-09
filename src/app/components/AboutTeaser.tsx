@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function AboutTeaser() {
   return (
-    <section id="about" className="relative bg-[#e7ebf0] px-6 sm:px-20 pt-24 pb-48">
+    <section id="about" className="relative bg-white px-6 sm:px-20 pt-24 pb-24">
       <div className="max-w-7xl mx-auto grid md:grid-cols-2 items-center gap-12">
         {/* Left - Text Content */}
         <div className="space-y-6">

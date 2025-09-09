@@ -12,7 +12,7 @@ export default function MissionVision({ mission, vision, goal }: MissionVisionPr
   return (
     <section
       id="mission-vision"
-      className="bg-[#f5f7fa] py-24 px-6 sm:px-20 text-gray-900"
+      className="bg-white py-24 px-6 sm:px-20 text-gray-900"
     >
       <div className="max-w-7xl mx-auto text-center">
         <h2 className="text-3xl sm:text-4xl font-extrabold text-primary mb-12">
