@@ -1,4 +1,4 @@
-import { type SchemaTypeDefinition } from 'sanity'
+import { type SchemaTypeDefinition } from 'sanity';
 import setting from '../schemas/setting';
 import subsidiary from '../schemas/subsidiary';
 import news from '../schemas/news';
@@ -8,7 +8,7 @@ import jobApplication from '../schemas/jobApplication';
 import ceoMessage from '../schemas/ceoMessage';
 import contactForm from '../schemas/contactForm';
 
-export const schemas: { types: SchemaTypeDefinition[] } = {
+const schema: { types: SchemaTypeDefinition[] } = {
   types: [
     setting,
     subsidiary,
@@ -17,6 +17,8 @@ export const schemas: { types: SchemaTypeDefinition[] } = {
     careersPage,
     job,
     jobApplication,
-    contactForm
+    contactForm,
   ],
 };
+
+export default schema;
