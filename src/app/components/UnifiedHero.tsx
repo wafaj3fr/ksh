@@ -11,7 +11,9 @@ interface UnifiedHeroProps {
   heroVideoFile?: { asset: { url: string } };
   heroVideoUrl?: string;
   height?: string; // "full" or "medium"
-}
+  ctaText?: string; 
+  ctaHref?: string; 
+}; 
 
 export default function UnifiedHero({
   title,
