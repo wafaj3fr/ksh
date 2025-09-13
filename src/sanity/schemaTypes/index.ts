@@ -8,7 +8,7 @@ import jobApplication from '../schemas/jobApplication'
 import ceoMessage from '../schemas/ceoMessage'
 import contactForm from '../schemas/contactForm'
 
-export const schema: { types: SchemaTypeDefinition[] } = {
+const schema: { types: SchemaTypeDefinition[] } = {
   types: [
     setting,
     subsidiary,
@@ -20,3 +20,4 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     contactForm,
   ],
 }
+export default schema;
