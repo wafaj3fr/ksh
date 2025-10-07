@@ -1,6 +1,6 @@
 "use client";
 
-import { Eye, Goal, Mountain, Target } from "lucide-react";
+import { Eye, Mountain, Target } from "lucide-react";
 
 interface MissionVisionProps {
   mission?: string;

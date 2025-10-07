@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Building2, Server, Globe, ShieldCheck, Award, TrendingUp, Users, Target, Layers } from "lucide-react";
+import { Globe, ShieldCheck, Award, TrendingUp, Users, Target, Layers } from "lucide-react";
 import BackToTopButton from "../components/BackToTopButton";
 import UnifiedHero from "../components/UnifiedHero";
 import { getSettings } from "../../sanity/sanity-utils";

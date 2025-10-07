@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 export default function Footer() {
   return (
     <footer className="bg-gray-900 text-gray-100 pt-16 pb-8  w-full min-h-[400px]
@@ -26,7 +28,11 @@ export default function Footer() {
             <li><a href="/about" className="hover:text-[#B49C5B] transition">About Us</a></li>
             <li><a href="/subsidiaries" className="hover:text-[#B49C5B] transition">Subsidiaries</a></li>
             <li><a href="/news" className="hover:text-[#B49C5B] transition">News & Media</a></li>
-            <li><a href="/careers" className="hover:text-[#B49C5B] transition">Careers</a></li>
+            <li>                  <Link href="/careers/" className="text-white"
+                        aria-label="Careers"
+                  >
+                    Careers
+                  </Link></li>
             <li><a href="/contact" className="hover:text-[#B49C5B] transition">Contact</a></li>
           </ul>
         </div>

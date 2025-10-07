@@ -6,7 +6,6 @@ import Section from "../../components/ui/Section";
 import Pill from "../../components/ui/Pill";
 import Card from "../../components/ui/Card";
 import JobApplicationForm from "../../components/forms/JobApplicationForm";
-import Hero from "../../components/ui/Hero";
 import UnifiedHero from "../../components/UnifiedHero";
 
 export default async function JobPage(props: { params: Promise<{ slug: string }> }) {
@@ -72,7 +71,7 @@ export default async function JobPage(props: { params: Promise<{ slug: string }>
       <h3 className="text-xl font-bold text-primary mb-2">Requirements</h3>
       <span className="block w-16 h-1 bg-[#B49C5B] rounded mb-4" />
       <ul className="space-y-3">
-        {job.requirements.map((req: any, idx: number) => (
+        {job.requirements.map((req: unknown, idx: number) => (
           <li
             key={idx}
             className="flex items-start gap-3 bg-white shadow-sm border border-[#e5e7eb] rounded-lg p-3 hover:shadow-md transition"
@@ -81,7 +80,7 @@ export default async function JobPage(props: { params: Promise<{ slug: string }>
               {idx + 1}
             </span>
             <span className="text-gray-800 leading-relaxed">
-              {typeof req === "string" ? req : req.children?.[0]?.text}
+              {typeof req === "string" ? req : (req as Record<string, unknown>)?.children?.[0]?.text || 'Requirement text'}
             </span>
           </li>
         ))}

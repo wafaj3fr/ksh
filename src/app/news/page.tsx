@@ -1,7 +1,6 @@
 // app/news/page.tsx
 import { getNews, getSettings } from "../../sanity/sanity-utils";
 import UnifiedHero from "../components/UnifiedHero";
-import PageHero from "../components/UnifiedHero";
 import NewsPageContent from "./NewsPageContent";
 
 export default async function NewsPage() {

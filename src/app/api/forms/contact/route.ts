@@ -1,31 +1,57 @@
 import { NextResponse } from "next/server";
 import { client } from "../../../../sanity/lib/client";
+import { validateContactForm } from "../../../../lib/validation";
+import { sanitizeFormData } from "../../../../lib/sanitization";
 
 export async function POST(req: Request) {
   try {
     const formData = await req.formData();
 
-    const fullName = formData.get("fullName") as string;
-    const email = formData.get("email") as string;
-    const subject = formData.get("subject") as string;
-    const message = formData.get("message") as string;
+    // Extract raw form data
+    const rawData = {
+      fullName: String(formData.get("fullName") || ''),
+      email: String(formData.get("email") || ''),
+      subject: formData.get("subject") ? String(formData.get("subject")) : undefined,
+      message: String(formData.get("message") || ''),
+    };
 
-    if (!fullName || !email || !message) {
-      return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
+    // Sanitize input data
+    const sanitizedData = sanitizeFormData(rawData);
+
+    // Validate the sanitized data
+    const validation = validateContactForm(sanitizedData);
+    if (!validation.success) {
+      return NextResponse.json({ 
+        error: 'Validation failed',
+        details: validation.error.issues.map(issue => ({
+          field: issue.path.join('.'),
+          message: issue.message
+        }))
+      }, { status: 400 });
     }
 
+    const validData = validation.data;
+
+    // Create contact form submission in Sanity
     await client.create({
       _type: "contactForm",
-      fullName,
-      email,
-      subject,
-      message,
+      fullName: validData.fullName,
+      email: validData.email,
+      subject: validData.subject || '',
+      message: validData.message,
       createdAt: new Date().toISOString(),
     });
 
-    return NextResponse.json({ success: true });
-  } catch (err: any) {
-    console.error("Contact form error:", err);
-    return NextResponse.json({ error: "Failed to submit" }, { status: 500 });
+    return NextResponse.json({ 
+      success: true,
+      message: 'Contact form submitted successfully'
+    });
+
+  } catch (error: unknown) {
+    console.error("Contact form error:", error);
+    return NextResponse.json({ 
+      error: "Internal server error",
+      details: "Please try again later"
+    }, { status: 500 });
   }
 }

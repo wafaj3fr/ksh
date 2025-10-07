@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { z } from 'zod';
 import { createClient } from '@sanity/client';
+import { validateJobApplication } from '../../../../lib/validation';
+import { sanitizeFormData } from '../../../../lib/sanitization';
+import { validateUploadedFile, FILE_SIZE_LIMITS } from '../../../../lib/fileValidation';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -13,61 +15,27 @@ const sanity = createClient({
   useCdn: false,
 });
 
-const TEXT_SCHEMA = z.object({
-  jobId: z.string().min(1),
-  fullName: z.string().min(2),
-  email: z.string().email(),
-  phone: z.string().optional(),
-  coverLetter: z.string().min(10),
-});
+async function uploadFileToSanity(file: File) {
+  // Validate file before upload
+  const validationResult = await validateUploadedFile(
+    file,
+    file.name,
+    file.type,
+    FILE_SIZE_LIMITS.CV
+  );
 
-const MAX_FILE_BYTES = 10 * 1024 * 1024; // 10MB
-
-// ⬇︎ وسّعنا القبول + fallback بالامتداد
-const ALLOWED_MIME = new Set([
-  'application/pdf',
-  'application/x-pdf',
-  'application/acrobat',
-  'applications/vnd.pdf',
-  'text/pdf',
-  'application/msword',
-  'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-  // أحيانًا يجي هكذا من بعض المتصفحات/الأنظمة
-  'application/octet-stream',
-]);
-
-const EXT_WHITELIST = new Set(['.pdf', '.doc', '.docx']);
-
-function extFromName(name?: string | null) {
-  if (!name) return '';
-  const dot = name.lastIndexOf('.');
-  return dot >= 0 ? name.slice(dot).toLowerCase() : '';
-}
-
-async function uploadFileToSanity(file: File | null) {
-  if (!file) return null;
-  if (file.size > MAX_FILE_BYTES) throw new Error('FILE_TOO_LARGE');
-
-  const contentType = file.type || 'application/octet-stream';
-  const filename = (file as any).name || 'upload';
-
-  // قبول بالـMIME أو بالامتداد كـ fallback
-  const ext = extFromName(filename);
-  const mimeOk = ALLOWED_MIME.has(contentType);
-  const extOk = EXT_WHITELIST.has(ext);
-
-  if (!mimeOk && !extOk) {
-    // لو احتجنا ديبَج مؤقت:
-    console.warn('Rejected upload', { contentType, filename, size: file.size });
-    throw new Error('UNSUPPORTED_TYPE');
+  if (!validationResult.isValid) {
+    throw new Error(`File validation failed: ${validationResult.errors.join(', ')}`);
   }
 
   const arrayBuffer = await file.arrayBuffer();
   const buffer = Buffer.from(arrayBuffer);
+  
   const asset = await sanity.assets.upload('file', buffer, {
-    filename,
-    contentType, // لو كان octet-stream ما عندنا مشكلة طالما الامتداد صحيح
+    filename: validationResult.fileInfo?.name || file.name,
+    contentType: file.type || 'application/octet-stream',
   });
+  
   return asset;
 }
 
@@ -75,50 +43,118 @@ export async function POST(req: NextRequest) {
   try {
     const form = await req.formData();
 
-    const parsed = TEXT_SCHEMA.parse({
+    // Extract and sanitize form data
+    const rawData = {
       jobId: String(form.get('jobId') || ''),
       fullName: String(form.get('fullName') || ''),
       email: String(form.get('email') || ''),
       phone: form.get('phone') ? String(form.get('phone')) : undefined,
       coverLetter: String(form.get('coverLetter') || ''),
-    });
+    };
 
+    // Sanitize input data
+    const sanitizedData = sanitizeFormData(rawData);
+
+    // Validate the sanitized data
+    const validation = validateJobApplication(sanitizedData);
+    if (!validation.success) {
+      return NextResponse.json({ 
+        error: 'Validation failed',
+        details: validation.error.issues.map(issue => ({
+          field: issue.path.join('.'),
+          message: issue.message
+        }))
+      }, { status: 400 });
+    }
+
+    const validData = validation.data;
+
+    // Handle file uploads
     const cv = form.get('cv') as File | null;
-    const coverLetterFile = (form.get('coverLetterFile') as File) || null;
-    const attachments = (form.getAll('attachments') as File[]).filter(Boolean);
+    if (!cv || cv.size === 0) {
+      return NextResponse.json({ error: 'CV file is required' }, { status: 400 });
+    }
 
+    const coverLetterFile = form.get('coverLetterFile') as File | null;
+    const attachments = (form.getAll('attachments') as File[]).filter(f => f && f.size > 0);
+
+    // Upload CV (required)
     const cvAsset = await uploadFileToSanity(cv);
-    if (!cvAsset) return NextResponse.json({ error: 'CV_REQUIRED' }, { status: 400 });
 
-    const clAsset = coverLetterFile ? await uploadFileToSanity(coverLetterFile) : null;
+    // Upload cover letter file (optional)
+    let clAsset = null;
+    if (coverLetterFile && coverLetterFile.size > 0) {
+      clAsset = await uploadFileToSanity(coverLetterFile);
+    }
 
+    // Upload attachments (optional)
     const attAssets = [];
-    for (const f of attachments) {
-      if (f && (f as any).size > 0) {
-        attAssets.push(await uploadFileToSanity(f));
+    for (const file of attachments) {
+      if (file && file.size > 0) {
+        const asset = await uploadFileToSanity(file);
+        attAssets.push(asset);
       }
     }
 
-    const doc = await sanity.create({
+    // Create the job application document in Sanity
+    const applicationDoc = {
       _type: 'jobApplication',
-      job: { _type: 'reference', _ref: parsed.jobId },
-      fullName: parsed.fullName,
-      email: parsed.email,
-      phone: parsed.phone || '',
-      coverLetter: parsed.coverLetter,
-      cvFile: { _type: 'file', asset: { _type: 'reference', _ref: cvAsset._id } },
-      ...(clAsset ? { coverLetterFile: { _type: 'file', asset: { _type: 'reference', _ref: clAsset._id } } } : {}),
-      ...(attAssets.length
-        ? { attachments: attAssets.map(a => ({ _type: 'file', asset: { _type: 'reference', _ref: a!._id } })) }
-        : {}),
+      job: { _type: 'reference', _ref: validData.jobId },
+      fullName: validData.fullName,
+      email: validData.email,
+      phone: validData.phone || '',
+      coverLetter: validData.coverLetter,
+      cvFile: { 
+        _type: 'file', 
+        asset: { _type: 'reference', _ref: cvAsset._id } 
+      },
       createdAt: new Date().toISOString(),
+    };
+
+    // Add optional files if they exist
+    if (clAsset) {
+      (applicationDoc as Record<string, unknown>).coverLetterFile = {
+        _type: 'file',
+        asset: { _type: 'reference', _ref: clAsset._id }
+      };
+    }
+
+    if (attAssets.length > 0) {
+      (applicationDoc as Record<string, unknown>).attachments = attAssets.map(asset => ({
+        _type: 'file',
+        asset: { _type: 'reference', _ref: asset._id }
+      }));
+    }
+
+    const doc = await sanity.create(applicationDoc);
+
+    return NextResponse.json({ 
+      success: true, 
+      id: doc._id,
+      message: 'Application submitted successfully'
     });
 
-    return NextResponse.json({ ok: true, id: doc._id });
-  } catch (err: any) {
-    const msg = err?.message || 'UNKNOWN_ERROR';
-    // رجّع كود مناسب للمستخدم بدل 500 دائمًا
-    const status = msg === 'UNSUPPORTED_TYPE' || msg === 'FILE_TOO_LARGE' ? 400 : 500;
-    return NextResponse.json({ error: msg }, { status });
+  } catch (error: unknown) {
+    console.error('Job application submission error:', error);
+    
+    // Handle specific error types
+    if (error instanceof Error && error.message.includes('File validation failed')) {
+      return NextResponse.json({ 
+        error: 'File validation error',
+        details: error.message
+      }, { status: 400 });
+    }
+
+    if (error instanceof Error && error.message.includes('FILE_TOO_LARGE')) {
+      return NextResponse.json({ 
+        error: 'File too large',
+        details: 'Files must be smaller than 10MB'
+      }, { status: 400 });
+    }
+
+    return NextResponse.json({ 
+      error: 'Internal server error',
+      details: 'Please try again later'
+    }, { status: 500 });
   }
 }

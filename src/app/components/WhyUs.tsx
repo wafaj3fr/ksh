@@ -1,6 +1,12 @@
 'use client';
 
-import { Player } from '@lottiefiles/react-lottie-player';
+import dynamic from 'next/dynamic';
+
+// Dynamically import Player to avoid SSR issues
+const Player = dynamic(
+  () => import('@lottiefiles/react-lottie-player').then((mod) => ({ default: mod.Player })),
+  { ssr: false }
+);
 
 export default function WhyUs() {
   return (

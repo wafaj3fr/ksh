@@ -12,7 +12,7 @@ interface NewsItem {
   slug: {
     current: string;
   };
-  content: any[];
+  content: unknown[];
   mainImage?: {
     asset: { url: string };
     alt?: string;
@@ -145,7 +145,7 @@ function NewsCard({ item, faded = false }: { item: NewsItem; faded?: boolean }) 
         </div>
       )}
       <p className="text-gray-700 text-sm mb-4 line-clamp-3">
-        {item.content?.[0]?.children?.[0]?.text || ""}
+        {String(((item.content?.[0] as Record<string, unknown>)?.children?.[0] as Record<string, unknown>)?.text || "")}
       </p>
       {slug && (
         <Link
