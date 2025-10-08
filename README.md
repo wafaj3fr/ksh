@@ -178,3 +178,56 @@ The application supports international phone number formats including:
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+
+## Deploy on AWS
+
+To deploy your Next.js application on AWS, follow these steps:
+
+### 1. **Set Up AWS Account**
+   - Create an AWS account if you don't already have one.
+   - Configure your AWS CLI with `aws configure`.
+
+### 2. **Create an S3 Bucket (For Static Assets)**
+   - Go to the S3 console and create a new bucket.
+   - Enable static website hosting for the bucket.
+
+### 3. **Set Up an EC2 Instance**
+   - Launch an EC2 instance with a Linux-based AMI.
+   - Install Node.js and npm on the instance.
+
+### 4. **Deploy Application**
+   - SSH into your EC2 instance.
+   - Clone your repository:
+     ```bash
+     git clone <repository-url>
+     cd ksh
+     ```
+   - Install dependencies:
+     ```bash
+     npm install
+     ```
+   - Build the application:
+     ```bash
+     npm run build
+     ```
+   - Start the application:
+     ```bash
+     npm start
+     ```
+
+### 5. **Configure Load Balancer (Optional)**
+   - Use an AWS Elastic Load Balancer to distribute traffic across multiple instances.
+
+### 6. **Set Up Route 53 (Optional)**
+   - Configure a custom domain using AWS Route 53.
+
+### Environment Variables for AWS Deployment
+Ensure the following environment variables are set on your EC2 instance:
+```env
+NEXT_PUBLIC_SANITY_PROJECT_ID=your_project_id
+NEXT_PUBLIC_SANITY_DATASET=production
+SANITY_WRITE_TOKEN=your_write_token
+```
+
+For more details, refer to the [AWS Deployment Guide](https://aws.amazon.com/getting-started/).
