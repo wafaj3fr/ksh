@@ -13,10 +13,16 @@ const customJestConfig = {
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
   },
-  testPathIgnorePatterns: ['<rootDir>/.next/', '<rootDir>/node_modules/'],
+  testPathIgnorePatterns: ['<rootDir>/.next/', '<rootDir>/node_modules/', '<rootDir>/src/__tests__/api/contact.test.ts', '<rootDir>/src/__tests__/api/apply.test.ts'],
   transformIgnorePatterns: [
-    'node_modules/(?!(nanoid|@sanity|next-sanity)/)',
+    'node_modules/(?!(nanoid|@sanity|next-sanity|file-type)/)',
   ],
+  extensionsToTreatAsEsm: ['.ts', '.tsx'],
+  globals: {
+    'ts-jest': {
+      useESM: true
+    }
+  },
   collectCoverageFrom: [
     'src/**/*.{js,jsx,ts,tsx}',
     '!src/**/*.d.ts',

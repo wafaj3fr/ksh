@@ -1,160 +1,107 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { createClient } from '@sanity/client';
-import { validateJobApplication } from '../../../../lib/validation';
-import { sanitizeFormData } from '../../../../lib/sanitization';
-import { validateUploadedFile, FILE_SIZE_LIMITS } from '../../../../lib/fileValidation';
+import { JobApplicationController, type JobApplicationData, type JobApplicationFiles } from './controller';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
-
-const sanity = createClient({
-  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!,
-  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET!,
-  apiVersion: '2025-01-01',
-  token: process.env.SANITY_WRITE_TOKEN,
-  useCdn: false,
-});
-
-async function uploadFileToSanity(file: File) {
-  // Validate file before upload
-  const validationResult = await validateUploadedFile(
-    file,
-    file.name,
-    file.type,
-    FILE_SIZE_LIMITS.CV
-  );
-
-  if (!validationResult.isValid) {
-    throw new Error(`File validation failed: ${validationResult.errors.join(', ')}`);
-  }
-
-  const arrayBuffer = await file.arrayBuffer();
-  const buffer = Buffer.from(arrayBuffer);
-  
-  const asset = await sanity.assets.upload('file', buffer, {
-    filename: validationResult.fileInfo?.name || file.name,
-    contentType: file.type || 'application/octet-stream',
-  });
-  
-  return asset;
-}
 
 export async function POST(req: NextRequest) {
   try {
     const form = await req.formData();
 
-    // Extract and sanitize form data
+    // Extract form data
     const rawData = {
       jobId: String(form.get('jobId') || ''),
       fullName: String(form.get('fullName') || ''),
       email: String(form.get('email') || ''),
-      phone: form.get('phone') ? String(form.get('phone')) : undefined,
+      phone: form.get('phone') ? String(form.get('phone')).trim() : '',
       coverLetter: String(form.get('coverLetter') || ''),
     };
 
-    // Sanitize input data
-    const sanitizedData = sanitizeFormData(rawData);
-
-    // Validate the sanitized data
-    const validation = validateJobApplication(sanitizedData);
-    if (!validation.success) {
-      return NextResponse.json({ 
-        error: 'Validation failed',
-        details: validation.error.issues.map(issue => ({
-          field: issue.path.join('.'),
-          message: issue.message
-        }))
-      }, { status: 400 });
-    }
-
-    const validData = validation.data;
-
-    // Handle file uploads
+    // Extract files
     const cv = form.get('cv') as File | null;
-    if (!cv || cv.size === 0) {
-      return NextResponse.json({ error: 'CV file is required' }, { status: 400 });
-    }
-
     const coverLetterFile = form.get('coverLetterFile') as File | null;
     const attachments = (form.getAll('attachments') as File[]).filter(f => f && f.size > 0);
 
-    // Upload CV (required)
-    const cvAsset = await uploadFileToSanity(cv);
+    // Validate and sanitize data
+    const validatedData: JobApplicationData = await JobApplicationController.validateFormData(rawData);
 
-    // Upload cover letter file (optional)
-    let clAsset = null;
-    if (coverLetterFile && coverLetterFile.size > 0) {
-      clAsset = await uploadFileToSanity(coverLetterFile);
-    }
-
-    // Upload attachments (optional)
-    const attAssets = [];
-    for (const file of attachments) {
-      if (file && file.size > 0) {
-        const asset = await uploadFileToSanity(file);
-        attAssets.push(asset);
-      }
-    }
-
-    // Create the job application document in Sanity
-    const applicationDoc = {
-      _type: 'jobApplication',
-      job: { _type: 'reference', _ref: validData.jobId },
-      fullName: validData.fullName,
-      email: validData.email,
-      phone: validData.phone || '',
-      coverLetter: validData.coverLetter,
-      cvFile: { 
-        _type: 'file', 
-        asset: { _type: 'reference', _ref: cvAsset._id } 
-      },
-      createdAt: new Date().toISOString(),
+    // Prepare files object
+    const files: JobApplicationFiles = {
+      cv: cv!,
+      coverLetterFile: coverLetterFile || undefined,
+      attachments: attachments.length > 0 ? attachments : undefined
     };
 
-    // Add optional files if they exist
-    if (clAsset) {
-      (applicationDoc as Record<string, unknown>).coverLetterFile = {
-        _type: 'file',
-        asset: { _type: 'reference', _ref: clAsset._id }
-      };
+    // Submit application through controller
+    const result = await JobApplicationController.submitJobApplication(validatedData, files);
+
+    if (result.success) {
+      return NextResponse.json({
+        success: true,
+        id: result.id,
+        message: result.message
+      }, { status: 200 });
+    } else {
+      // Determine appropriate status code based on error type
+      let statusCode = 400; // Default to bad request
+      
+      if (result.error === 'Validation Error') {
+        statusCode = 422; // Unprocessable Entity for validation errors
+      } else if (result.error === 'File Too Large') {
+        statusCode = 413; // Payload Too Large
+      } else if (result.error === 'Upload Failed' || result.error === 'Submission Failed') {
+        statusCode = 500; // Internal Server Error
+      }
+
+      return NextResponse.json({
+        success: false,
+        error: result.error,
+        details: result.details
+      }, { status: statusCode });
     }
-
-    if (attAssets.length > 0) {
-      (applicationDoc as Record<string, unknown>).attachments = attAssets.map(asset => ({
-        _type: 'file',
-        asset: { _type: 'reference', _ref: asset._id }
-      }));
-    }
-
-    const doc = await sanity.create(applicationDoc);
-
-    return NextResponse.json({ 
-      success: true, 
-      id: doc._id,
-      message: 'Application submitted successfully'
-    });
 
   } catch (error: unknown) {
-    console.error('Job application submission error:', error);
+    console.error('Route error:', error);
     
-    // Handle specific error types
-    if (error instanceof Error && error.message.includes('File validation failed')) {
-      return NextResponse.json({ 
-        error: 'File validation error',
-        details: error.message
+    // Handle controller validation errors
+    if (error instanceof Error && (error as any).validationErrors) {
+      return NextResponse.json({
+        success: false,
+        error: 'Validation Error', 
+        details: (error as any).validationErrors
+      }, { status: 422 });
+    }
+
+    // Handle other errors
+    if (error instanceof Error) {
+      // Check for specific error types
+      if (error.message.includes('CV file is required')) {
+        return NextResponse.json({
+          success: false,
+          error: 'Missing Required File',
+          details: 'CV file is required. Please upload your resume.'
+        }, { status: 400 });
+      }
+
+      if (error.message.includes('multipart/form-data')) {
+        return NextResponse.json({
+          success: false,
+          error: 'Invalid Request Format',
+          details: 'Please submit the form with proper file attachments.'
+        }, { status: 400 });
+      }
+
+      return NextResponse.json({
+        success: false,
+        error: 'Request Processing Error',
+        details: 'There was an error processing your request. Please check your inputs and try again.'
       }, { status: 400 });
     }
 
-    if (error instanceof Error && error.message.includes('FILE_TOO_LARGE')) {
-      return NextResponse.json({ 
-        error: 'File too large',
-        details: 'Files must be smaller than 10MB'
-      }, { status: 400 });
-    }
-
-    return NextResponse.json({ 
-      error: 'Internal server error',
-      details: 'Please try again later'
+    return NextResponse.json({
+      success: false,
+      error: 'Server Error',
+      details: 'An unexpected server error occurred. Please try again later.'
     }, { status: 500 });
   }
 }

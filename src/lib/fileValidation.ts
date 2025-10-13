@@ -1,4 +1,3 @@
-import { fileTypeFromBuffer } from 'file-type'
 import { allowedFileTypes } from './validation'
 
 // File size limits (in bytes)
@@ -20,15 +19,31 @@ export const MIME_TYPE_EXTENSIONS = {
  */
 export async function validateFileType(buffer: Buffer, expectedMimeType: string): Promise<boolean> {
   try {
-    const fileType = await fileTypeFromBuffer(buffer)
+    const fileTypeModule: any = await import('file-type')
+    const fromBufferFn =
+      typeof fileTypeModule.fromBuffer === 'function'
+        ? fileTypeModule.fromBuffer
+        : typeof fileTypeModule.fileTypeFromBuffer === 'function'
+          ? fileTypeModule.fileTypeFromBuffer
+          : typeof fileTypeModule.default === 'function'
+            ? fileTypeModule.default
+            : typeof fileTypeModule.default?.fromBuffer === 'function'
+              ? fileTypeModule.default.fromBuffer.bind(fileTypeModule.default)
+              : null
+
+    if (!fromBufferFn) {
+      throw new Error('file-type fromBuffer function not available')
+    }
+
+    const detectedType = await fromBufferFn(buffer)
     
-    if (!fileType) {
+    if (!detectedType) {
       // For some files like plain text DOC files, file-type might not detect them
       // In this case, we'll rely on the MIME type provided by the browser
       return allowedFileTypes.includes(expectedMimeType as any)
     }
     
-    return fileType.mime === expectedMimeType
+    return detectedType.mime === expectedMimeType
   } catch (error) {
     console.error('Error validating file type:', error)
     return false

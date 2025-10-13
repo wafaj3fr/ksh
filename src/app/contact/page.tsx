@@ -1,29 +1,51 @@
 'use client';
 import { useState } from "react";
 
+// تعريف نوع للأخطاء
+type FormErrors = {
+  fullName?: string;
+  email?: string;
+  subject?: string;
+  message?: string;
+  general?: string; // للأخطاء العامة
+};
+
 export default function ContactForm() {
   const [status, setStatus] = useState<'idle' | 'submitting' | 'ok' | 'error'>('idle');
-  const [error, setError] = useState('');
+  const [errors, setErrors] = useState<FormErrors>({}); // <--- تعديل: حالة لتخزين أخطاء كل حقل
 
 async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
   e.preventDefault();
   setStatus("submitting");
-  setError("");
+  setErrors({}); // <--- تعديل: إعادة تعيين الأخطاء عند كل إرسال
 
-  const formEl = e.currentTarget; // ✅ خزن المرجع هنا
+  const formEl = e.currentTarget;
   const fd = new FormData(formEl);
 
   try {
     const res = await fetch("/api/forms/contact", { method: "POST", body: fd });
-    if (!res.ok) {
-      const data = await res.json().catch(() => ({}));
-      throw new Error(data?.error || "Submit failed");
-    }
+    const data = await res.json();
 
-    formEl.reset(); // ✅ استعمل المرجع المحفوظ
-    setStatus("ok");
+    if (!res.ok) {
+      if (res.status === 400 && data.details) {
+        // <--- تعديل: معالجة أخطاء التحقق من الصحة
+        const newErrors: FormErrors = {};
+        data.details.forEach((error: any) => {
+          // استخدام اسم الحقل البرمجي مباشرة (fullName, email, etc.)
+          newErrors[error.field as keyof FormErrors] = error.message;
+        });
+        setErrors(newErrors);
+      } else {
+        // للأخطاء العامة الأخرى
+        setErrors({ general: data.error || "Submission failed. Please try again." });
+      }
+      setStatus("error");
+    } else {
+      formEl.reset();
+      setStatus("ok");
+    }
   } catch (err: any) {
-    setError(err.message || "Failed");
+    setErrors({ general: "An unexpected error occurred. Please try again." });
     setStatus("error");
   }
 }
@@ -39,6 +61,12 @@ async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
           </h2>
 
           <form onSubmit={onSubmit} className="flex flex-col gap-6">
+            {/* Honeypot Field (for spam protection) */}
+            <div className="hidden" aria-hidden="true">
+              <label htmlFor="honeypot">Do not fill this out if you are human:</label>
+              <input type="text" id="honeypot" name="honeypot" tabIndex={-1} autoComplete="off" />
+            </div>
+
             {/* Full Name */}
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-2">
@@ -47,9 +75,11 @@ async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
               <input
                 name="fullName"
                 required
-                className="w-full px-4 py-3 rounded-lg border-2 border-[#B49D5A]/70 bg-white text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#B49D5A]/40 focus:border-[#B49D5A] transition-all"
-                placeholder="Enter your full name"
+                className={`w-full px-4 py-3 rounded-lg border-2 bg-white text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#B49D5A]/40 transition-all
+                  ${errors.fullName ? 'border-red-500' : 'border-[#B49D5A]/70'}`}
+                placeholder="Example: John Doe"
               />
+              {errors.fullName && <p className="text-red-600 text-sm mt-1">{errors.fullName}</p>}
             </div>
 
             {/* Email */}
@@ -61,9 +91,11 @@ async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
                 type="email"
                 name="email"
                 required
-                className="w-full px-4 py-3 rounded-lg border-2 border-[#B49D5A]/70 bg-white text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#B49D5A]/40 focus:border-[#B49D5A] transition-all"
-                placeholder="Enter your email"
+                className={`w-full px-4 py-3 rounded-lg border-2 bg-white text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#B49D5A]/40 transition-all
+                  ${errors.email ? 'border-red-500' : 'border-[#B49D5A]/70'}`}
+                placeholder="example@domain.com"
               />
+              {errors.email && <p className="text-red-600 text-sm mt-1">{errors.email}</p>}
             </div>
 
             {/* Subject */}
@@ -73,9 +105,11 @@ async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
               </label>
               <input
                 name="subject"
-                className="w-full px-4 py-3 rounded-lg border-2 border-[#B49D5A]/70 bg-white text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#B49D5A]/40 focus:border-[#B49D5A] transition-all"
-                placeholder="Enter subject"
+                className={`w-full px-4 py-3 rounded-lg border-2 bg-white text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#B49D5A]/40 transition-all
+                  ${errors.subject ? 'border-red-500' : 'border-[#B49D5A]/70'}`}
+                placeholder="Example: Inquiry about company services"
               />
+              {errors.subject && <p className="text-red-600 text-sm mt-1">{errors.subject}</p>}
             </div>
 
             {/* Message */}
@@ -87,9 +121,11 @@ async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
                 name="message"
                 rows={5}
                 required
-                className="w-full px-4 py-3 rounded-lg border-2 border-[#B49D5A]/70 bg-white text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#B49D5A]/40 focus:border-[#B49D5A] transition-all resize-y"
-                placeholder="Write your message..."
+                className={`w-full px-4 py-3 rounded-lg border-2 bg-white text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#B49D5A]/40 transition-all resize-y
+                  ${errors.message ? 'border-red-500' : 'border-[#B49D5A]/70'}`}
+                placeholder="Write your message here, minimum 10 characters"
               />
+              {errors.message && <p className="text-red-600 text-sm mt-1">{errors.message}</p>}
             </div>
 
             {/* Submit */}
@@ -105,13 +141,13 @@ async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
             {status === "ok" && (
               <div className="p-4 bg-green-50 border border-green-200 rounded-lg text-center">
                 <p className="text-green-700 text-sm font-medium">
-                  ✅ Message sent successfully!
+                  ✅ Message sent successfully! We will get back to you as soon as possible.
                 </p>
               </div>
             )}
-            {status === "error" && (
+            {errors.general && (
               <div className="p-4 bg-red-50 border border-red-200 rounded-lg text-center">
-                <p className="text-red-600 text-sm font-medium">❌ {error}</p>
+                <p className="text-red-600 text-sm font-medium">❌ {errors.general}</p>
               </div>
             )}
           </form>

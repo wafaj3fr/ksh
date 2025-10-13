@@ -13,6 +13,7 @@ export async function POST(req: Request) {
       email: String(formData.get("email") || ''),
       subject: formData.get("subject") ? String(formData.get("subject")) : undefined,
       message: String(formData.get("message") || ''),
+      honeypot: String(formData.get("honeypot") || ''),
     };
 
     // Sanitize input data

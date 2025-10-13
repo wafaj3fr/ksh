@@ -91,7 +91,11 @@ describe('Validation Schemas', () => {
         '+1 (555) 123-4567', // US format with formatting
         '+44 20 7946 0958',  // UK format
         '+81-3-1234-5678',   // Japanese format with dashes
-        undefined // optional field
+        '0125817547',        // Local Sudanese format
+        '01234567890',       // Local format with more digits
+        '0987654321',        // Another local format
+        '',                  // Empty string (optional)
+        undefined            // optional field
       ];
 
       validPhones.forEach(phone => {
@@ -106,7 +110,9 @@ describe('Validation Schemas', () => {
         '+',
         '++1234567890',
         'phone-number',
-        '0123456789' // starts with 0
+        '123', // too short
+        '+1234567890123456789', // too long
+        '00123456789', // local with two zeros
       ];
 
       invalidPhones.forEach(phone => {

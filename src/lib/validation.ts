@@ -16,17 +16,36 @@ export const nameSchema = z
 export const phoneSchema = z
   .string()
   .optional()
+  .or(z.literal(''))
   .refine((val) => {
-    if (!val) return true; // Optional field
+    if (!val || val.trim() === '') return true; // Optional field or empty string
     
     // Remove all formatting characters (spaces, dashes, parentheses)
     const cleaned = val.replace(/[\s\-\(\)]/g, '');
     
-    // Check international phone format: optional +, then 1-15 digits, first digit 1-9
-    return /^[\+]?[1-9][\d]{0,15}$/.test(cleaned);
+    // Check for different phone number formats:
+    // 1. International: +[country code][number] (e.g., +249125817547)
+    // 2. Local: starts with 0 followed by non-zero digit (e.g., 0125817547)
+    // 3. International without +: first digit 1-9 (e.g., 249125817547)
+    
+    const patterns = [
+      /^\+[1-9]\d{7,14}$/, // International with + (8-15 digits total)
+      /^0[1-9]\d{7,13}$/,  // Local starting with 0 then non-zero (9-15 digits total)
+      /^[1-9]\d{7,14}$/    // International without + (8-15 digits total)
+    ];
+    
+    return patterns.some(pattern => pattern.test(cleaned));
   }, {
-    message: 'Please enter a valid phone number',
+    message: 'Please enter a valid phone number (e.g., +249125817547 or 0125817547)',
   })
+
+// Honeypot schema (must be empty)
+export const honeypotSchema = z
+  .string()
+  .max(0, 'Honeypot field must be empty')
+  .optional()
+  .or(z.literal(''))
+  .transform(e => (e === '' ? undefined : e)); // Treat empty string as undefined
 
 // Job Application Form Schema
 export const jobApplicationSchema = z.object({
@@ -38,6 +57,7 @@ export const jobApplicationSchema = z.object({
     .string()
     .min(50, 'Cover letter must be at least 50 characters')
     .max(2000, 'Cover letter must be less than 2000 characters'),
+  honeypot: honeypotSchema,
 })
 
 export type JobApplicationData = z.infer<typeof jobApplicationSchema>
@@ -55,6 +75,7 @@ export const contactFormSchema = z.object({
     .string()
     .min(10, 'Message must be at least 10 characters')
     .max(1000, 'Message must be less than 1000 characters'),
+  honeypot: honeypotSchema,
 })
 
 export type ContactFormData = z.infer<typeof contactFormSchema>

@@ -15,6 +15,8 @@ describe('/api/forms/contact', () => {
     jest.clearAllMocks();
   });
 
+  // --- Successful Submission Tests (Status 200) ---
+
   it('should successfully submit a contact form with valid data', async () => {
     const formData = new FormData();
     formData.append('fullName', 'Jane Smith');
@@ -25,12 +27,12 @@ describe('/api/forms/contact', () => {
     const request = new NextRequest('http://localhost:3000/api/forms/contact', {
       method: 'POST',
       body: formData,
-    });
+    } );
 
     const response = await POST(request);
     const data = await response.json();
 
-    expect(response.status).toBe(200);
+    expect(response.status).toBe(200); 
     expect(data.success).toBe(true);
     expect(data.id).toBe('test-contact-id');
   });
@@ -44,7 +46,7 @@ describe('/api/forms/contact', () => {
     const request = new NextRequest('http://localhost:3000/api/forms/contact', {
       method: 'POST',
       body: formData,
-    });
+    } );
 
     const response = await POST(request);
     const data = await response.json();
@@ -53,6 +55,27 @@ describe('/api/forms/contact', () => {
     expect(data.success).toBe(true);
     expect(data.id).toBe('test-contact-id');
   });
+
+  it('should sanitize HTML content in form fields', async () => {
+    const formData = new FormData();
+    formData.append('fullName', 'Jane <script>alert("xss")</script> Smith');
+    formData.append('email', 'jane@example.com');
+    formData.append('subject', 'Business <b>Inquiry</b>');
+    formData.append('message', 'I would like to know more about your <script>malicious()</script> services.');
+
+    const request = new NextRequest('http://localhost:3000/api/forms/contact', {
+      method: 'POST',
+      body: formData,
+    } );
+
+    const response = await POST(request);
+    const data = await response.json();
+
+    expect(response.status).toBe(200);
+    expect(data.success).toBe(true);
+  });
+
+  // --- Validation Error Tests (Status 422) ---
 
   it('should reject contact form with invalid email', async () => {
     const formData = new FormData();
@@ -64,17 +87,17 @@ describe('/api/forms/contact', () => {
     const request = new NextRequest('http://localhost:3000/api/forms/contact', {
       method: 'POST',
       body: formData,
-    });
+    } );
 
     const response = await POST(request);
     const data = await response.json();
 
-    expect(response.status).toBe(400);
-    expect(data.error).toBe('Validation failed');
+    expect(response.status).toBe(422); 
+    expect(data.error).toBe('Validation Error'); 
     expect(data.details).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
-          field: 'email',
+          field: 'Email Address', 
           message: expect.stringContaining('email')
         })
       ])
@@ -91,17 +114,17 @@ describe('/api/forms/contact', () => {
     const request = new NextRequest('http://localhost:3000/api/forms/contact', {
       method: 'POST',
       body: formData,
-    });
+    } );
 
     const response = await POST(request);
     const data = await response.json();
 
-    expect(response.status).toBe(400);
-    expect(data.error).toBe('Validation failed');
+    expect(response.status).toBe(422); 
+    expect(data.error).toBe('Validation Error'); 
     expect(data.details).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
-          field: 'message',
+          field: 'Message', 
           message: expect.stringContaining('10 characters')
         })
       ])
@@ -116,33 +139,19 @@ describe('/api/forms/contact', () => {
     const request = new NextRequest('http://localhost:3000/api/forms/contact', {
       method: 'POST',
       body: formData,
-    });
+    } );
 
     const response = await POST(request);
     const data = await response.json();
 
-    expect(response.status).toBe(400);
-    expect(data.error).toBe('Validation failed');
-    expect(data.details.length).toBeGreaterThan(0);
-  });
-
-  it('should sanitize HTML content in form fields', async () => {
-    const formData = new FormData();
-    formData.append('fullName', 'Jane <script>alert("xss")</script> Smith');
-    formData.append('email', 'jane@example.com');
-    formData.append('subject', 'Business <b>Inquiry</b>');
-    formData.append('message', 'I would like to know more about your <script>malicious()</script> services.');
-
-    const request = new NextRequest('http://localhost:3000/api/forms/contact', {
-      method: 'POST',
-      body: formData,
-    });
-
-    const response = await POST(request);
-    const data = await response.json();
-
-    expect(response.status).toBe(200);
-    expect(data.success).toBe(true);
+    expect(response.status).toBe(422); 
+    expect(data.error).toBe('Validation Error'); 
+    expect(data.details).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({ field: 'Email Address' }), 
+        expect.objectContaining({ field: 'Message' }) 
+      ])
+    );
   });
 
   it('should handle empty form data', async () => {
@@ -151,26 +160,28 @@ describe('/api/forms/contact', () => {
     const request = new NextRequest('http://localhost:3000/api/forms/contact', {
       method: 'POST',
       body: formData,
-    });
+    } );
 
     const response = await POST(request);
     const data = await response.json();
 
-    expect(response.status).toBe(400);
-    expect(data.error).toBe('Validation failed');
+    expect(response.status).toBe(422); 
+    expect(data.error).toBe('Validation Error'); 
     expect(data.details).toEqual(
       expect.arrayContaining([
-        expect.objectContaining({ field: 'fullName' }),
-        expect.objectContaining({ field: 'email' }),
-        expect.objectContaining({ field: 'message' })
+        expect.objectContaining({ field: 'Full Name' }), 
+        expect.objectContaining({ field: 'Email Address' }), 
+        expect.objectContaining({ field: 'Message' }) 
       ])
     );
   });
 
+  // --- Other Tests ---
+
   it('should handle only GET method rejection', async () => {
     const request = new NextRequest('http://localhost:3000/api/forms/contact', {
       method: 'GET',
-    });
+    } );
 
     const response = await POST(request);
     

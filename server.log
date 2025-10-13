@@ -1,0 +1,17 @@
+
+> frontend@0.1.0 dev:server
+> nodemon --exec ts-node -P tsconfig.server.json server/index.ts
+
+[33m[nodemon] 3.1.10[39m
+[33m[nodemon] to restart at any time, enter `rs`[39m
+[33m[nodemon] watching path(s): *.*[39m
+[33m[nodemon] watching extensions: ts,json[39m
+[32m[nodemon] starting `ts-node server/index.ts`[39m
+[dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  write to custom object with { processEnv: myObject }
+(node:98985) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///home/aziz99/home/ksh/server/index.ts is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to /home/aziz99/home/ksh/package.json.
+(Use `node --trace-warnings ...` to show where the warning was created)
+🚀 Express API server running on port 3001
+📱 Health check: http://localhost:3001/health
+🌍 Environment: development
