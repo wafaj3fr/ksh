@@ -20,3 +20,18 @@ export const sanitizeMiddleware = (req: Request, res: Response, next: NextFuncti
   req.body = sanitize(req.body);
   next();
 };
+
+export function sanitizeInput(data: Record<string, any>) {
+  const sanitized: Record<string, any> = {};
+  for (const key in data) {
+    if (typeof data[key] === "string") {
+      sanitized[key] = data[key]
+        .replace(/<[^>]*>?/gm, "") // remove HTML tags
+        .trim()
+        .replace(/\s+/g, " "); // normalize spaces
+    } else {
+      sanitized[key] = data[key];
+    }
+  }
+  return sanitized;
+}

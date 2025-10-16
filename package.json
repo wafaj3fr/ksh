@@ -1,18 +1,22 @@
 {
-  "name": "frontend",
-  "version": "0.1.0",
+  "name": "ksh-fullstack-app",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "predev": "npm run typegen",
-    "dev": "npm run typegen && next dev",
-    "dev:server": "nodemon --exec ts-node -P tsconfig.server.json server/index.ts",
-    "dev:both": "concurrently \"npm run dev\" \"npm run dev:server\"",
+    "dev:next": "next dev",
+    "dev:server": "nodemon --exec ts-node --files -P tsconfig.server.json server/index.ts",
+    "dev:both": "concurrently \"npm run dev:next\" \"npm run dev:server\"",
+
     "prebuild": "npm run typegen",
-    "build": "next build",
+    "build:next": "next build",
     "build:server": "tsc -p tsconfig.server.json",
-    "start": "next start",
+    "build": "npm run build:next && npm run build:server",
+
+    "start:next": "next start",
     "start:server": "node dist/server/index.js",
-    "start:both": "concurrently \"npm run start\" \"npm run start:server\"",
+    "start:both": "concurrently \"npm run start:next\" \"npm run start:server\"",
+
     "lint": "next lint",
     "lint:fix": "next lint --fix",
     "test": "jest",
