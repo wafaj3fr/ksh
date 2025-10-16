@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import { useState } from "react";
 
 type FormErrors = {
@@ -10,7 +10,9 @@ type FormErrors = {
 };
 
 export default function ContactForm() {
-  const [status, setStatus] = useState<'idle' | 'submitting' | 'ok' | 'error'>('idle');
+  const [status, setStatus] = useState<"idle" | "submitting" | "ok" | "error">(
+    "idle"
+  );
   const [errors, setErrors] = useState<FormErrors>({});
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -21,13 +23,15 @@ export default function ContactForm() {
     const formEl = e.currentTarget;
     const fd = new FormData(formEl);
     const formData = Object.fromEntries(fd.entries());
-
     try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_EXPRESS_API_URL}/api/forms/contact`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData),
+        }
+      );
 
       const data = await res.json();
 
@@ -39,7 +43,9 @@ export default function ContactForm() {
           });
           setErrors(newErrors);
         } else {
-          setErrors({ general: data.message || "Submission failed. Please try again." });
+          setErrors({
+            general: data.message || "Submission failed. Please try again.",
+          });
         }
         setStatus("error");
       } else {
@@ -48,7 +54,9 @@ export default function ContactForm() {
       }
     } catch (err: any) {
       console.error("❌ Frontend error:", err);
-      setErrors({ general: "An unexpected error occurred. Please try again later." });
+      setErrors({
+        general: "An unexpected error occurred. Please try again later.",
+      });
       setStatus("error");
     }
   }
@@ -64,8 +72,16 @@ export default function ContactForm() {
           <form onSubmit={onSubmit} className="flex flex-col gap-6">
             {/* Honeypot (Anti-bot) */}
             <div className="hidden" aria-hidden="true">
-              <label htmlFor="honeypot">Do not fill this out if you are human:</label>
-              <input type="text" id="honeypot" name="honeypot" tabIndex={-1} autoComplete="off" />
+              <label htmlFor="honeypot">
+                Do not fill this out if you are human:
+              </label>
+              <input
+                type="text"
+                id="honeypot"
+                name="honeypot"
+                tabIndex={-1}
+                autoComplete="off"
+              />
             </div>
 
             {/* Full Name */}
@@ -77,50 +93,64 @@ export default function ContactForm() {
                 name="fullName"
                 required
                 className={`w-full px-4 py-3 rounded-lg border-2 bg-white text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#B49D5A]/40 transition-all
-                  ${errors.fullName ? 'border-red-500' : 'border-[#B49D5A]/70'}`}
+                  ${errors.fullName ? "border-red-500" : "border-[#B49D5A]/70"}`}
                 placeholder="Example: John Doe"
               />
-              {errors.fullName && <p className="text-red-600 text-sm mt-1">{errors.fullName}</p>}
+              {errors.fullName && (
+                <p className="text-red-600 text-sm mt-1">{errors.fullName}</p>
+              )}
             </div>
 
             {/* Email */}
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">Email</label>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">
+                Email
+              </label>
               <input
                 type="email"
                 name="email"
                 required
                 className={`w-full px-4 py-3 rounded-lg border-2 bg-white text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#B49D5A]/40 transition-all
-                  ${errors.email ? 'border-red-500' : 'border-[#B49D5A]/70'}`}
+                  ${errors.email ? "border-red-500" : "border-[#B49D5A]/70"}`}
                 placeholder="example@domain.com"
               />
-              {errors.email && <p className="text-red-600 text-sm mt-1">{errors.email}</p>}
+              {errors.email && (
+                <p className="text-red-600 text-sm mt-1">{errors.email}</p>
+              )}
             </div>
 
             {/* Subject */}
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">Subject</label>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">
+                Subject
+              </label>
               <input
                 name="subject"
                 className={`w-full px-4 py-3 rounded-lg border-2 bg-white text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#B49D5A]/40 transition-all
-                  ${errors.subject ? 'border-red-500' : 'border-[#B49D5A]/70'}`}
+                  ${errors.subject ? "border-red-500" : "border-[#B49D5A]/70"}`}
                 placeholder="Example: Inquiry about company services"
               />
-              {errors.subject && <p className="text-red-600 text-sm mt-1">{errors.subject}</p>}
+              {errors.subject && (
+                <p className="text-red-600 text-sm mt-1">{errors.subject}</p>
+              )}
             </div>
 
             {/* Message */}
             <div>
-              <label className="block text-sm font-semibold text-gray-700 mb-2">Message</label>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">
+                Message
+              </label>
               <textarea
                 name="message"
                 rows={5}
                 required
                 className={`w-full px-4 py-3 rounded-lg border-2 bg-white text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#B49D5A]/40 transition-all resize-y
-                  ${errors.message ? 'border-red-500' : 'border-[#B49D5A]/70'}`}
+                  ${errors.message ? "border-red-500" : "border-[#B49D5A]/70"}`}
                 placeholder="Write your message here, minimum 10 characters"
               />
-              {errors.message && <p className="text-red-600 text-sm mt-1">{errors.message}</p>}
+              {errors.message && (
+                <p className="text-red-600 text-sm mt-1">{errors.message}</p>
+              )}
             </div>
 
             {/* Submit */}
@@ -142,7 +172,9 @@ export default function ContactForm() {
             )}
             {errors.general && (
               <div className="p-4 bg-red-50 border border-red-200 rounded-lg text-center">
-                <p className="text-red-600 text-sm font-medium">❌ {errors.general}</p>
+                <p className="text-red-600 text-sm font-medium">
+                  ❌ {errors.general}
+                </p>
               </div>
             )}
           </form>
