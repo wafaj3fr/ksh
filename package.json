@@ -5,18 +5,15 @@
   "scripts": {
     "predev": "npm run typegen",
     "dev:next": "next dev",
-    "dev:server": "nodemon --exec ts-node --files -P tsconfig.server.json server/index.ts",
+    "dev:server": "nodemon --exec \"ts-node --project tsconfig.server.json --transpile-only\" server/index.ts",
     "dev:both": "concurrently \"npm run dev:next\" \"npm run dev:server\"",
-
     "prebuild": "npm run typegen",
     "build:next": "next build",
     "build:server": "tsc -p tsconfig.server.json",
     "build": "npm run build:next && npm run build:server",
-
     "start:next": "next start",
     "start:server": "node dist/server/index.js",
     "start:both": "concurrently \"npm run start:next\" \"npm run start:server\"",
-
     "lint": "next lint",
     "lint:fix": "next lint --fix",
     "test": "jest",
