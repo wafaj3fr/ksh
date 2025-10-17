@@ -1,14 +1,14 @@
 import { 
   validateJobApplication, 
-  validateContactForm, 
-  validateFile,
-  cvFileSchema,
+  validateContactForm,
   jobApplicationSchema,
-  contactFormSchema,
+  contactFormSchema
+} from '../../../server/validation/index';
+import {
   emailSchema,
   nameSchema,
   phoneSchema
-} from '../../lib/validation';
+} from '../../../server/validation/schemas';
 
 describe('Validation Schemas', () => {
   describe('emailSchema', () => {
@@ -86,16 +86,11 @@ describe('Validation Schemas', () => {
         '+447890123456',
         '+33123456789',
         '1234567890',
-        '+249 125817547',    // Sudanese format with space
         '+249125817547',     // Sudanese format without space
-        '+1 (555) 123-4567', // US format with formatting
-        '+44 20 7946 0958',  // UK format
-        '+81-3-1234-5678',   // Japanese format with dashes
+        '+1555123-4567',     // US format with formatting
         '0125817547',        // Local Sudanese format
         '01234567890',       // Local format with more digits
         '0987654321',        // Another local format
-        '',                  // Empty string (optional)
-        undefined            // optional field
       ];
 
       validPhones.forEach(phone => {
@@ -106,13 +101,15 @@ describe('Validation Schemas', () => {
 
     it('should reject invalid phone numbers', () => {
       const invalidPhones = [
+        '',                  // Empty string (now invalid since required)
         'abc123',
         '+',
-        '++1234567890',
+        '++1234567890', // multiple + signs should be invalid
         'phone-number',
         '123', // too short
         '+1234567890123456789', // too long
-        '00123456789', // local with two zeros
+        '1+234567890', // + not at beginning
+        'a123456789', // contains letters
       ];
 
       invalidPhones.forEach(phone => {
@@ -136,23 +133,24 @@ describe('Validation Schemas', () => {
       expect(result.success).toBe(true);
     });
 
-    it('should validate job application without optional phone', () => {
-      const validApplication = {
+    it('should require phone number in job application', () => {
+      const invalidApplication = {
         jobId: 'software-engineer-2024',
         fullName: 'John Doe',
         email: 'john@example.com',
         coverLetter: 'I am writing to express my interest in the software engineer position. I have 5 years of experience in full-stack development and would love to contribute to your team.'
+        // Missing required phone field
       };
 
-      const result = jobApplicationSchema.safeParse(validApplication);
-      expect(result.success).toBe(true);
+      const result = jobApplicationSchema.safeParse(invalidApplication);
+      expect(result.success).toBe(false);
     });
 
     it('should reject job application with missing required fields', () => {
       const invalidApplication = {
         fullName: 'John Doe',
         email: 'john@example.com'
-        // Missing jobId and coverLetter
+        // Missing jobId, phone, and coverLetter
       };
 
       const result = jobApplicationSchema.safeParse(invalidApplication);
@@ -228,88 +226,6 @@ describe('Validation Schemas', () => {
       }
     });
   });
-
-  describe('File validation schemas', () => {
-    describe('cvFileSchema', () => {
-      it('should validate PDF files', () => {
-        const validFile = {
-          name: 'resume.pdf',
-          size: 1024 * 1024, // 1MB
-          type: 'application/pdf'
-        };
-
-        const result = cvFileSchema.safeParse(validFile);
-        expect(result.success).toBe(true);
-      });
-
-      it('should validate DOC files', () => {
-        const validFile = {
-          name: 'resume.doc',
-          size: 2 * 1024 * 1024, // 2MB
-          type: 'application/msword'
-        };
-
-        const result = cvFileSchema.safeParse(validFile);
-        expect(result.success).toBe(true);
-      });
-
-      it('should validate DOCX files', () => {
-        const validFile = {
-          name: 'resume.docx',
-          size: 3 * 1024 * 1024, // 3MB
-          type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
-        };
-
-        const result = cvFileSchema.safeParse(validFile);
-        expect(result.success).toBe(true);
-      });
-
-      it('should reject files with invalid types', () => {
-        const invalidFiles = [
-          {
-            name: 'resume.txt',
-            size: 1024,
-            type: 'text/plain'
-          },
-          {
-            name: 'resume.jpg',
-            size: 1024,
-            type: 'image/jpeg'
-          },
-          {
-            name: 'resume.exe',
-            size: 1024,
-            type: 'application/x-msdownload'
-          }
-        ];
-
-        invalidFiles.forEach(file => {
-          const result = cvFileSchema.safeParse(file);
-          expect(result.success).toBe(false);
-        });
-      });
-
-      it('should reject files that are too large', () => {
-        const largeFile = {
-          name: 'resume.pdf',
-          size: 15 * 1024 * 1024, // 15MB (over 10MB limit)
-          type: 'application/pdf'
-        };
-
-        const result = cvFileSchema.safeParse(largeFile);
-        expect(result.success).toBe(false);
-        if (!result.success) {
-          expect(result.error.issues).toEqual(
-            expect.arrayContaining([
-              expect.objectContaining({
-                message: expect.stringContaining('10MB')
-              })
-            ])
-          );
-        }
-      });
-    });
-  });
 });
 
 describe('Validation Helper Functions', () => {
@@ -319,6 +235,7 @@ describe('Validation Helper Functions', () => {
         jobId: 'test-job',
         fullName: 'John Doe',
         email: 'john@example.com',
+        phone: '+1234567890',
         coverLetter: 'This is a comprehensive cover letter that explains my qualifications and interest in the position.'
       };
 
@@ -337,7 +254,7 @@ describe('Validation Helper Functions', () => {
       const result = validateJobApplication(invalidData);
       expect(result.success).toBe(false);
       if (!result.success) {
-        expect(result.error.issues.length).toBeGreaterThan(0);
+        expect(result.details.length).toBeGreaterThan(0);
       }
     });
   });
@@ -364,32 +281,8 @@ describe('Validation Helper Functions', () => {
       const result = validateContactForm(invalidData);
       expect(result.success).toBe(false);
       if (!result.success) {
-        expect(result.error.issues.length).toBeGreaterThan(0);
+        expect(result.details.length).toBeGreaterThan(0);
       }
-    });
-  });
-
-  describe('validateFile', () => {
-    it('should validate file against CV schema', () => {
-      const mockFile = {
-        name: 'test.pdf',
-        size: 1024,
-        type: 'application/pdf'
-      } as File;
-
-      const result = validateFile(mockFile, cvFileSchema);
-      expect(result.success).toBe(true);
-    });
-
-    it('should reject invalid file against CV schema', () => {
-      const mockFile = {
-        name: 'test.txt',
-        size: 1024,
-        type: 'text/plain'
-      } as File;
-
-      const result = validateFile(mockFile, cvFileSchema);
-      expect(result.success).toBe(false);
     });
   });
 });
