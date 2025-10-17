@@ -18,15 +18,33 @@ export const nameSchema = z
   .trim()
   .min(3, "Full name must be at least 3 characters")
   .max(100, "Full name must be less than 100 characters")
-  .regex(/^[A-Za-z\s'-]+$/, "Name can only contain letters, spaces, hyphens, and apostrophes.");
+  .regex(
+    /^[A-Za-z\s'-]+$/,
+    "Name can only contain letters, spaces, hyphens, and apostrophes."
+  );
 
-// ✅ Phone (optional)
+// ✅ Phone (required)
 export const phoneSchema = z
   .string()
   .trim()
-  .regex(/^[0-9+\s()-]{8,15}$/, "Invalid phone format")
-  .optional()
-  .or(z.literal("").transform(() => undefined)); // يسمح بحقل فارغ
+  .min(1, "Phone number is required")
+  .regex(/^\+?[0-9\s()-]{7,14}$/, "Invalid phone format")
+  .refine(
+    (phone) => {
+      // Additional validation rules
+      if (!phone || phone.trim().length === 0) return false; // Phone is required
+
+      // Check for multiple + signs
+      const plusCount = (phone.match(/\+/g) || []).length;
+      if (plusCount > 1) return false;
+
+      // Check that + is only at the beginning
+      if (phone.includes("+") && !phone.startsWith("+")) return false;
+
+      return true;
+    },
+    { message: "Invalid phone format" }
+  );
 
 // ✅ Cover Letter
 export const coverLetterSchema = z
