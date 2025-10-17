@@ -127,11 +127,12 @@ export default function JobApplicationForm({ jobId, className = '' }: Props) {
       {/* Phone */}
       <div className="w-full">
         <label className="block text-sm font-semibold text-gray-700 mb-2">
-          Phone (optional)
+          Phone
         </label>
         <input 
           name="phone"
           type="tel"
+          required
           className={`w-full px-4 py-3 rounded-lg border-2 bg-white text-gray-900 
             focus:outline-none focus:ring-2 focus:ring-[#B49D5A]/40 transition-all
             ${errors.phone ? 'border-red-500' : 'border-[#B49D5A]/70'}`}
