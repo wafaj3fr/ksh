@@ -3,6 +3,7 @@ import cors from "cors";
 import helmet from "helmet";
 import rateLimit from "express-rate-limit";
 import dotenv from "dotenv";
+import routes from "./routes";
 
 // ✅ Load environment variables early
 dotenv.config();
@@ -53,6 +54,9 @@ app.post("/api/forms/contact", contactController.submit);
 
 // 💼 Job Application Route (with CV upload)
 app.post("/api/forms/apply", upload.single("cv"), jobApplicationController.submit);
+
+// ✅ Include any additional route modules (if exist)
+app.use("/api", routes);
 
 // ⚠️ Global Error Handler (must be last)
 app.use(errorHandler);

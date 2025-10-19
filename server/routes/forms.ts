@@ -10,14 +10,14 @@ const router = express.Router();
  * 📨 CONTACT FORM — POST /api/forms/contact
  * Validates + sanitizes + stores message in Sanity
  */
-router.post("/contact", contactController.submit);
+router.post("/forms/contact", contactController.submit);
 
 /**
  * 💼 JOB APPLICATION — POST /api/forms/apply
  * Uses multer for file upload + full validation pipeline
  */
 router.post(
-  "/apply",
+  "/forms/apply",
   upload.single("cv"), // middleware handles file validation
   jobApplicationController.submit
 );

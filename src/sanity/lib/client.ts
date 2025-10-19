@@ -1,11 +1,33 @@
-import { createClient } from 'next-sanity'
+import { createClient } from "@sanity/client";
+import imageUrlBuilder from "@sanity/image-url";
+import { apiVersion, dataset, projectId } from "../env";
 
-import { apiVersion, dataset, projectId } from '../env'
-
-export const client = createClient({
+/**
+ * 🔧 Sanity Client Configuration
+ */
+export const sanityClient = createClient({
   projectId,
   dataset,
   apiVersion,
-  useCdn: true, // Set to false if statically generating pages, using ISR or tag-based revalidation
-  token: process.env.SANITY_WRITE_TOKEN,
-})
+  useCdn: process.env.NODE_ENV === "production",
+  token: process.env.SANITY_WRITE_TOKEN ?? undefined,
+});
+
+/**
+ * ✅ Legacy alias (for compatibility with old imports)
+ */
+export const client = sanityClient;
+
+/**
+ * 🖼️ Image URL builder
+ */
+const builder = imageUrlBuilder(sanityClient);
+
+export function urlFor(source: any) {
+  return builder.image(source);
+}
+
+// ✅ Optional helper (auto-fetch)
+export const fetchSanity = async (query: string, params = {}) => {
+  return sanityClient.fetch(query, params);
+};
