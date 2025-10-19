@@ -10,14 +10,15 @@ const express_rate_limit_1 = __importDefault(require("express-rate-limit"));
 const dotenv_1 = __importDefault(require("dotenv"));
 const routes_1 = __importDefault(require("./routes"));
 dotenv_1.default.config();
-const upload_1 = require("./middleware/upload");
-const contactController_1 = require("./controllers/contactController");
-const jobApplicationController_1 = require("./controllers/jobApplicationController");
 const errorHandler_1 = require("./middleware/errorHandler");
 const app = (0, express_1.default)();
 app.use((0, helmet_1.default)());
 app.use((0, cors_1.default)({
-    origin: process.env.FRONTEND_URL || "http://localhost:3000",
+    origin: [
+        "https://www.kshcholding.com",
+        "https://kshcholding.com",
+        "http://localhost:3000"
+    ],
     credentials: true,
 }));
 app.use(express_1.default.json({ limit: "2mb" }));
@@ -35,8 +36,6 @@ app.get("/", (_, res) => {
         message: "✅ KSH API is running successfully",
     });
 });
-app.post("/api/forms/contact", contactController_1.contactController.submit);
-app.post("/api/forms/apply", upload_1.upload.single("cv"), jobApplicationController_1.jobApplicationController.submit);
 app.use("/api", routes_1.default);
 app.use(errorHandler_1.errorHandler);
 const PORT = process.env.PORT || 4000;

@@ -9,8 +9,8 @@ const jobApplicationController_1 = require("../controllers/jobApplicationControl
 const upload_1 = require("../middleware/upload");
 const errorHandler_1 = require("../middleware/errorHandler");
 const router = express_1.default.Router();
-router.post("/forms/contact", contactController_1.contactController.submit);
-router.post("/forms/apply", upload_1.upload.single("cv"), jobApplicationController_1.jobApplicationController.submit);
+router.post("/contact", contactController_1.contactController.submit);
+router.post("/apply", upload_1.upload.single("cv"), jobApplicationController_1.jobApplicationController.submit);
 router.use(errorHandler_1.errorHandler);
 exports.default = router;
 //# sourceMappingURL=forms.js.map
