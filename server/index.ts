@@ -23,10 +23,15 @@ app.use(helmet());
 // 🌐 CORS setup (frontend domain)
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL || "http://localhost:3000",
+    origin: [
+      "https://www.kshcholding.com",
+      "https://kshcholding.com",
+      "http://localhost:3000"
+    ],
     credentials: true,
   })
 );
+
 
 // 🧩 Body parsers
 app.use(express.json({ limit: "2mb" }));
@@ -50,10 +55,10 @@ app.get("/", (_, res) => {
 });
 
 // 📬 Contact Form Route
-app.post("/api/forms/contact", contactController.submit);
+//app.post("/api/forms/contact", contactController.submit);
 
 // 💼 Job Application Route (with CV upload)
-app.post("/api/forms/apply", upload.single("cv"), jobApplicationController.submit);
+//app.post("/api/forms/apply", upload.single("cv"), jobApplicationController.submit);
 
 // ✅ Include any additional route modules (if exist)
 app.use("/api", routes);
