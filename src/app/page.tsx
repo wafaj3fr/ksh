@@ -18,15 +18,20 @@ import MissionVision from "./components/MissionVision";
 import Hero from "./components/Hero";
 import Customers from "./components/Customers";
 import Testimonials from "./components/Testimonials";
+import { getTranslations } from "next-intl/server";
 
 export default async function Home() {
-  const [settings, subsidiaries, news, ceoMessage, sectors] = await Promise.all([
-    getSettings(),
-    getSubsidiaries(),
-    getNews(),
-    getCEOMessage(),
-    getInvestmentSectors(),
-  ]);
+  const [settings, subsidiaries, news, ceoMessage, sectors] = await Promise.all(
+    [
+      getSettings(),
+      getSubsidiaries(),
+      getNews(),
+      getCEOMessage(),
+      getInvestmentSectors(),
+    ]
+  );
+
+  const t = await getTranslations("HomePage");
 
   return (
     <div className="min-h-screen text-gray-900 font-sans bg-white">
@@ -40,14 +45,14 @@ export default async function Home() {
         heroTitle={settings.heroTitle}
         heroSubtitle={settings.heroSubtitle}
       />
-      
+
       {/* About Teaser */}
       <section className="py-16 px-6 sm:px-20">
         <div className="max-w-6xl mx-auto">
           <AboutTeaser />
         </div>
       </section>
-      
+
       {/* Subsidiaries */}
       <section id="subsidiaries" className="py-16 px-6 sm:px-20">
         <div className="max-w-6xl mx-auto">
@@ -84,7 +89,9 @@ export default async function Home() {
       <section id="objectives" className="py-16 px-6 sm:px-20 bg-white">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-extrabold text-primary mb-4">General Objectives</h2>
+            <h2 className="text-3xl font-extrabold text-primary mb-4">
+              General Objectives {t("title")}
+            </h2>
             <span className="block mx-auto w-24 h-1 bg-[#B49C5B] rounded" />
           </div>
 
@@ -92,7 +99,8 @@ export default async function Home() {
             {[
               {
                 title: "Kuwait–Sudan Ties",
-                description: "Introducing a unique model of foreign investment in Sudan.",
+                description:
+                  "Introducing a unique model of foreign investment in Sudan.",
                 icon: <Globe className="text-primary w-7 h-7 mx-auto" />,
               },
               {
@@ -103,17 +111,20 @@ export default async function Home() {
               },
               {
                 title: "Smart Investments",
-                description: "Expanding and supporting effective initiatives through smart partnerships.",
+                description:
+                  "Expanding and supporting effective initiatives through smart partnerships.",
                 icon: <TrendingUp className="text-primary w-7 h-7 mx-auto" />,
               },
               {
                 title: "Talent Development",
-                description: "Nurturing exceptional talent and supporting innovative ideas and projects.",
+                description:
+                  "Nurturing exceptional talent and supporting innovative ideas and projects.",
                 icon: <Users className="text-primary w-7 h-7 mx-auto" />,
               },
               {
                 title: "Social Responsibility",
-                description: "Focusing on social responsibility and fostering intergenerational connections.",
+                description:
+                  "Focusing on social responsibility and fostering intergenerational connections.",
                 icon: <Target className="text-primary w-7 h-7 mx-auto" />,
               },
               {
@@ -122,12 +133,19 @@ export default async function Home() {
                 icon: <Layers className="text-primary w-7 h-7 mx-auto" />,
               },
             ].map((obj, idx) => (
-              <div key={idx} className="text-center space-y-4 p-6 bg-white rounded-xl shadow-sm">
+              <div
+                key={idx}
+                className="text-center space-y-4 p-6 bg-white rounded-xl shadow-sm"
+              >
                 <div className="bg-primary/10 p-4 rounded-full mb-4 flex items-center justify-center w-fit mx-auto">
                   {obj.icon}
                 </div>
-                <h3 className="text-lg font-bold text-primary mb-2">{obj.title}</h3>
-                <p className="text-sm text-gray-700 leading-relaxed">{obj.description}</p>
+                <h3 className="text-lg font-bold text-primary mb-2">
+                  {obj.title}
+                </h3>
+                <p className="text-sm text-gray-700 leading-relaxed">
+                  {obj.description}
+                </p>
               </div>
             ))}
           </div>

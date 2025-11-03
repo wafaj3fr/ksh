@@ -4,6 +4,7 @@ import { getSettings } from "../sanity/sanity-utils";
 import AOSInit from "./components/AOSInit";
 import { Geist, Geist_Mono } from "next/font/google";
 import LayoutShell from "./components/LayoutShell"; // تمت الإضافة
+import { NextIntlClientProvider } from "next-intl";
 
 export const metadata: Metadata = {
   title: "Kuwaiti Sudanese Holding Company",
@@ -32,7 +33,9 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className="bg-white text-gray-900">
-        <div className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <div
+          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        >
           {/* Fonts */}
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link
@@ -50,7 +53,9 @@ export default async function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
         {/* التحكم في إظهار الهيدر والفوتر خارج /admin */}
-        <LayoutShell logo={settings?.logo}>{children}</LayoutShell>
+        <LayoutShell logo={settings?.logo}>
+          <NextIntlClientProvider>{children}</NextIntlClientProvider>
+        </LayoutShell>
       </body>
     </html>
   );

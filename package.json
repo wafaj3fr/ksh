@@ -44,6 +44,7 @@
     "morgan": "^1.10.1",
     "multer": "^2.0.2",
     "next": "^15.3.2",
+    "next-intl": "^4.4.0",
     "next-sanity": "^9.12.3",
     "react": "19.1.0",
     "react-dom": "19.1.0",
