@@ -1,5 +1,265 @@
 {
-  "HomePage": {
-    "title": "Hello world!"
+  "navigation": {
+    "about": "About",
+    "subsidiaries": "Subsidiaries",
+    "news": "News",
+    "services": "Services",
+    "careers": "Careers",
+    "contact": "Contact"
+  },
+
+  "footer": {
+    "companyInfo": "Kuwaiti Sudanese Holding Company is a leading investment group advancing Sudan's economic growth through innovation and strategic partnerships.",
+    "quickLinks": "Quick Links",
+    "contactInfo": "Contact",
+    "email": "Email",
+    "phone": "Phone",
+    "address": "Address",
+    "addressValue": "Al Amarat Street 1, Khartoum, Sudan",
+    "copyright": "© 2025 Kuwaiti Sudanese Holding Company (KSHC). All rights reserved."
+  },
+
+  "hero": {
+    "contactUs": "Contact Us"
+  },
+
+  "aboutTeaser": {
+    "title": "Discover Our Story",
+    "description": "The Kuwaiti Sudanese Holding Company is an innovative and dynamic investment group that keeps pace with the latest investment developments in Sudan. It is committed to leading in its unique fields, striving for excellence through integrated efforts in all its investments. Established with the goal of leadership, the company oversees numerous ventures, each contributing individually and collectively to the realization of the company's core objectives.",
+    "learnMore": "Learn More →"
+  },
+
+  "whyUs": {
+    "title": "Why Us?",
+    "description1": "We follow a strategic and credible investment methodology to build a sustainable and impactful legacy. Our projects are guided by innovation, long-term vision, and a commitment to client trust and partnership excellence.",
+    "description2": "Our diverse investments and projects are based on credibility, excellence, and continuous innovation. We provide comprehensive and advanced services to our clients and partners, earning their respect and trust for the long term.",
+    "statsExperience": "Years of Experience",
+    "statsSubsidiaries": "Subsidiaries",
+    "statsCapital": "Invested Capital"
+  },
+
+  "missionVision": {
+    "title": "Our Vision & Mission",
+    "vision": "Vision",
+    "mission": "Mission",
+    "goal": "Goal",
+    "visionText": "To establish the largest economic group with foreign capital contributing to Sudan's growth.",
+    "missionText": "Bringing global technologies and business practices to Sudan, aligning the country with global advancements.",
+    "goalText": "Strengthening Kuwait–Sudan ties, rebuilding post-conflict Sudan, and investing in high-impact sectors."
+  },
+
+  "objectives": {
+    "title": "General Objectives",
+    "kuwaitSudanTitle": "Kuwait–Sudan Ties",
+    "kuwaitSudanDesc": "Introducing a unique model of foreign investment in Sudan.",
+    "reconstructionTitle": "Post-conflict Reconstruction",
+    "reconstructionDesc": "Establishing profitable institutions that contribute to development in areas like technology, services, and reconstruction.",
+    "smartInvestmentsTitle": "Smart Investments",
+    "smartInvestmentsDesc": "Expanding and supporting effective initiatives through smart partnerships.",
+    "talentDevelopmentTitle": "Talent Development",
+    "talentDevelopmentDesc": "Nurturing exceptional talent and supporting innovative ideas and projects.",
+    "socialResponsibilityTitle": "Social Responsibility",
+    "socialResponsibilityDesc": "Focusing on social responsibility and fostering intergenerational connections.",
+    "smartPartnershipsTitle": "Smart Partnerships",
+    "smartPartnershipsDesc": "Managing corporate assets efficiently."
+  },
+
+  "sectors": {
+    "title": "Key Investment Sectors"
+  },
+
+  "subsidiaries": {
+    "title": "KSHC Subsidiaries",
+    "visitWebsite": "Visit Website"
+  },
+
+  "customers": {
+    "title": "Our Customers"
+  },
+
+  "testimonials": {
+    "title": "Don't just take our word for it!"
+  },
+
+  "news": {
+    "title": "News & Updates",
+    "readMore": "Read More →",
+    "gallery": "Gallery"
+  },
+
+  "ceoMessage": {
+    "title": "General Manager Message",
+    "name": "Mahmoud Alassad",
+    "position": "Chief Executive Officer"
+  },
+
+  "aboutPage": {
+    "heroTitle": "Rooted in Vision, Driven by Legacy",
+    "heroSubtitle": "Explore our journey, leadership, and vision for building a better future for Sudan and the region.",
+    "ourStoryTitle": "Our Story",
+    "ourStoryDesc": "Established in [Year] under the Sudanese Companies Law, the Kuwaiti Sudanese Holding Company (KSHC) emerged as a foreign-capital investment leader committed to economic growth, innovation, and Sudan's prosperity. Our ventures span across strategic sectors, driven by a unified goal of building a sustainable legacy for future generations.",
+    "fieldsTitle": "Fields of Operation",
+    "generalInvestmentTitle": "General Investment",
+    "generalInvestmentDesc": "We focus on projects and companies that enhance productivity and create tangible positive impacts on society. Our aim is to improve quality of life through sustainable investments.",
+    "specializedTitle": "Specialized Investments",
+    "specializedSubtitle": "We operate across a diverse set of sectors with innovative strategies and a commitment to excellence.",
+    "telecomTitle": "Telecommunications",
+    "telecomDesc": "Advancing networks and communication technologies in Sudan.",
+    "realEstateTitle": "Real Estate",
+    "realEstateDesc": "Developing modern spaces and managing real estate portfolios.",
+    "logisticsTitle": "Logistics",
+    "logisticsDesc": "Integrated supply chain services including transport & storage.",
+    "facilityTitle": "Facility Management",
+    "facilityDesc": "Modern and efficient systems for property and infrastructure.",
+    "boardTitle": "Board of Directors",
+    "managementTitle": "Management Structure",
+    "managementName": "Name",
+    "managementPosition": "Position",
+    "managementNationality": "Nationality/Department",
+    "futureTitle": "Looking Ahead",
+    "futureDesc": "Over the next five years, KSHC is on a mission to become a regional investment powerhouse. By uniting our companies under one umbrella and driving strategic innovation, we aim to create a diversified investment ecosystem that builds a better future for Sudan and beyond."
+  },
+
+  "careersPage": {
+    "heroTitle": "Join Our Mission to Build the Future of Sudan",
+    "heroSubtitle": "We're a community of innovators, builders, and changemakers.",
+    "unitsHeading": "Our Business Units",
+    "whyWorkHeading": "Why Work with Us?",
+    "whyImpact": "Contribute to high-impact projects",
+    "whyExperience": "Gain hands-on experience in multiple sectors",
+    "whyValues": "Join a team that values integrity, innovation, and collaboration",
+    "whyGrowth": "Opportunities for career growth",
+    "whyInclusive": "Inclusive, diverse, and empowering environment",
+    "jobsHeading": "Current Openings",
+    "jobsEmpty": "No openings at the moment.",
+    "jobReadMore": "Read more",
+    "jobApplyBy": "Apply by",
+    "applyTitle": "Apply for this role",
+    "applyFullName": "Full Name",
+    "applyEmail": "Email",
+    "applyPhone": "Phone",
+    "applyCover": "Cover Letter",
+    "applyCoverPlaceholder": "Tell us about yourself and why you're a great fit (min 50 characters)",
+    "applyCV": "Resume / CV",
+    "applyNow": "Apply Now",
+    "applyUploading": "Uploading…",
+    "applySuccess": "Application submitted successfully! We'll review and contact you soon.",
+    "applyError": "",
+    "internshipsTitle": "Internship Programs",
+    "howToApplyTitle": "How to Apply",
+    "hrTitle": "HR Contact",
+    "hrQuestion": "Do You Have Questions?",
+    "hrEmail": "Email",
+    "hrPhone": "Phone",
+    "hrWhatsApp": "WhatsApp"
+  },
+
+  "contactPage": {
+    "title": "Get in Touch",
+    "fullName": "Full Name",
+    "fullNamePlaceholder": "Example: John Doe",
+    "email": "Email",
+    "emailPlaceholder": "example@domain.com",
+    "subject": "Subject",
+    "subjectPlaceholder": "Example: Inquiry about company services",
+    "message": "Message",
+    "messagePlaceholder": "Write your message here, minimum 10 characters",
+    "send": "Send Message",
+    "sending": "Sending…",
+    "success": "Message sent successfully! We'll get back to you shortly.",
+    "error": ""
+  },
+
+  "newsPage": {
+    "title": "News & Updates",
+    "subtitle": "Stay informed about the latest developments at KSHC.",
+    "description": "Stay up to date with the latest news, announcements, and events from the Kuwaiti Sudanese Holding Company."
+  },
+
+  "servicesPage": {
+    "heroTitle": "Our Services",
+    "heroSubtitle": "Explore our services and specialized investments at KSHC.",
+    "servicesTitle": "Our Services",
+    "servicesSubtitle": "We operate across a diverse set of sectors with innovative strategies and a commitment to excellence.",
+    "techTitle": "Technology Services",
+    "techSubtitle": "QAST manages the full spectrum of technology needs: infrastructure, systems, and service management.",
+    "techMore": "More About QAST",
+    "facilityTitle": "Facility Management Services",
+    "facilitySubtitle": "TAD focuses on delivering a complete suite of both hard and soft offerings to companies across North and East Africa.",
+    "facilityMore": "More About TAD",
+    "constructionTitle": "Construction Services",
+    "constructionSubtitle": "CUBES specializes in infrastructure, construction, and property development.",
+    "constructionMore": "More About CUBES",
+    "supplyTitle": "Supply Chain Services",
+    "supplySubtitle": "Quality provides integrated logistics, procurement, and supply chain solutions.",
+    "supplyMore": "More About Q Supply Chain"
+  },
+
+  "subsidiariesPage": {
+    "heroTitle": "Our Subsidiaries",
+    "heroSubtitle": "Explore the diverse companies under the Kuwaiti Sudanese Holding Company, each contributing to Sudan's growth and development.",
+    "overviewTitle": "Our Subsidiaries",
+    "overviewDesc": "Each of our subsidiaries is a leader in its field, working together to build a stronger, more innovative Sudan. Explore our group companies and their unique contributions.",
+
+    "qastName": "QAST",
+    "qastDesc": "Network services & Information Technology Management Company.",
+    "qastTag": "Technology",
+    "qastHero": "QAST – Innovation in Technology",
+    "qastHeroDesc": "QAST is a Network Services & Information Technology Management company committed to elevating Sudan's digital infrastructure. Our solutions are tailored to empower businesses and communities through innovation, reliability, and cutting-edge services.",
+    "qastRole": "Our Role",
+    "qastRoleDesc": "As a pioneer in ICT services, QAST supports organizations by delivering network infrastructure, managed services, and innovative IT consulting. Our vision is to be the digital transformation partner of choice in the region.",
+    "qastVision": "Our Vision",
+    "qastVisionText": "To be a leading ICT managed service and solutions provider in the region and Sudan.",
+    "qastMission": "Our Mission",
+    "qastMissionText": "Building strong organization by investing on our people, new technologies and processes as to deliver the highest level of solutions and services to provide the maximum value to all stakeholders.",
+    "qastValues": "Our Values",
+    "qastValuesText": "Professionalism: Demonstrate strong work commitments, treat others with respect and accountability. Integrity: Engage in activities aligned with moral and ethical standards, building trust with clients, partners, and stakeholders. Customer Centricity: Respect and fulfill customer needs, provide tailored support for their goals.",
+
+    "tadName": "TAD",
+    "tadDesc": "Facility Management Services & Integrated Solutions Company.",
+    "tadTag": "Facility Management",
+    "tadHero": "Smart Facility Management Solutions",
+    "tadHeroDesc": "Elevating spaces through innovation, efficiency, and sustainability.",
+    "tadAbout": "About TAD",
+    "tadAboutDesc": "TAD is a professional company providing integrated facility management services and smart building solutions. With a strong focus on sustainability and technology, we support various industries by delivering:",
+    "tadVision": "Vision",
+    "tadVisionText": "To build a brand that is recognized as a market leader in the region for providing professional, smart, and sustainable total facilities management solutions and services.",
+    "tadMission": "Mission",
+    "tadGoal": "Goal",
+    "tadGoalText": "Delivering a complete suite of both hard and soft offerings to companies across North and East Africa.",
+
+    "cubesName": "Cubes",
+    "cubesDesc": "Construction & Real Estate Company.",
+    "cubesTag": "Construction",
+    "cubesHero": "Building the Future with Cubes",
+    "cubesHeroDesc": "Transforming Sudan's urban spaces with innovation and sustainability.",
+    "cubesAbout": "About Cubes",
+    "cubesAboutDesc1": "Cubes is a construction and real estate development company committed to delivering modern, functional, and innovative buildings across Sudan.",
+    "cubesAboutDesc2": "We focus on quality infrastructure, blending design excellence with sustainable practices – offering residential, commercial, and mixed-use solutions.",
+    "cubesVision": "Vision",
+    "cubesVisionText": "To be a leading construction company, delivering sustainable and innovative building solutions, supported by best project management practices to achieve the highest standards of quality and efficiency.",
+    "cubesMission": "Mission",
+    "cubesValues": "Values",
+
+    "qscName": "Quality for Supply Chains",
+    "qscDesc": "Supply Chains Management Services Company.",
+    "qscTag": "Supply Chains",
+    "qscHero": "Excellence in Supply Chain",
+    "qscHeroSubtitle": "Delivered with Quality",
+    "qscAbout": "Quality for Supply Chain",
+    "qscAboutDesc1": "We provide end-to-end supply chain solutions – from logistics, transport, customs clearance, to modern storage and door-to-door services.",
+    "qscAboutDesc2": "Our mission is to ensure seamless operations, cost efficiency, and client satisfaction across the supply chain. Our strength lies in our deep market knowledge and a commitment to excellence.",
+    "qscVision": "Vision",
+    "qscVisionText": "We aspire to be the leader in the supply chain industry in Sudan, offering our local and international clients innovative and efficient solutions to streamline the movement of goods and distribution. Our vision is to help strengthen the Sudanese economy by becoming a trusted partner to our clients, through safety, reliability, and excellence in service.",
+    "qscMission": "Mission",
+    "qscMissionText": "At Q Supply Chain, our mission is to provide integrated, technology-driven solutions in supply chain services that meet the needs of our clients across purchasing, shipping, customs clearance, storage, distribution, and door-to-door delivery. We aim to be the number one choice for all our clients by offering unparalleled service while ensuring the highest levels of safety and quality.",
+    "qscObjectives": "Our Objectives"
+  },
+
+  "common": {
+    "backToTop": "Back to Top",
+    "loading": "Loading...",
+    "apply": "Apply",
+    "learnMore": "Learn More"
   }
 }

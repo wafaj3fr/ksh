@@ -31,7 +31,7 @@ export default async function Home() {
     ]
   );
 
-  const t = await getTranslations("HomePage");
+  const t = await getTranslations("objectives");
 
   return (
     <div className="min-h-screen text-gray-900 font-sans bg-white">
@@ -90,7 +90,7 @@ export default async function Home() {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-extrabold text-primary mb-4">
-              General Objectives {t("title")}
+              {t("title")}
             </h2>
             <span className="block mx-auto w-24 h-1 bg-[#B49C5B] rounded" />
           </div>
