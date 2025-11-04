@@ -1,0 +1,4961 @@
+
+
+==============================
+src/app/[locale]/about/page.tsx
+==============================
+
+import Image from "next/image";
+import {
+  Globe,
+  ShieldCheck,
+  Award,
+  TrendingUp,
+  Users,
+  Target,
+  Layers,
+} from "lucide-react";
+import BackToTopButton from "../components/BackToTopButton";
+import UnifiedHero from "../components/UnifiedHero";
+import { getSettings } from "../../../sanity/sanity-utils";
+
+export default async function AboutPage() {
+  // Fetch settings from Sanity or any other source
+  const settings = await getSettings();
+
+  return (
+    <main className="min-h-screen bg-[#f5f7fa] text-gray-900 font-sans">
+      {/* Hero Section */}
+      <UnifiedHero
+        title="Rooted in Vision, Driven by Legacy"
+        subtitle="Explore our journey, leadership, and vision for building a better future for Sudan and the region."
+        heroMediaType={settings.heroMediaType}
+        videoSource={settings.videoSource}
+        heroImage={settings.heroImage}
+        heroVideoFile={settings.heroVideoFile}
+        heroVideoUrl={settings.heroVideoUrl}
+        height="medium"
+      />
+      {/* Company Journey */}
+      <section className="bg-[#e7ebf0] px-6 sm:px-20 py-20">
+        <div className="max-w-6xl mx-auto grid md:grid-cols-2 items-center gap-12">
+          <div className="space-y-6">
+            <h2 className="text-3xl font-extrabold text-primary">Our Story</h2>
+            <span className="block w-20 h-1 bg-[#B49C5B] rounded" />
+            <p className="text-gray-700 leading-relaxed">
+              Established in [Year] under the Sudanese Companies Law, the
+              Kuwaiti Sudanese Holding Company (KSHC) emerged as a
+              foreign-capital investment leader committed to economic growth,
+              innovation, and Sudan’s prosperity. Our ventures span across
+              strategic sectors, driven by a unified goal of building a
+              sustainable legacy for future generations.
+            </p>
+          </div>
+          <Image
+            src="/undraw_profile.svg"
+            alt="KSHC Vision"
+            width={500}
+            height={400}
+            className="rounded-xl shadow-lg"
+          />
+        </div>
+      </section>
+
+      {/* Fields of Operation */}
+      <section className="bg-white px-6 sm:px-20 py-24">
+        <div className="max-w-6xl mx-auto text-center">
+          <h2 className="text-3xl font-extrabold text-primary">
+            Fields of Operation
+          </h2>
+          <span className="block w-24 h-1 bg-[#B49C5B] rounded mx-auto my-6" />
+        </div>
+
+        {/* General Investment */}
+        <div className="grid sm:grid-cols-2 gap-10 text-left mt-16 max-w-5xl mx-auto">
+          <div className="flex items-start gap-5">
+            <div className="bg-[#f3e8d1] p-4 rounded-xl">
+              <ShieldCheck className="w-6 h-6 text-[#B49C5B]" />
+            </div>
+            <div>
+              <h3 className="text-xl font-bold text-[#0a1f44] mb-2">
+                General Investment
+              </h3>
+              <p className="text-gray-700">
+                We focus on projects and companies that enhance productivity and
+                create tangible positive impacts on society. Our aim is to
+                improve quality of life through sustainable investments.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Specialized Investments */}
+        <section className="bg-white px-6 sm:px-20 py-24">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-16">
+              <h3 className="text-3xl sm:text-4xl font-extrabold text-primary mb-4">
+                Specialized Investments
+              </h3>
+              <span className="block w-24 h-1 bg-[#B49C5B] rounded mx-auto mb-6" />
+              <p className="text-lg text-gray-700 max-w-2xl mx-auto">
+                We operate across a diverse set of sectors with innovative
+                strategies and a commitment to excellence.
+              </p>
+            </div>
+
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+              {[
+                {
+                  title: "Telecommunications",
+                  image: "/telecom.jpg",
+                  desc: "Advancing networks and communication technologies in Sudan.",
+                },
+                {
+                  title: "Real Estate",
+                  image: "/realestate.jpg",
+                  desc: "Developing modern spaces and managing real estate portfolios.",
+                },
+                {
+                  title: "Logistics",
+                  image: "/logistics.jpg",
+                  desc: "Integrated supply chain services including transport & storage.",
+                },
+                {
+                  title: "Facility Management",
+                  image: "/facility.jpg",
+                  desc: "Modern and efficient systems for property and infrastructure.",
+                },
+              ].map((item, idx) => (
+                <div
+                  key={idx}
+                  className="group relative h-72 rounded-xl overflow-hidden transition-all duration-500 transform hover:scale-105 shadow-md hover:shadow-xl"
+                >
+                  {/* الخلفية مع بلور وتظليل */}
+                  <Image
+                    src={item.image}
+                    alt={item.title}
+                    fill
+                    className="object-cover transition-all duration-700 blur-0 group-hover:blur-0 brightness-75 group-hover:brightness-100 scale-100 group-hover:scale-110"
+                  />
+
+                  {/* المحتوى فوق الصورة */}
+                  <div className="absolute inset-0 flex flex-col justify-end p-6 transition-all duration-500 bg-black/30 group-hover:bg-black/10  rounded-xl">
+                    <h3 className="text-xl font-bold text-[#B49C5B] underline underline-offset-4 decoration-[#B49C5B] drop-shadow-md mb-1">
+                      {item.title}
+                    </h3>
+                    <p className="text-sm text-gray-100 opacity-0 group-hover:opacity-100 translate-y-3 group-hover:translate-y-0 transition-all duration-500">
+                      {item.desc}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Objectives */}
+        <section id="objectives" className="py-16 px-6 sm:px-20 bg-white">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl font-extrabold text-primary mb-4">
+                General Objectives
+              </h2>
+              <span className="block mx-auto w-24 h-1 bg-[#B49C5B] rounded" />
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+              {[
+                {
+                  title: "Kuwait–Sudan Ties",
+                  description:
+                    "Introducing a unique model of foreign investment in Sudan.",
+                  icon: <Globe className="text-primary w-7 h-7 mx-auto" />,
+                },
+                {
+                  title: "Post-conflict Reconstruction",
+                  description:
+                    "Establishing profitable institutions that contribute to development in areas like technology, services, and reconstruction.",
+                  icon: <Award className="text-primary w-7 h-7 mx-auto" />,
+                },
+                {
+                  title: "Smart Investments",
+                  description:
+                    "Expanding and supporting effective initiatives through smart partnerships.",
+                  icon: <TrendingUp className="text-primary w-7 h-7 mx-auto" />,
+                },
+                {
+                  title: "Talent Development",
+                  description:
+                    "Nurturing exceptional talent and supporting innovative ideas and projects.",
+                  icon: <Users className="text-primary w-7 h-7 mx-auto" />,
+                },
+                {
+                  title: "Social Responsibility",
+                  description:
+                    "Focusing on social responsibility and fostering intergenerational connections.",
+                  icon: <Target className="text-primary w-7 h-7 mx-auto" />,
+                },
+                {
+                  title: "Smart Partnerships",
+                  description: "Managing corporate assets efficiently.",
+                  icon: <Layers className="text-primary w-7 h-7 mx-auto" />,
+                },
+              ].map((obj, idx) => (
+                <div
+                  key={idx}
+                  className="text-center space-y-4 p-6 bg-white rounded-xl shadow-sm"
+                >
+                  <div className="bg-primary/10 p-4 rounded-full mb-4 flex items-center justify-center w-fit mx-auto">
+                    {obj.icon}
+                  </div>
+                  <h3 className="text-lg font-bold text-primary mb-2">
+                    {obj.title}
+                  </h3>
+                  <p className="text-sm text-gray-700 leading-relaxed">
+                    {obj.description}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      </section>
+
+      {/* Board of Directors */}
+      <section className="bg-white px-6 sm:px-20 py-20">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-3xl font-extrabold text-primary mb-4">
+            Board of Directors
+          </h2>
+          <span className="block w-24 h-1 bg-[#B49C5B] rounded mx-auto mb-10" />
+          <div className="grid sm:grid-cols-3 gap-10">
+            {[
+              {
+                name: "Hisham Mustafa Allam",
+                title: "Chairman",
+                nationality: "Sudanese",
+              },
+              { name: "Shaji", title: "Board Member", nationality: "Sudanese" },
+              {
+                name: "Osama Michel Matta",
+                title: "Board Member",
+                nationality: "Lebanese",
+              },
+            ].map((member, idx) => (
+              <div
+                key={idx}
+                className="bg-white rounded-xl shadow p-6 border border-[#d8c99b]"
+              >
+                <h3 className="font-bold text-[#0a1f44]">{member.name}</h3>
+                <p className="text-sm text-gray-600">{member.title}</p>
+                <p className="text-xs text-gray-500">{member.nationality}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Management Structure */}
+      <section className="bg-white px-6 sm:px-20 py-20">
+        <div className="max-w-6xl mx-auto text-center">
+          <h2 className="text-3xl font-extrabold text-primary mb-4">
+            Management Structure
+          </h2>
+          <span className="block w-24 h-1 bg-[#B49C5B] rounded mx-auto mb-10" />
+
+          {/* Top Manager */}
+          <div className="flex justify-center mb-12">
+            <div className="bg-white rounded-xl shadow p-6 border border-[#d8c99b] w-64">
+              <h3 className="font-bold text-[#0a1f44]">Name</h3>
+              <p className="text-sm text-gray-600">Position</p>
+              <p className="text-xs text-gray-500">Sudanese</p>
+            </div>
+          </div>
+
+          {/* Sub Managers */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              {
+                name: "Name",
+                title: "Position",
+                dept: "Nationality/Department",
+              },
+              {
+                name: "Name",
+                title: "Position",
+                dept: "Nationality/Department",
+              },
+              {
+                name: "Name",
+                title: "Position",
+                dept: "Nationality/Department",
+              },
+              {
+                name: "Name",
+                title: "Position",
+                dept: "Nationality/Department",
+              },
+            ].map((m, idx) => (
+              <div
+                key={idx}
+                className="bg-white rounded-xl shadow p-6 border border-[#d8c99b]"
+              >
+                <h3 className="font-bold text-[#0a1f44]">{m.name}</h3>
+                <p className="text-sm text-gray-600">{m.title}</p>
+                <p className="text-xs text-gray-500">{m.dept}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Future Vision */}
+      <section className="bg-white px-6 sm:px-20 py-24">
+        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+          <div>
+            <h2 className="text-3xl font-extrabold text-primary mb-4">
+              Looking Ahead
+            </h2>
+            <p className="text-gray-700 leading-relaxed">
+              Over the next five years, KSHC is on a mission to become a
+              regional investment powerhouse. By uniting our companies under one
+              umbrella and driving strategic innovation, we aim to create a
+              diversified investment ecosystem that builds a better future for
+              Sudan and beyond.
+            </p>
+          </div>
+          <Image
+            src="/road.svg"
+            alt="Future Vision"
+            width={500}
+            height={400}
+            className="rounded-xl shadow"
+          />
+        </div>
+      </section>
+
+      {/* CEO Message */}
+      <section className="bg-[#f7f9fc] px-6 sm:px-20 py-24">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-3xl font-extrabold text-primary mb-6">
+            General Manager Message
+          </h2>
+          <span className="block w-20 h-1 bg-[#B49C5B] rounded mx-auto mb-6" />
+          <p className="text-lg text-gray-700 leading-loose text-justify">
+            The Kuwaiti Sudanese Holding Company takes pride in being a Kuwaiti
+            company with foreign capital, dedicated to economic development in
+            Sudan. Our mission is grounded in integrity, progress, and long-term
+            success. As we continue this journey, we remain committed to our
+            principles, our people, and our purpose — to build a prosperous
+            future for our communities.
+          </p>
+        </div>
+      </section>
+      <BackToTopButton />
+    </main>
+  );
+}
+
+
+
+==============================
+src/app/[locale]/admin/[[...tool]]/page.tsx
+==============================
+
+"use client";
+/**
+ * This route is responsible for the built-in authoring environment using Sanity Studio.
+ * All routes under your studio path is handled by this file using Next.js' catch-all routes:
+ * https://nextjs.org/docs/routing/dynamic-routes#catch-all-routes
+ *
+ * You can learn more about the next-sanity package here:
+ * https://github.com/sanity-io/next-sanity
+ */
+
+import { NextStudio } from "next-sanity/studio";
+import config from "../../../../../sanity.config";
+import React from "react";
+
+export const dynamic = "force-static";
+
+// export { metadata, viewport } from 'next-sanity/studio'
+
+export default function StudioPage() {
+  return <NextStudio config={config} />;
+}
+
+
+
+==============================
+src/app/[locale]/careers/[slug]/page.tsx
+==============================
+
+// src/app/careers/[slug]/page.tsx
+import { PortableText } from "next-sanity";
+import client, { getSettings } from "../../../../sanity/sanity-utils";
+import { GROQ } from "../../../../sanity/lib/queries";
+import Section from "../../components/ui/Section";
+import Pill from "../../components/ui/Pill";
+import Card from "../../components/ui/Card";
+import JobApplicationForm from "../../components/forms/JobApplicationForm";
+import UnifiedHero from "../../components/UnifiedHero";
+
+export default async function JobPage(props: {
+  params: Promise<{ slug: string }>;
+}) {
+  // ✅ حل المشكلة: await props.params
+  const { slug } = await props.params;
+
+  const job = await client.fetch(GROQ.jobBySlug, { slug });
+
+  if (!job) {
+    return <div className="px-6 py-12 text-[#3a3f46]">Not found</div>;
+  }
+
+  const meta = [job.department, job.location, job.type].filter(Boolean);
+  const settings = await getSettings();
+  return (
+    <main className="pb-24 bg-[#f5f7fa] text-gray-900">
+      {/* <Hero heroTitle={job.title} heroSubtitle={job.intro} /> */}
+      <UnifiedHero
+        title={job.title}
+        subtitle="Explore our journey, leadership, and vision for building a better future for Sudan and the region."
+        heroMediaType={settings.heroMediaType}
+        videoSource={settings.videoSource}
+        heroImage={settings.heroImage}
+        heroVideoFile={settings.heroVideoFile}
+        heroVideoUrl={settings.heroVideoUrl}
+        height="medium"
+      />
+
+      <Section>
+        <div className="mt-6 flex flex-wrap gap-2">
+          {meta.map((m: string, i: number) => (
+            <Pill key={i}>{m}</Pill>
+          ))}
+          {job.deadline && (
+            <Pill tone="accent">
+              Apply by {new Date(job.deadline).toLocaleDateString()}
+            </Pill>
+          )}
+        </div>
+
+        <div className="mt-10 grid gap-10 lg:grid-cols-[1fr,420px]">
+          <article className="max-w-none text-gray-800">
+            {/* Description */}
+            {job.description && (
+              <div className="mb-8">
+                <h3 className="text-xl font-bold text-primary mb-2">
+                  Job Description
+                </h3>
+                <span className="block w-16 h-1 bg-[#B49C5B] rounded mb-4" />
+                <div className="space-y-4 leading-relaxed text-gray-700">
+                  <PortableText value={job.description} />
+                </div>
+              </div>
+            )}
+          </article>
+
+          <article className="max-w-none text-gray-800">
+            {/* ✅ Requirements (معدلة بالستايل الجديد + underline) */}
+            {job.requirements && (
+              <div className="mt-10">
+                <h3 className="text-xl font-bold text-primary mb-2">
+                  Requirements
+                </h3>
+                <span className="block w-16 h-1 bg-[#B49C5B] rounded mb-4" />
+                <ul className="space-y-3">
+                  {job.requirements.map((req: unknown, idx: number) => (
+                    <li
+                      key={idx}
+                      className="flex items-start gap-3 bg-white shadow-sm border border-[#e5e7eb] rounded-lg p-3 hover:shadow-md transition"
+                    >
+                      <span className="flex-shrink-0 w-6 h-6 rounded-full bg-primary/10 text-primary flex items-center justify-center text-sm font-bold">
+                        {idx + 1}
+                      </span>
+                      <span className="text-gray-800 leading-relaxed">
+                        {typeof req === "string"
+                          ? req
+                          : (req as Record<string, unknown>)?.children?.[0]
+                              ?.text || "Requirement text"}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </article>
+
+          <Card className="p-6">
+            <h2 className="mb-2 text-2xl font-semibold text-primary">
+              Apply for this role
+            </h2>
+            <span className="block w-16 h-1 bg-[#B49C5B] rounded mb-4" />
+            <JobApplicationForm jobId={job._id} />
+          </Card>
+        </div>
+      </Section>
+    </main>
+  );
+}
+
+
+
+==============================
+src/app/[locale]/careers/components/BenefitsGrid.tsx
+==============================
+
+"use client";
+
+import { iconMap } from "../../../../utils/icons";
+
+type BenefitItem = { text: string; iconKey?: string };
+
+// خليها تقبل إما string أو BenefitItem (توافق للخلف)
+type Props = {
+  heading?: string;
+  subtext?: string;
+  items?: Array<string | BenefitItem>;
+};
+
+export default function BenefitsGrid({ heading, subtext, items }: Props) {
+  const normalized: BenefitItem[] = (items ?? []).map((it) =>
+    typeof it === "string" ? { text: it } : it
+  );
+
+  return (
+    <div className="py-16 text-center">
+      {heading && (
+        <h2 className="text-2xl font-extrabold text-[#0a1f44] underline underline-offset-8 decoration-[#B49C5B]">
+          {heading}
+        </h2>
+      )}
+      {subtext && <p className="mt-2 text-sm text-[#586270]">{subtext}</p>}
+
+      <div className="mx-auto mt-8 grid max-w-5xl grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {normalized.map((item, i) => {
+          const Icon = item.iconKey ? iconMap[item.iconKey] : undefined;
+          return (
+            <div
+              key={`${item.text}-${i}`}
+              className="flex items-center gap-3 rounded-2xl border border-[#E6D9B3] bg-white px-5 py-4 text-left shadow-sm"
+            >
+              <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#F3EAD3]">
+                {Icon ? (
+                  <Icon className="h-5 w-5 text-[#B49C5B]" />
+                ) : (
+                  <span className="h-5 w-5" />
+                )}
+              </div>
+              <span className="font-semibold text-[#0a1f44]">{item.text}</span>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+
+
+==============================
+src/app/[locale]/careers/components/BusinessUnits.tsx
+==============================
+
+export default function BusinessUnits() {
+  const units = [
+    { name:'KSHC', desc:'—' },
+    { name:'Q Supply Chain', desc:'Logistics, procurement, and supply services' },
+    { name:'Cubes Construction & Real Estate', desc:'Infrastructure, construction, and property development' },
+  ];
+  return (
+    <div className="py-10">
+      <p className="mx-auto max-w-3xl text-center text-white/85 text-lg">
+        We are always on the lookout for passionate, skilled, and motivated individuals to join our growing team across our three business units:
+      </p>
+      <div className="mt-8 grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
+        {units.map((u) => (
+          <div
+            key={u.name}
+            className="mx-auto w-full max-w-xs rounded-2xl border border-white/10 bg-[#0f1419] p-6 flex flex-col items-center shadow-[0_6px_24px_-10px_rgba(0,0,0,.4)]"
+            style={{ height: 420 }}
+          >
+            {/* logo - circular and at top */}
+            <div className="h-28 w-28 rounded-full bg-white/5 flex items-center justify-center mb-6" />
+
+            {/* content centered and allowed to grow */}
+            <div className="flex-1 flex flex-col justify-center items-center text-center">
+              <h4 className="font-semibold text-white text-lg">{u.name}</h4>
+              <p className="mt-3 text-sm text-white/70">{u.desc}</p>
+            </div>
+
+            {/* optional action area (keeps footer space) */}
+            <div className="mt-6 w-full flex justify-center">
+              {/* placeholder for button or badge */}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+
+
+==============================
+src/app/[locale]/careers/components/HRContactCard.tsx
+==============================
+
+'use client';
+
+export default function HRContactCard({
+  title,
+  email,
+  phone,
+  whatsapp,
+}: { title?: string; email?: string; phone?: string; whatsapp?: string }) {
+  return (
+    <section className="px-6 sm:px-20 py-12 bg-white">
+      <div className="max-w-5xl mx-auto rounded-xl border border-black/10 bg-white p-6 shadow-[0_1px_2px_rgba(0,0,0,.05),0_8px_20px_-12px_rgba(0,0,0,.08)]">
+        <h3 className="text-xl font-semibold text-[#0a1f44] text-center">
+          {title ?? 'Do You Have Questions?'}
+        </h3>
+        <div className="mt-4 flex flex-col items-center gap-1 text-sm text-[#263238]">
+          {email && <div>Email: <a className="underline" href={`mailto:${email}`}>{email}</a></div>}
+          {phone && <div>Phone: <a className="underline" href={`tel:${phone}`}>{phone}</a></div>}
+          {whatsapp && <div>WhatsApp: <a className="underline" href={`https://wa.me/${whatsapp}`}>{whatsapp}</a></div>}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+
+
+==============================
+src/app/[locale]/careers/components/HowToApply.tsx
+==============================
+
+'use client';
+
+type HowToApplyProps = {
+  /** عنوان اختياري للقسم */
+  title?: string;
+  /** خطوات التقديم */
+  steps?: string[];
+};
+
+export default function HowToApply({
+  title = 'How to Apply',
+  steps = [],
+}: HowToApplyProps) {
+  if (!steps || steps.length === 0) return null;
+
+  return (
+    <section className="bg-[#f7f9fc] px-6 sm:px-20 py-16">
+      <div className="mx-auto max-w-4xl">
+        <h2 className="text-2xl sm:text-3xl font-extrabold text-primary text-center mb-6">
+          {title}
+        </h2>
+        <ol className="space-y-4">
+          {steps.map((s, i) => (
+            <li
+              key={i}
+              className="flex items-start gap-3 rounded-xl border border-[#E5DDBF] bg-white p-4 shadow-sm"
+            >
+              <span className="mt-1 inline-flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full bg-[#B49C5B] text-white font-semibold">
+                {i + 1}
+              </span>
+              <p className="text-gray-800">{s}</p>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+  );
+}
+
+
+
+==============================
+src/app/[locale]/careers/components/InternshipPrograms.tsx
+==============================
+
+'use client';
+
+export default function InternshipPrograms({ title, body }: { title?: string; body?: string }) {
+  return (
+    <section className="bg-white px-6 sm:px-20 py-16">
+      <div className="max-w-6xl mx-auto">
+        {title && <h3 className="text-2xl font-bold text-[#0a1f44] text-center">{title}</h3>}
+        <span className="block w-24 h-1 bg-[#B49C5B] rounded mx-auto my-6" />
+        {body && (
+          <div className="mx-auto max-w-4xl text-center">
+            <p className="text-[#263238]">{body}</p>
+          </div>
+        )}
+      </div>
+    </section>
+  );
+}
+
+
+
+==============================
+src/app/[locale]/careers/components/JobCard.tsx
+==============================
+
+"use client";
+
+import { Link } from "@/i18n/navigation";
+import { Job } from "../../../../types/job";
+import Card from "../../components/ui/Card";
+import Pill from "../../components/ui/Pill";
+import Button from "../../components/ui/Button";
+
+export default function JobCard({ job }: { job: Job }) {
+  const meta = [job.department, job.location, job.type].filter(
+    Boolean
+  ) as string[];
+  const slug = typeof job.slug === "string" ? job.slug : job.slug?.current;
+
+  return (
+    <Card className="p-6 group hover:shadow-lg transition">
+      <h3 className="text-xl font-semibold text-[#0a1f44]">{job.title}</h3>
+
+      {meta.length > 0 && (
+        <div className="mt-3 flex flex-wrap gap-2">
+          {meta.map((m, i) => (
+            <Pill key={i}>{m}</Pill>
+          ))}
+          {job.deadline && (
+            <Pill tone="accent">
+              Apply by {new Date(job.deadline).toLocaleDateString()}
+            </Pill>
+          )}
+        </div>
+      )}
+
+      <div className="mt-5">
+        <Link href={`/careers/${slug ?? ""}`} prefetch>
+          <Button variant="outline">Read more</Button>
+        </Link>
+      </div>
+    </Card>
+  );
+}
+
+
+
+==============================
+src/app/[locale]/careers/components/JobsBrowser.tsx
+==============================
+
+'use client';
+
+import { useMemo, useState } from 'react';
+import JobCard from './JobCard';
+
+type Job = {
+  _id: string;
+  id?: string;
+  title: string;
+  category?: string;
+  department?: string;
+  location?: string;
+  type?: string;
+  deadline?: string;
+  slug?: string | { current: string };
+};
+
+type Props = {
+  jobs?: Job[];
+  categories?: string[]; // اختياري: لو عايز تفرض ترتيب/مسميات معيّنة
+  pageSize?: number;     // اختياري: للعرض التدريجي
+};
+
+export default function JobsBrowser({ jobs, categories, pageSize = 9 }: Props) {
+  const safeJobs = Array.isArray(jobs) ? jobs : [];
+
+  // استخرج التصنيفات ديناميكيًا من البيانات (case-insensitive + تخلص من القيم الفارغة)
+  const autoCats = useMemo(() => {
+    const set = new Set<string>();
+    for (const j of safeJobs) {
+      const raw = (j?.category ?? '').toString().trim();
+      if (raw) set.add(capitalize(raw));
+    }
+    return Array.from(set);
+  }, [safeJobs]);
+
+  // لو المستخدم مرّر categories نستخدمها (مع الحفاظ على All بالأول)، وإلا نستخدم المستخرجة
+  const cats = useMemo(() => {
+    const base = (Array.isArray(categories) && categories.length) ? categories : autoCats;
+    return base[0] === 'All' ? base : ['All', ...base];
+  }, [categories, autoCats]);
+
+  const [active, setActive] = useState<string>('All');
+  const [visible, setVisible] = useState<number>(pageSize);
+
+  // عدّاد لكل تبويب (يساعد تجربة المستخدم)
+  const counts = useMemo(() => {
+    const map: Record<string, number> = { All: safeJobs.length };
+    for (const c of cats) {
+      if (c === 'All') continue;
+      const key = c.toLowerCase();
+      map[c] = safeJobs.filter(j => (j.category ?? '').toString().toLowerCase() === key).length;
+    }
+    return map;
+  }, [cats, safeJobs]);
+
+  // فلترة حسب التبويب (case-insensitive)
+  const filtered = useMemo(() => {
+    if (active === 'All') return safeJobs;
+    const key = active.toLowerCase();
+    return safeJobs.filter(j => (j.category ?? '').toString().toLowerCase() === key);
+  }, [active, safeJobs]);
+
+  const sliced = useMemo(() => filtered.slice(0, visible), [filtered, visible]);
+
+  const onTab = (t: string) => {
+    setActive(t);
+    setVisible(pageSize);
+  };
+
+  return (
+    <div>
+      {/* Tabs */}
+      <div className="mb-6 flex flex-wrap items-center gap-2 sm:gap-3">
+        {cats.map((t) => {
+          const isActive = active === t;
+          return (
+            <button
+              key={t}
+              onClick={() => onTab(t)}
+              className={`rounded-full px-3 py-1.5 text-sm transition
+                ${
+                  isActive
+                    ? 'border border-[#B49C5B]/50 bg-[#B49C5B]/20 text-[#0a1f44]'
+                    : 'border border-black/10 bg-white text-gray-700 hover:border-[#B49C5B]/40 hover:text-[#0a1f44]'
+                }`}
+            >
+              <span>{t}</span>
+              {t !== 'All' && (
+                <span className="ml-2 rounded-full bg-black/5 px-2 py-0.5 text-xs text-gray-700">
+                  {counts[t] ?? 0}
+                </span>
+              )}
+            </button>
+          );
+        })}
+      </div>
+
+      {/* Grid / Empty */}
+      {sliced.length ? (
+        <>
+          <div className="grid gap-6 sm:gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {sliced.map((j) => (
+              <JobCard key={j.id ?? j._id} job={j} />
+            ))}
+          </div>
+
+          {/* Show more */}
+          {sliced.length < filtered.length && (
+            <div className="mt-8 text-center">
+              <button
+                onClick={() => setVisible(v => v + pageSize)}
+                className="rounded-full border border-[#B49C5B]/40 bg-[#B49C5B]/10 px-5 py-2 text-sm text-[#0a1f44] hover:bg-[#B49C5B]/15"
+              >
+                Show more . . .
+              </button>
+            </div>
+          )}
+        </>
+      ) : (
+        <div className="rounded-xl border border-black/10 bg-white p-8 text-center text-gray-700">
+          No positions in <span className="text-[#0a1f44] font-medium">{active}</span> right now.
+        </div>
+      )}
+    </div>
+  );
+}
+
+/* Helpers */
+function capitalize(s: string) {
+  if (!s) return s;
+  return s.charAt(0).toUpperCase() + s.slice(1).toLowerCase();
+}
+
+
+
+==============================
+src/app/[locale]/careers/components/JobsSidebar.tsx
+==============================
+
+export default function JobsSidebar({ counts }:{ counts:Record<string,number> }) {
+  const order = ['All','Engineering','Product','Design','Operation','Marketing'];
+  return (
+    <aside className="rounded-2xl border border-white/10 bg-[#0b0f13] p-4">
+      <ul className="space-y-1">
+        {order.map((k) => (
+          <li key={k} className="flex items-center justify-between rounded-lg px-3 py-2 hover:bg-white/[0.03]">
+            <span className="text-sm text-white">{k}</span>
+            <span className="rounded-full bg-white/10 px-2 py-0.5 text-xs text-white/80">
+              {counts[k] ?? 0}
+            </span>
+          </li>
+        ))}
+      </ul>
+
+      <div className="mt-6 rounded-xl border border-[#b99a53]/40 bg-[#b99a53]/10 p-3 text-sm text-[#e7d8ad]">
+        We are always seeking talented people. Share your LinkedIn profile and we will be in touch.
+        <button className="mt-3 w-full rounded-lg border border-[#b99a53]/50 bg-[#b99a53]/15 px-3 py-1.5 text-sm hover:bg-[#b99a53]/20">
+          Share your LinkedIn profile
+        </button>
+      </div>
+    </aside>
+  );
+}
+
+
+
+==============================
+src/app/[locale]/careers/components/UnitsStrip.tsx
+==============================
+
+'use client';
+
+import Image from 'next/image';
+
+type Unit = {
+  title?: string;
+  subtitle?: string;
+  description?: string;
+  logoUrl?: string | null;
+  logo?: { asset?: { url?: string } } | null;
+};
+
+export default function UnitsStrip({
+  heading = 'Our Business Units',
+  subtext,
+  units,
+}: {
+  heading?: string;
+  subtext?: string;
+  units?: Unit[];
+}) {
+  if (!units || units.length === 0) return null;
+
+  return (
+    <section className="bg-[#e9eff5] py-16 px-6 sm:px-20">
+      <div className="mx-auto max-w-7xl">
+        {/* Title */}
+        <div className="mb-10 text-center">
+          <h2 className="text-3xl font-extrabold text-[#0a1f44]">{heading}</h2>
+          <span className="mt-3 inline-block h-1 w-24 rounded bg-[#B49C5B]" />
+          {subtext ? (
+            <p className="mt-4 text-sm text-[#586270]">{subtext}</p>
+          ) : null}
+        </div>
+
+        {/* Cards */}
+        <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
+          {units.map((u, i) => {
+            const src = u.logoUrl || u.logo?.asset?.url || '';
+
+            return (
+              <div
+                key={i}
+                className="mx-auto w-full max-w-sm rounded-2xl border border-[#d8c99b] bg-white p-6 flex flex-col items-center shadow-[0_8px_24px_rgba(10,31,68,0.08)]"
+              >
+                {/* larger circular logo on top */}
+                <div className="mb-3 -mt-6 flex items-center justify-center">
+                  {src ? (
+                    <Image
+                      src={src}
+                      alt={u.title || 'Unit logo'}
+                      width={144}
+                      height={144}
+                      className="h-36 w-36 rounded-full object-contain"
+                    />
+                  ) : (
+                    <div className="h-36 w-36 rounded-full bg-[#f1f4f8] ring-1 ring-[#d8c99b]" />
+                  )}
+                </div>
+
+                {/* content: keep compact and avoid large empty space */}
+                <div className="w-full flex-1 flex flex-col justify-start items-center text-center px-4">
+                  {u.title ? (
+                    <h3 className="text-lg font-extrabold tracking-wide text-[#0a1f44]">
+                      {u.title}
+                    </h3>
+                  ) : null}
+                  {u.subtitle ? (
+                    <p className="mt-2 text-sm text-[#586270]">{u.subtitle}</p>
+                  ) : null}
+                  {u.description ? (
+                    <p className="mt-3 text-sm text-[#586270] line-clamp-4">{u.description}</p>
+                  ) : (
+                    <p className="mt-3 text-sm text-[#9aa0a6]">Short overview coming soon.</p>
+                  )}
+                </div>
+
+                {/* CTA area (small, ensures card doesn't feel empty) */}
+                <div className="mt-4 w-full flex justify-center">
+                  <button
+                    type="button"
+                    className="rounded-full px-4 py-2 text-sm font-medium bg-[#B49C5B] text-white hover:bg-[#a88a46] transition"
+                  >
+                    Learn more
+                  </button>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+
+
+==============================
+src/app/[locale]/careers/page.tsx
+==============================
+
+// src/app/careers/page.tsx
+import UnifiedHero from "../components/UnifiedHero";
+import JobsBrowser from "./components/JobsBrowser";
+import UnitsStrip from "./components/UnitsStrip";
+import BenefitsGrid from "./components/BenefitsGrid";
+import InternshipPrograms from "./components/InternshipPrograms";
+import HowToApply from "./components/HowToApply";
+import HRContactCard from "./components/HRContactCard";
+
+import { getSettings } from "../../../sanity/sanity-utils";
+import { client } from "../../../sanity/lib/client";
+import { GROQ } from "../../../sanity/lib/queries";
+import type { Job } from "../../../types/job";
+import BackToTopButton from "../components/BackToTopButton";
+
+/** ---------- Local types (keep loose to match GROQ) ---------- */
+type Unit = {
+  title?: string;
+  subtitle?: string;
+  description?: string;
+  logoUrl?: string | null;
+};
+
+type BenefitItem = { text: string; iconKey?: string };
+
+type CareersContent = {
+  // Hero
+  title?: string;
+  intro?: string;
+
+  // Units
+  unitsHeading?: string;
+  unitsSubtext?: string;
+  units?: Unit[];
+
+  // Why work
+  whyWorkHeading?: string; // الاسم الجديد
+  benefitsHeading?: string; // fallback لو لسه قديم
+  whyWorkItems?: BenefitItem[]; // الجديد { text, iconKey }
+  whyUs?: string[]; // legacy: نصوص بدون أيقونات
+
+  // Jobs
+  jobsHeading?: string;
+  jobsSubtext?: string;
+  emptyState?: string;
+
+  // Internships
+  internshipTitle?: string;
+  internshipBody?: string;
+
+  // How to apply
+  howToApplyTitle?: string;
+  howToApplySteps?: string[];
+  howToApply?: string[]; // fallback اسم بديل
+
+  // HR
+  hr?: { email?: string; phone?: string; whatsapp?: string };
+};
+
+export default async function CareersPage() {
+  const [settings, page, jobs] = await Promise.all([
+    getSettings(),
+    client.fetch<CareersContent>(GROQ.careersPage),
+    client.fetch<Job[]>(GROQ.jobs),
+  ]);
+
+  /** ---- SAFE defaults for Why-Work section (عشان ما يختفي لو البيانات ناقصة) ---- */
+  const DEFAULT_BENEFITS: BenefitItem[] = [
+    { text: "Contribute to high-impact projects", iconKey: "shield" },
+    { text: "Gain hands-on experience in multiple sectors", iconKey: "layers" },
+    {
+      text: "Join a team that values integrity, innovation, and collaboration",
+      iconKey: "users",
+    },
+    { text: "Opportunities for career growth", iconKey: "growth" },
+    {
+      text: "Inclusive, diverse, and empowering environment",
+      iconKey: "sparkles",
+    },
+  ];
+
+  // العنوان: الجديد ثم القديم ثم افتراضي
+  const whyWorkHeading =
+    page?.whyWorkHeading ?? page?.benefitsHeading ?? "Why Work with Us?";
+
+  // العناصر: الجديد ثم تحويل القديم ثم افتراضي
+  const whyWorkItems: BenefitItem[] =
+    page?.whyWorkItems ??
+    (page?.whyUs ? page.whyUs.map((t) => ({ text: t })) : undefined) ??
+    DEFAULT_BENEFITS;
+
+  return (
+    <main className="min-h-screen bg-[#f5f7fa] text-gray-900 font-sans">
+      {/* Hero */}
+      <UnifiedHero
+        title={page?.title ?? "Join Our Mission to Build the Future of Sudan"}
+        subtitle={
+          page?.intro ??
+          "We’re a community of innovators, builders, and changemakers."
+        }
+        heroMediaType={settings?.heroMediaType}
+        videoSource={settings?.videoSource}
+        heroImage={settings?.heroImage}
+        heroVideoFile={settings?.heroVideoFile}
+        heroVideoUrl={settings?.heroVideoUrl}
+        height="medium"
+      />
+
+      {/* Units / Business strips */}
+      <UnitsStrip
+        heading={page?.unitsHeading}
+        subtext={page?.unitsSubtext}
+        units={page?.units}
+      />
+
+      {/* ----- Why Work With Us ----- */}
+      <section className="bg-white">
+        <div className="mx-auto max-w-7xl px-6 sm:px-20">
+          <BenefitsGrid heading={whyWorkHeading} items={whyWorkItems} />
+        </div>
+      </section>
+
+      {/* Jobs list */}
+      <section className="px-6 sm:px-20 py-16 bg-white">
+        <div className="mx-auto max-w-7xl">
+          {(page?.jobsHeading || page?.jobsSubtext) && (
+            <div className="mb-4 text-center">
+              {page?.jobsHeading && (
+                <h2 className="text-2xl font-semibold text-[#0a1f44]">
+                  {page.jobsHeading}
+                </h2>
+              )}
+              {page?.jobsSubtext && (
+                <p className="mt-1 text-sm text-[#586270]">
+                  {page.jobsSubtext}
+                </p>
+              )}
+            </div>
+          )}
+
+          <JobsBrowser jobs={jobs} />
+
+          {(!jobs || jobs.length === 0) && (
+            <p className="mt-6 text-center text-sm text-[#586270]">
+              {page?.emptyState ?? "No openings at the moment."}
+            </p>
+          )}
+        </div>
+      </section>
+
+      {/* Internships */}
+      <InternshipPrograms
+        title={page?.internshipTitle}
+        body={page?.internshipBody}
+      />
+
+      {/* How to apply */}
+      <HowToApply
+        title={page?.howToApplyTitle}
+        steps={page?.howToApplySteps ?? page?.howToApply}
+      />
+
+      {/* HR Contact */}
+      <HRContactCard
+        title="HR Contact"
+        email={page?.hr?.email}
+        phone={page?.hr?.phone}
+        whatsapp={page?.hr?.whatsapp}
+      />
+      <BackToTopButton />
+    </main>
+  );
+}
+
+
+
+==============================
+src/app/[locale]/components/AOSInit.tsx
+==============================
+
+'use client';
+
+import { useEffect } from 'react';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
+export default function AOSInit() {
+  useEffect(() => {
+    AOS.init({ duration: 100, once: true });
+  }, []);
+
+  return null; 
+}
+
+
+
+==============================
+src/app/[locale]/components/AboutTeaser.tsx
+==============================
+
+import { Link } from "@/i18n/navigation";
+import Image from "next/image";
+
+export default function AboutTeaser() {
+  return (
+    <section id="about" className="relative bg-white px-6 sm:px-20 pt-24 pb-24">
+      <div className="max-w-7xl mx-auto grid md:grid-cols-2 items-center gap-12">
+        {/* Left - Text Content */}
+        <div className="space-y-6">
+          <div>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-primary mb-2">
+              Discover Our Story
+            </h2>
+            <span className="block w-24 h-1 bg-[#B49C5B] rounded" />
+          </div>
+          <p className="text-lg text-gray-700 leading-relaxed">
+            The Kuwaiti Sudanese Holding Company is an innovative and dynamic
+            investment group that keeps pace with the latest investment
+            developments in Sudan. It is committed to leading in its unique
+            fields, striving for excellence through integrated efforts in all
+            its investments. Established with the goal of leadership, the
+            company oversees numerous ventures, each contributing individually
+            and collectively to the realization of the company’s core
+            objectives.
+          </p>
+
+          <Link
+            href="/about"
+            className="inline-block bg-[#B49C5B] text-black font-semibold px-5 py-2 rounded shadow-md hover:bg-[#a88a46] transition duration-300"
+          >
+            Learn More →
+          </Link>
+        </div>
+
+        {/* Right - Illustration */}
+        <div className="flex justify-center">
+          <Image
+            src="/about.png"
+            alt="About illustration"
+            width={420}
+            height={420}
+            className="max-w-full h-auto rounded-xl shadow-md object-cover hover:scale-105 transition-transform duration-300"
+          />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+
+
+==============================
+src/app/[locale]/components/BackToTopButton.tsx
+==============================
+
+// components/BackToTopButton.tsx
+"use client";
+import { useEffect, useState } from "react";
+import { ArrowUp } from "lucide-react";
+
+export default function BackToTopButton() {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const toggleVisible = () => {
+      setVisible(window.scrollY > 300);
+    };
+    window.addEventListener("scroll", toggleVisible);
+    return () => window.removeEventListener("scroll", toggleVisible);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  if (!visible) return null;
+
+  return (
+    <button
+      onClick={scrollToTop}
+      className="fixed bottom-6 right-6 bg-[#B49C5B] text-white p-3 rounded-full shadow-lg hover:bg-[#a88a46] transition-all z-50"
+      aria-label="Back to Top"
+    >
+      <ArrowUp className="w-5 h-5" />
+    </button>
+  );
+}
+
+
+
+==============================
+src/app/[locale]/components/CEOMessage.tsx
+==============================
+
+import Image from "next/image";
+
+interface CEOMessageProps {
+  message?: string;
+  imageUrl?: string;
+}
+
+export default function CEOMessage({ message, imageUrl }: CEOMessageProps) {
+  return (
+    <section className="bg-white py-24 px-6 sm:px-20">
+      <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-12 items-start">
+        {/* Left - Heading and Message */}
+        <div className="md:col-span-2 space-y-6">
+          <div>
+            <h2 className="text-3xl font-extrabold text-primary mb-2">General Manager Message</h2>
+            <div className="w-20 h-1 bg-[#B49C5B] rounded" />
+          </div>
+
+          <div className="max-h-[300px] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-[#B49C5B] scrollbar-track-#B49C5B/10">
+            <p className="text-lg text-gray-700 leading-relaxed whitespace-pre-line">
+              {message}
+            </p>
+          </div>
+
+          <div className="pt-2">
+            <p className="text-sm font-semibold text-gray-800">Mahmoud Alassad</p>
+            <p className="text-xs text-gray-500">Chief Executive Officer</p>
+          </div>
+        </div>
+
+        {/* Right - Image */}
+        {imageUrl && (
+          <div className="flex justify-center">
+            <Image
+              src={imageUrl}
+              alt="CEO"
+              width={180}
+              height={180}
+              className="rounded-full border border-[#B49C5B]/40 shadow-md"
+            />
+          </div>
+        )}
+      </div>
+    </section>
+  );
+}
+
+
+
+==============================
+src/app/[locale]/components/Customers.tsx
+==============================
+
+"use client";
+
+import Image from "next/image";
+
+export default function Customers() {
+  const logos = [
+    { name: "Zain Sudan", logo: "/zain.png" },
+    { name: "QAST", logo: "/qast-logo.png" },
+    { name: "Embassy of Kuwait", logo: "/embassy.png" },
+  ];
+
+  return (
+    <section className="bg-white px-6 sm:px-20 py-24">
+      <div className="max-w-6xl mx-auto text-center">
+        <h2 className="text-3xl font-extrabold text-primary mb-6">Our Customers</h2>
+        <span className="block w-20 h-1 bg-[#B49C5B] rounded mx-auto mb-10" />
+        <div className="flex flex-wrap justify-center items-center gap-10">
+          {logos.map((item, idx) => (
+            <div key={idx} className="flex flex-col items-center">
+              <div className="w-40 h-20 relative grayscale hover:grayscale-0 transition mb-3">
+                <Image
+                  src={item.logo}
+                  alt={item.name}
+                  fill
+                  className="object-contain"
+                />
+              </div>
+              <p className="text-sm font-medium text-gray-700">{item.name}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+
+
+==============================
+src/app/[locale]/components/Footer.tsx
+==============================
+
+import { Link } from "@/i18n/navigation";
+
+export default function Footer() {
+  return (
+    <footer
+      className="bg-gray-900 text-gray-100 pt-16 pb-8  w-full min-h-[400px]
+"
+    >
+      <div className="max-w-7xl mx-auto px-6 sm:px-20 grid grid-cols-1 sm:grid-cols-3 gap-12 items-start">
+        {/* Company Info */}
+        <div>
+          <div className="text-2xl font-bold text-[#B49C5B] mb-4">KSHC</div>
+          <p className="text-gray-400 mb-4">
+            Kuwaiti Sudanese Holding Company is a leading investment group
+            advancing Sudan’s economic growth through innovation and strategic
+            partnerships.
+          </p>
+          <div className="flex gap-4 mt-4">
+            <a href="#" className="hover:text-[#B49C5B]" aria-label="Twitter">
+              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M24 4.56c-.883.392-1.832.656-2.828.775a4.932 4.932 0 0 0 2.165-2.724c-.951.564-2.005.974-3.127 1.195A4.916 4.916 0 0 0 16.616 3c-2.72 0-4.924 2.205-4.924 4.924 0 .386.044.763.127 1.124C7.728 8.82 4.1 6.884 1.671 3.965c-.423.724-.666 1.562-.666 2.457 0 1.695.863 3.19 2.175 4.068-.802-.025-1.557-.246-2.217-.616v.062c0 2.367 1.684 4.342 3.918 4.788-.41.112-.843.172-1.288.172-.316 0-.623-.03-.922-.086.624 1.951 2.432 3.372 4.576 3.412A9.868 9.868 0 0 1 0 21.543a13.94 13.94 0 0 0 7.548 2.212c9.057 0 14.009-7.513 14.009-14.009 0-.213-.005-.425-.014-.636A10.012 10.012 0 0 0 24 4.56z" />
+              </svg>
+            </a>
+            <a href="#" className="hover:text-[#B49C5B]" aria-label="LinkedIn">
+              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M19 0h-14c-2.76 0-5 2.24-5 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5v-14c0-2.76-2.24-5-5-5zm-11 19h-3v-9h3v9zm-1.5-10.28c-.966 0-1.75-.784-1.75-1.75s.784-1.75 1.75-1.75 1.75.784 1.75 1.75-.784 1.75-1.75 1.75zm13.5 10.28h-3v-4.5c0-1.08-.02-2.47-1.5-2.47-1.5 0-1.73 1.17-1.73 2.38v4.59h-3v-9h2.89v1.23h.04c.4-.76 1.38-1.56 2.84-1.56 3.04 0 3.6 2 3.6 4.59v5.74z" />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        {/* Quick Links */}
+        <div>
+          <h3 className="text-lg font-semibold text-[#B49C5B] mb-4">
+            Quick Links
+          </h3>
+          <ul className="space-y-2">
+            <li>
+              <a href="/about" className="hover:text-[#B49C5B] transition">
+                About Us
+              </a>
+            </li>
+            <li>
+              <a
+                href="/subsidiaries"
+                className="hover:text-[#B49C5B] transition"
+              >
+                Subsidiaries
+              </a>
+            </li>
+            <li>
+              <a href="/news" className="hover:text-[#B49C5B] transition">
+                News & Media
+              </a>
+            </li>
+            <li>
+              {" "}
+              <Link
+                href="/careers/"
+                className="text-white"
+                aria-label="Careers"
+              >
+                Careers
+              </Link>
+            </li>
+            <li>
+              <a href="/contact" className="hover:text-[#B49C5B] transition">
+                Contact
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        {/* Contact Info */}
+        <div>
+          <h3 className="text-lg font-semibold text-[#B49C5B] mb-4">Contact</h3>
+          <ul className="space-y-2 text-gray-400">
+            <li>
+              <span className="block text-gray-300">Email:</span>
+              <a
+                href="mailto:info@kshc.com"
+                className="hover:text-[#B49C5B] transition"
+              >
+                info@kshc.com
+              </a>
+            </li>
+            <li>
+              <span className="block text-gray-300">Phone:</span>
+              <a
+                href="tel:+249123456789"
+                className="hover:text-[#B49C5B] transition"
+              >
+                +249 900 922 906 | +249 900 922 905
+              </a>
+            </li>
+            <li>
+              <span className="block text-gray-300">Address:</span>
+              <span> Al Amarat Street 1, Khartoum, Sudan</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      {/* Bottom Note */}
+      <div className="border-t border-gray-700 mt-12 pt-6 text-center text-gray-500 text-sm">
+        &copy; 2025 Kuwaiti Sudanese Holding Company (KSHC). All rights
+        reserved.
+      </div>
+    </footer>
+  );
+}
+
+
+
+==============================
+src/app/[locale]/components/Header.tsx
+==============================
+
+"use client";
+
+import { Link } from "@/i18n/navigation";
+import Image from "next/image";
+import { usePathname } from "next/navigation";
+import { Menu, X } from "lucide-react";
+import { useEffect, useState } from "react";
+
+interface HeaderProps {
+  logo?: {
+    asset: { url: string };
+    alt?: string;
+  };
+}
+
+const navItems = [
+  { name: "About", href: "/about" },
+  { name: "Subsidiaries", href: "/subsidiaries" },
+  { name: "News", href: "/news" },
+  { name: "Services", href: "/services" },
+  { name: "Careers", href: "/careers" },
+];
+
+export default function Header({ logo }: HeaderProps) {
+  const [isOpen, setIsOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [visible, setVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+  const pathname = usePathname();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      setIsScrolled(currentScrollY > 10);
+      setVisible(currentScrollY < lastScrollY || currentScrollY < 100);
+      setLastScrollY(currentScrollY);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [lastScrollY]);
+
+  const navText = isScrolled ? "text-gray-100" : "text-white";
+  const hoverText = "hover:text-[#B49C5B]";
+  const bgColor = isScrolled
+    ? "bg-gray-900 border-b border-gray-700"
+    : "bg-transparent border-b border-[#B49C5B]";
+
+  return (
+    <header
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${bgColor} ${
+        visible ? "translate-y-0" : "-translate-y-full"
+      }`}
+    >
+      <div className="flex justify-between items-center px-6 sm:px-16 py-2 max-w-screen-xl mx-auto">
+        {/* Logo */}
+        <Link href="/" className="flex items-center">
+          {logo?.asset?.url ? (
+            <Image
+              src={logo.asset.url}
+              alt={logo.alt || "KSHC Logo"}
+              width={100} // smaller logo
+              height={40}
+              className="object-contain"
+              priority
+            />
+          ) : (
+            <span className={`text-lg font-bold tracking-tight ${navText}`}>
+              KSHC
+            </span>
+          )}
+        </Link>
+
+        {/* Desktop Nav */}
+        <nav className="hidden sm:flex items-center gap-5 text-xs font-medium">
+          {navItems.map(({ name, href }) => {
+            const isActive = pathname === href;
+            return (
+              <Link
+                key={name}
+                href={href}
+                className={`relative group transition duration-200 ${
+                  isActive ? "text-[#B49C5B]" : navText
+                } ${hoverText}`}
+              >
+                {name}
+                <span
+                  className={`absolute left-0 bottom-0 w-full h-[2px] bg-[#B49C5B] transition-transform duration-200 ${
+                    isActive
+                      ? "scale-x-100"
+                      : "scale-x-0 group-hover:scale-x-100"
+                  }`}
+                ></span>
+              </Link>
+            );
+          })}
+
+          {/* CTA Contact Button */}
+          <Link
+            href="/contact"
+            className="ml-4 bg-[#B49C5B] text-black font-semibold text-xs px-4 py-1.5 rounded-full hover:bg-[#a4884a] transition"
+          >
+            Contact
+          </Link>
+        </nav>
+
+        {/* Mobile Menu Button */}
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className={`${navText} sm:hidden`}
+          aria-label="Toggle menu"
+        >
+          {isOpen ? <X size={22} /> : <Menu size={22} />}
+        </button>
+      </div>
+
+      {/* Mobile Nav */}
+      {isOpen && (
+        <div className="sm:hidden px-6 pt-2 pb-4">
+          <div className="bg-white rounded-xl shadow-lg p-6 flex flex-col gap-3 border border-gray-200 text-sm">
+            {[...navItems, { name: "Contact", href: "/contact" }].map(
+              ({ name, href }) => (
+                <Link
+                  key={name}
+                  href={href}
+                  onClick={() => setIsOpen(false)}
+                  className={`font-medium text-gray-800 hover:text-[#B49C5B] transition ${
+                    pathname === href ? "text-[#B49C5B]" : ""
+                  }`}
+                >
+                  {name}
+                </Link>
+              )
+            )}
+          </div>
+        </div>
+      )}
+    </header>
+  );
+}
+
+
+
+==============================
+src/app/[locale]/components/Hero.tsx
+==============================
+
+import Image from "next/image";
+
+interface HeroProps {
+  heroMediaType?: string;
+  videoSource?: string;
+  heroImage?: { asset: { url: string }; alt?: string };
+  heroVideoFile?: { asset: { url: string } };
+  heroVideoUrl?: string;
+  heroTitle: string;
+  heroSubtitle: string;
+}
+
+export default function Hero({
+  heroMediaType,
+  videoSource,
+  heroImage,
+  heroVideoFile,
+  heroVideoUrl,
+  heroTitle,
+  heroSubtitle,
+}: HeroProps) {
+  return (
+    <section className="relative w-full h-[100vh] min-h-[600px] flex items-center justify-center text-center text-white overflow-hidden">
+      {/* Background Media */}
+      {heroMediaType === "video" ? (
+        videoSource === "file" && heroVideoFile?.asset?.url ? (
+          <video
+            src={heroVideoFile.asset.url}
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover z-0"
+          />
+        ) : videoSource === "url" && heroVideoUrl ? (
+          <iframe
+            src={heroVideoUrl}
+            title="Hero Video"
+            allow="autoplay; fullscreen"
+            className="absolute inset-0 w-full h-full object-cover z-0"
+          />
+        ) : (
+          <div className="absolute inset-0 bg-black" />
+        )
+      ) : heroImage?.asset?.url ? (
+        <Image
+          src={heroImage.asset.url}
+          alt={heroImage.alt || "Hero Image"}
+          fill
+          className="object-cover z-0"
+          priority
+        />
+      ) : (
+        <div className="absolute inset-0 bg-gray-700 z-0" />
+      )}
+
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-black opacity-50 z-10" />
+
+      {/* Content */}
+      <div className="relative z-20 px-6 sm:px-20">
+        <h1 className="text-4xl sm:text-6xl font-extrabold mb-4">{heroTitle}</h1>
+        <p className="text-lg text-[#B49C5B] sm:text-2xl max-w-2xl mx-auto">{heroSubtitle}</p>
+        <div className="mt-8">
+          <a
+            href="#contact"
+            className="bg-[#B49C5B] text-gray-800 py-3 px-6 rounded-full hover:bg-[#a4884a] hover:text-white transition"
+            >
+            Contact Us
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+
+==============================
+src/app/[locale]/components/LayoutShell.tsx
+==============================
+
+'use client';
+
+import { usePathname } from 'next/navigation';
+import Header from './Header';
+import Footer from './Footer';
+
+interface LayoutShellProps {
+  children: React.ReactNode;
+  logo?: {
+    asset: { url: string };
+    alt?: string;
+  };
+}
+
+export default function LayoutShell({ children, logo }: LayoutShellProps) {
+  const pathname = usePathname();
+
+  // لا تعرض الهيدر والفوتر داخل لوحة التحكم
+  if (pathname.startsWith('/admin')) {
+    return <>{children}</>;
+  }
+
+  return (
+    <>
+      <Header logo={logo} />
+      <main>{children}</main>
+      <Footer />
+    </>
+  );
+}
+
+
+==============================
+src/app/[locale]/components/MissionVision.tsx
+==============================
+
+"use client";
+
+import { Eye, Mountain, Target } from "lucide-react";
+
+interface MissionVisionProps {
+  mission?: string;
+  vision?: string;
+  goal?: string;
+}
+
+export default function MissionVision({ mission, vision, goal }: MissionVisionProps) {
+  return (
+    <section
+      id="mission-vision"
+      className="bg-white py-24 px-6 sm:px-20 text-gray-900"
+    >
+      <div className="max-w-7xl mx-auto text-center">
+        <h2 className="text-3xl sm:text-4xl font-extrabold text-primary mb-12">
+          Our Vision & Mission
+        </h2>
+
+        <div className="flex flex-col lg:flex-row gap-8 justify-center items-stretch">
+          {/* Vision */}
+          <div className="group flex-1 bg-white rounded-2xl border border-[#B49C5B] shadow-md p-8 transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
+            <div className="flex items-center gap-4 mb-4">
+              <div className="bg-primary/10 p-3 rounded-full text-primary group-hover:bg-[#B49C5B]/20 transition">
+                <Eye size={28} />
+              </div>
+              <h3 className="text-xl font-bold text-primary">Our Vision</h3>
+            </div>
+            <p className="text-gray-700 leading-relaxed text-md">
+              {vision}
+            </p>
+          </div>
+
+          {/* Mission */}
+          <div className="group flex-1 bg-white rounded-2xl border border-[#B49C5B] shadow-md p-8 transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
+            <div className="flex items-center gap-4 mb-4">
+              <div className="bg-primary/10 p-3 rounded-full text-primary group-hover:bg-[#B49C5B]/20 transition">
+                <Mountain size={28} />
+              </div>
+              <h3 className="text-xl font-bold text-primary">Our Mission</h3>
+            </div>
+            <p className="text-gray-700 leading-relaxed text-md">
+              {mission}
+            </p>
+          </div>
+
+          {/* Goal */}
+          <div className="group flex-1 bg-white rounded-2xl border border-[#B49C5B] shadow-md p-8 transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
+            <div className="flex items-center gap-4 mb-4">
+              <div className="bg-primary/10 p-3 rounded-full text-primary group-hover:bg-[#B49C5B]/20 transition">
+                <Target size={28} />
+              </div>
+              <h3 className="text-xl font-bold text-primary">Our Goal</h3>
+            </div>
+            <p className="text-gray-700 leading-relaxed text-md">
+              {goal}
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+
+
+==============================
+src/app/[locale]/components/News.tsx
+==============================
+
+"use client";
+
+import Image from "next/image";
+import { Link } from "@/i18n/navigation";
+import { useState } from "react";
+
+interface NewsItem {
+  _id: string;
+  title: string;
+  date: string;
+  slug: {
+    current: string;
+  };
+  content: unknown[];
+  mainImage?: {
+    asset: { url: string };
+    alt?: string;
+  };
+  gallery?: {
+    asset: { url: string };
+    alt?: string;
+  }[];
+}
+
+interface NewsProps {
+  news: NewsItem[];
+}
+
+export default function News({ news }: NewsProps) {
+  const [current, setCurrent] = useState(0);
+  const total = news.length;
+
+  const goTo = (idx: number) => {
+    if (idx < 0) setCurrent(total - 1);
+    else if (idx >= total) setCurrent(0);
+    else setCurrent(idx);
+  };
+
+  const item = news[current];
+
+  return (
+    <section id="news" className="px-8 sm:px-20 py-20 bg-white">
+      <div className="max-w-5xl mx-auto text-center">
+        <h2 className="text-3xl font-bold mb-2 text-primary">News & Updates</h2>
+        <span className="block mx-auto w-60 h-1 rounded bg-[#B49C5B] mb-8" />
+
+        {/* Carousel */}
+        <div className="flex flex-col items-center">
+          <div className="relative w-full flex justify-center">
+            {/* Previous preview */}
+            {total > 1 && (
+              <div
+                className="hidden sm:block absolute left-0 top-1/2 -translate-y-1/2 z-0 opacity-50 scale-90 transition-all duration-300 cursor-pointer"
+                style={{ width: 320 }}
+                onClick={() => goTo((current - 1 + total) % total)}
+              >
+                <NewsCard item={news[(current - 1 + total) % total]} faded />
+              </div>
+            )}
+            {/* Main card */}
+            <div
+              className="z-10 w-full sm:w-auto cursor-pointer"
+              onClick={() => goTo((current + 1) % total)}
+            >
+              <NewsCard item={item} />
+            </div>
+            {/* Next preview */}
+            {total > 1 && (
+              <div
+                className="hidden sm:block absolute right-0 top-1/2 -translate-y-1/2 z-0 opacity-50 scale-90 transition-all duration-300 cursor-pointer"
+                style={{ width: 320 }}
+                onClick={() => goTo((current + 1) % total)}
+              >
+                <NewsCard item={news[(current + 1) % total]} faded />
+              </div>
+            )}
+          </div>
+          {/* Carousel Controls */}
+          <div className="flex items-center justify-center gap-4 mt-8">
+            <button
+              onClick={() => goTo(current - 1)}
+              className="px-4 py-2 rounded-full bg-[#B49C5B] text-white font-bold hover:bg-[#a88a46] transition"
+              aria-label="Previous"
+            >
+              &#8592;
+            </button>
+            <div className="flex gap-2">
+              {news.map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => goTo(idx)}
+                  className={`w-3 h-3 rounded-full ${current === idx ? "bg-[#B49C5B]" : "bg-gray-300"}`}
+                  aria-label={`Go to slide ${idx + 1}`}
+                />
+              ))}
+            </div>
+            <button
+              onClick={() => goTo(current + 1)}
+              className="px-4 py-2 rounded-full bg-[#B49C5B] text-white font-bold hover:bg-[#a88a46] transition"
+              aria-label="Next"
+            >
+              &#8594;
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function NewsCard({
+  item,
+  faded = false,
+}: {
+  item: NewsItem;
+  faded?: boolean;
+}) {
+  const slug = item.slug?.current;
+
+  return (
+    <div
+      className={`
+        bg-white rounded-xl shadow p-4 sm:p-6 text-left transition-all duration-300
+        flex-1 flex flex-col
+        ${faded ? "opacity-60 scale-95" : "opacity-100 scale-105 border-2 border-[#B49C5B]"}
+      `}
+      style={{
+        minWidth: 0,
+        maxWidth: 400,
+      }}
+    >
+      <h4 className="font-semibold text-xl text-gray-800 mb-1">{item.title}</h4>
+      <span className="block w-12 h-1 rounded bg-[#B49C5B] mb-3" />
+      <p className="text-gray-500 text-xs mb-2">
+        {new Date(item.date).toLocaleDateString("en-US", {
+          year: "numeric",
+          month: "short",
+          day: "numeric",
+        })}
+      </p>
+      {item.mainImage?.asset.url && (
+        <div className="mb-4 rounded-lg overflow-hidden">
+          <Image
+            src={item.mainImage.asset.url}
+            alt={item.mainImage.alt || "News Image"}
+            width={400}
+            height={200}
+            className="object-cover w-full h-48"
+          />
+        </div>
+      )}
+      <p className="text-gray-700 text-sm mb-4 line-clamp-3">
+        {String(
+          (
+            (item.content?.[0] as Record<string, unknown>)
+              ?.children?.[0] as Record<string, unknown>
+          )?.text || ""
+        )}
+      </p>
+      {slug && (
+        <Link
+          href={`/news`}
+          className="mt-auto inline-block text-sm font-semibold text-[#B49C5B] hover:text-[#a88a46] transition"
+        >
+          Read More &rarr;
+        </Link>
+      )}
+    </div>
+  );
+}
+
+
+
+==============================
+src/app/[locale]/components/Sectors.tsx
+==============================
+
+"use client";
+
+import { iconMap } from "../../../utils/icons";
+
+export interface InvestmentSectorProps {
+  _id: string;
+  title: string;
+  description?: string;
+  icon?: string;
+}
+
+export default function Sectors({
+  sectors,
+}: {
+  sectors: InvestmentSectorProps[];
+}) {
+  return (
+    <section
+      id="sectors"
+      className="px-8 sm:px-20 py-24 bg-gray-900 text-white"
+    >
+      <div className="max-w-6xl mx-auto text-center space-y-12">
+        <h2 className="text-3xl font-bold mb-2 text-primary">
+          Key Investment Sectors
+        </h2>
+        <span className="block mx-auto w-85 h-1 rounded bg-[#B49C5B] mb-8" />
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          {sectors.map((sector, index) => {
+            const IconComponent = sector.icon && iconMap[sector.icon];
+
+            return (
+              <div
+                key={index}
+                className="bg-gray-900 text-white p-6 rounded-xl shadow border border-[#B49C5B] transition-transform duration-300 transform hover:scale-110 hover:shadow-xl"
+              >
+                <div className="flex items-center gap-4 mb-3">
+                  {IconComponent ? (
+                    <IconComponent className="text-[#B49C5B] w-6 h-6" />
+                  ) : (
+                    <div className="w-6 h-6 bg-gray-300 rounded-full" />
+                  )}
+                  <h3 className="text-xl font-semibold text-white">
+                    {sector.title}
+                  </h3>
+                </div>
+                <p className="text-white">{sector.description}</p>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+
+
+==============================
+src/app/[locale]/components/Subsidiaries.tsx
+==============================
+
+import Image from "next/image";
+
+interface Subsidiary {
+  _id: string;
+  name: string;
+  description: string;
+  logo?: { asset: { url: string } };
+  website?: string;
+}
+
+interface SubsidiariesProps {
+  subsidiaries: Subsidiary[];
+}
+
+export default function Subsidiaries({ subsidiaries }: SubsidiariesProps) {
+  return (
+    <section id="subsidiaries" className="px-8 sm:px-20 py-20 bg-white">
+      <h2 className="text-3xl font-bold mb-2 text-center text-primary">KSHC Subsidiaries</h2>
+      <span className="block mx-auto w-70 h-1 rounded bg-[#B49C5B] mb-12" />
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {subsidiaries.map((sub) => (
+          <div
+            key={sub._id}
+            className="group bg-[#f9fafb] p-6 rounded-xl shadow transition-all duration-300 transform hover:-translate-y-1 hover:shadow-xl border border-transparent hover:border-[#B49C5B]"
+          >
+            {sub.logo?.asset?.url && (
+              <div className="w-full h-40 mb-4 relative">
+                <Image
+                  src={sub.logo.asset.url}
+                  alt={sub.name}
+                  fill
+                  className="rounded-lg object-contain"
+                  sizes="(max-width: 768px) 100vw, 400px"
+                />
+              </div>
+            )}
+            <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-[#B49C5B] transition-colors">
+              {sub.name}
+            </h3>
+            <p className="text-sm text-gray-600 mb-4">{sub.description}</p>
+
+            <a
+  href={sub.website || "#"}
+  target="_blank"
+  rel="noopener noreferrer"
+  className="inline-flex items-center gap-1 mt-auto text-sm font-medium text-[#B49C5B] border border-[#B49C5B] px-4 py-1.5 rounded hover:bg-[#B49C5B] hover:text-white transition"
+>
+  Visit Website
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    className="w-4 h-4"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={2}
+      d="M13 7h6m0 0v6m0-6L10 19"
+    />
+  </svg>
+</a>
+
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+
+
+==============================
+src/app/[locale]/components/Testimonials.tsx
+==============================
+
+"use client";
+
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+
+const testimonials = [
+  {
+    text: "I do admire the company culture and I like that. Visioncraft is truly the place where good attitudes have blended with proficiency.",
+    author: "James Olson",
+    role: "Product Designer",
+  },
+  {
+    text: "If you’re going to craft something great and you have a strong eagerness to do that, Visioncraft will remove all hassles in your journey.",
+    author: "Sarah Ali",
+    role: "Marketing Manager",
+  },
+  {
+    text: "Working with KSHC has been a transformative experience. Their vision and professionalism are unmatched.",
+    author: "Mohamed Ahmed",
+    role: "CEO, Partner Company",
+  },
+];
+
+export default function Testimonials() {
+  const [index, setIndex] = useState(0);
+
+  const next = () => setIndex((prev) => (prev + 1) % testimonials.length);
+  const prev = () =>
+    setIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+
+  return (
+    <section className="bg-white px-6 sm:px-20 py-24">
+      <div className="max-w-4xl mx-auto text-center relative">
+        <h2 className="text-3xl font-extrabold text-primary mb-6">
+          Don’t just take our word for it!
+        </h2>
+        <span className="block w-20 h-1 bg-[#B49C5B] rounded mx-auto mb-10" />
+
+        {/* Slider */}
+        <div className="relative overflow-hidden">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -50 }}
+              transition={{ duration: 0.4 }}
+              className="bg-[#f7f9fc] rounded-xl p-8 shadow"
+            >
+              <p className="text-gray-700 italic mb-4">
+                "{testimonials[index].text}"
+              </p>
+              <h4 className="text-primary font-semibold">
+                {testimonials[index].author}
+              </h4>
+              <p className="text-sm text-gray-600">{testimonials[index].role}</p>
+            </motion.div>
+          </AnimatePresence>
+        </div>
+
+        {/* Controls */}
+        <div className="flex justify-center items-center gap-6 mt-8">
+          <button
+            onClick={prev}
+            className="p-2 rounded-full border border-primary text-primary hover:bg-primary hover:text-white transition"
+            aria-label="Previous testimonial"
+          >
+            <ChevronLeft className="w-5 h-5" />
+          </button>
+          <button
+            onClick={next}
+            className="p-2 rounded-full border border-primary text-primary hover:bg-primary hover:text-white transition"
+            aria-label="Next testimonial"
+          >
+            <ChevronRight className="w-5 h-5" />
+          </button>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+
+
+==============================
+src/app/[locale]/components/UnifiedHero.tsx
+==============================
+
+// src/app/components/UnifiedHero.tsx
+"use client";
+import Image from "next/image";
+
+interface UnifiedHeroProps {
+  title: string;
+  subtitle?: string;
+  heroMediaType?: string;
+  videoSource?: string;
+  heroImage?: { asset: { url: string }; alt?: string };
+  heroVideoFile?: { asset: { url: string } };
+  heroVideoUrl?: string;
+  height?: string; // "full" or "medium"
+  ctaText?: string; 
+  ctaHref?: string; 
+}; 
+
+export default function UnifiedHero({
+  title,
+  subtitle,
+  heroMediaType,
+  videoSource,
+  heroImage,
+  heroVideoFile,
+  heroVideoUrl,
+  height = "medium",
+}: UnifiedHeroProps) {
+  const heightClass = height === "full" ? "h-[100vh] min-h-[600px]" : "h-[300px] sm:h-[500px]";
+
+  return (
+    <section className={`relative w-full ${heightClass} flex items-center justify-center text-center text-white overflow-hidden`}>
+      {/* Background media */}
+      {heroMediaType === "video" ? (
+        videoSource === "file" && heroVideoFile?.asset?.url ? (
+          <video
+            src={heroVideoFile.asset.url}
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover z-0"
+          />
+        ) : videoSource === "url" && heroVideoUrl ? (
+          <iframe
+            src={heroVideoUrl}
+            title="Hero Video"
+            allow="autoplay; fullscreen"
+            className="absolute inset-0 w-full h-full object-cover z-0"
+          />
+        ) : (
+          <div className="absolute inset-0 bg-black" />
+        )
+      ) : heroImage?.asset?.url ? (
+        <Image
+          src={heroImage.asset.url}
+          alt={heroImage.alt || "Hero Image"}
+          fill
+          className="object-cover z-0"
+          priority
+        />
+      ) : (
+        <div className="absolute inset-0 bg-gray-700 z-0" />
+      )}
+
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-black/50 z-10" />
+
+      {/* Text */}
+      <div className="relative z-20 px-4 sm:px-8">
+        <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight mb-4">{title}</h1>
+        {subtitle && <p className="text-lg sm:text-xl text-[#B49C5B] font-medium">{subtitle}</p>}
+      </div>
+    </section>
+  );
+}
+
+
+==============================
+src/app/[locale]/components/WhyUs.tsx
+==============================
+
+'use client';
+
+import dynamic from 'next/dynamic';
+
+// Dynamically import Player to avoid SSR issues
+const Player = dynamic(
+  () => import('@lottiefiles/react-lottie-player').then((mod) => ({ default: mod.Player })),
+  { ssr: false }
+);
+
+export default function WhyUs() {
+  return (
+    <section className="py-28 px-6 sm:px-20 bg-white">
+      <div className="max-w-7xl mx-auto grid md:grid-cols-2 items-center gap-12">
+        {/* Left - Text Content */}
+        <div>
+          <h2 className="text-4xl sm:text-5xl font-extrabold text-primary tracking-tight mb-4">
+            Why Us?
+          </h2>
+          <div className="w-24 h-1 bg-[#B49C5B] rounded mb-6 sm:mb-10" />
+          <p className="text-lg text-gray-700 leading-relaxed mb-4">
+            We follow a strategic and credible investment methodology to build a sustainable and impactful legacy. Our projects are guided by innovation, long-term vision, and a commitment to client trust and partnership excellence.
+          </p>
+          <p className="text-lg text-gray-700 leading-relaxed">
+            Our diverse investments and projects are based on credibility, excellence, and continuous innovation. We provide comprehensive and advanced services to our clients and partners, earning their respect and trust for the long term.
+          </p>
+        </div>
+
+        {/* Right - Animation */}
+        <div className="flex justify-center">
+          <Player
+            autoplay
+            loop
+            src="/lottie/partnership.json"
+            className="w-full max-w-sm sm:max-w-md h-auto"
+          />
+        </div>
+      </div>
+
+      {/* Stats Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 mt-24 max-w-6xl mx-auto">
+        <StatCard value="20+" label="Years of Experience" icon={clockIcon} />
+        <StatCard value="15" label="Subsidiaries" icon={gridIcon} />
+        <StatCard value="$500M+" label="Invested Capital" icon={moneyIcon} />
+      </div>
+    </section>
+  );
+}
+
+// === Helper Components ===
+function StatCard({
+  value,
+  label,
+  icon,
+}: {
+  value: string;
+  label: string;
+  icon: React.ReactNode;
+}) {
+  return (
+    <div className="group bg-white rounded-2xl shadow-lg p-10 flex flex-col items-center transition-all duration-300 hover:scale-105 hover:shadow-2xl border border-[#f3e9d1]">
+      <div className="mb-4 bg-[#f7f3e6] rounded-full p-4 flex items-center justify-center group-hover:bg-[#B49C5B]/10 transition">
+        {icon}
+      </div>
+      <span className="text-5xl font-extrabold text-[#B49C5B] mb-2 group-hover:text-[#a88a46] transition">{value}</span>
+      <span className="text-gray-700 font-semibold text-lg text-center">{label}</span>
+    </div>
+  );
+}
+
+// Icons
+const clockIcon = (
+  <svg className="w-10 h-10 text-[#B49C5B]" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="10" />
+    <path d="M12 6v6l4 2" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+const gridIcon = (
+  <svg className="w-10 h-10 text-[#B49C5B]" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+    <rect x="3" y="3" width="7" height="7" rx="2" />
+    <rect x="14" y="3" width="7" height="7" rx="2" />
+    <rect x="14" y="14" width="7" height="7" rx="2" />
+    <rect x="3" y="14" width="7" height="7" rx="2" />
+  </svg>
+);
+
+const moneyIcon = (
+  <svg className="w-10 h-10 text-[#B49C5B]" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+    <path d="M12 8c-2.21 0-4 1.343-4 3s1.79 3 4 3 4-1.343 4-3-1.79-3-4-3zm0 0V4m0 12v4" />
+    <circle cx="12" cy="12" r="10" />
+  </svg>
+);
+
+
+
+==============================
+src/app/[locale]/components/cubesSection.tsx
+==============================
+
+"use client";
+
+import Image from "next/image";
+import { motion } from "framer-motion";
+
+export default function CubesSection() {
+  return (
+    <>
+      <section id="cubes" className="w-full text-white font-sans">
+        {/* Section 1 - Hero Style */}
+        <div className="min-h-screen flex flex-col items-center justify-center px-6 sm:px-20 text-center bg-[#075869] relative overflow-hidden">
+          <div className="absolute inset-0 bg-black/20 z-0" />
+          <motion.h2
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+            className="text-5xl font-bold tracking-tight z-10 font-[serif]"
+          >
+            Building the Future with{" "}
+            <span className="text-[#A84A11]">Cubes</span>
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.7 }}
+            className="text-xl text-white/90 mt-6 max-w-3xl z-10"
+          >
+            Transforming Sudan's urban spaces with innovation and sustainability.
+          </motion.p>
+        </div>
+
+        {/* Section 2 - Company Intro */}
+        <div className="min-h-screen bg-white text-gray-900 px-6 sm:px-20 py-24 flex flex-col justify-center font-['Raleway']">
+          <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+            {/* Text content */}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.7 }}
+            >
+              <h3 className="text-3xl font-bold text-[#075869] mb-4">
+                About Cubes
+              </h3>
+              <span className="block w-20 h-1 bg-[#A84A11] rounded mb-6" />
+              <p className="text-lg leading-relaxed">
+                Cubes is a construction and real estate development company
+                committed to delivering modern, functional, and innovative
+                buildings across Sudan.
+              </p>
+              <p className="text-lg mt-4 leading-relaxed">
+                We focus on quality infrastructure, blending design excellence
+                with sustainable practices — offering residential, commercial,
+                and mixed-use solutions.
+              </p>
+            </motion.div>
+
+            {/* Illustration or image */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.7 }}
+              className="flex justify-center"
+            >
+              <Image
+                src="/realestate.jpg"
+                alt="Cubes Construction"
+                width={500}
+                height={400}
+                className="rounded-xl shadow-xl"
+              />
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Mission/Vision - Cubes Light Style */}
+      <section className="bg-[#f8fafc] px-6 sm:px-20 py-24">
+        <div className="max-w-6xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-3xl font-extrabold text-[#075869] mb-4">
+              Our Vision & Mission
+            </h2>
+            <span className="block w-24 h-1 bg-[#A84A11] rounded mx-auto" />
+          </motion.div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.1 }}
+              className="bg-white p-8 rounded-xl shadow-lg border border-[#A84A11]/20 hover:shadow-xl transition"
+            >
+              <h3 className="text-xl font-bold text-[#A84A11] mb-4">Vision</h3>
+              <p className="text-gray-700 leading-relaxed">
+                To be a leading construction company, delivering sustainable and innovative building solutions, supported by best project management practices to achieve the highest standards of quality and efficiency.
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.2 }}
+              className="bg-white p-8 rounded-xl shadow-lg border border-[#A84A11]/20 hover:shadow-xl transition"
+            >
+              <h3 className="text-xl font-bold text-[#A84A11] mb-4">Mission</h3>
+                <ul className="text-gray-700 leading-relaxed list-disc list-inside">
+                <li>Deliver high-quality projects that meet global standards, adhering to timelines and budgets.</li>
+                <li>Leverage the latest construction technologies to ensure sustainability and efficiency.</li>
+                <li>Promote a strong project management culture through our PMO to enhance project execution.</li>
+                <li>Build long-term relationships with clients and partners based on transparency and trust.</li>
+                <li>Develop our human capital by providing continuous training and fostering a motivating work environment.</li>
+                </ul>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.3 }}
+              className="bg-white p-8 rounded-xl shadow-lg border border-[#A84A11]/20 hover:shadow-xl transition"
+            >
+              <h3 className="text-xl font-bold text-[#A84A11] mb-4">Values</h3>
+                <ul className="text-gray-700 leading-relaxed list-disc list-inside">
+                <li>Quality – Striving for excellence in every project we undertake.</li>
+                <li>Innovation – Integrating the latest technologies and modern methodologies in construction.</li>
+                <li>Safety – Ensuring a safe working environment for employees and project teams.</li>
+                <li>Commitment – Meeting deadlines and fulfilling our promises to clients.</li>
+                <li>Transparency – Building trust through honesty and open communication.</li>
+                <li>Sustainability – Committed to eco-friendly and energy-efficient building solutions.</li>
+                <li>Professionalism – Managing projects with best-in-class project management practices.</li>
+                </ul>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Management Structure - Cubes Light Style */}
+      <section className="bg-white px-6 sm:px-20 py-24">
+        <div className="max-w-6xl mx-auto text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+            className="mb-16"
+          >
+            <h2 className="text-3xl font-extrabold text-[#075869] mb-4">
+              Management Structure
+            </h2>
+            <span className="block w-24 h-1 bg-[#A84A11] rounded mx-auto" />
+          </motion.div>
+
+          {/* Top Manager */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.1 }}
+            className="flex justify-center mb-12"
+          >
+            <div className="bg-white rounded-xl shadow-lg p-6 border-2 border-[#A84A11] w-64 hover:shadow-xl transition">
+              <h3 className="font-bold text-[#075869]">Name</h3>
+              <p className="text-sm text-gray-600">Position</p>
+              <p className="text-xs text-gray-500">Sudanese</p>
+            </div>
+          </motion.div>
+
+          {/* Sub Managers */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              { name: "Name", title: "Position", dept: "Nationality/Department" },
+              { name: "Name", title: "Position", dept: "Nationality/Department" },
+              { name: "Name", title: "Position", dept: "Nationality/Department" },
+              { name: "Name", title: "Position", dept: "Nationality/Department" },
+            ].map((m, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: 0.2 + idx * 0.1 }}
+                className="bg-white rounded-xl shadow-lg p-6 border border-[#A84A11]/50 hover:border-[#A84A11] hover:shadow-xl transition"
+              >
+                <h3 className="font-bold text-[#075869]">{m.name}</h3>
+                <p className="text-sm text-gray-600">{m.title}</p>
+                <p className="text-xs text-gray-500">{m.dept}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}
+
+
+==============================
+src/app/[locale]/components/forms/JobApplicationForm.tsx
+==============================
+
+'use client';
+import { useState } from 'react';
+
+type FormErrors = {
+  fullName?: string;
+  email?: string;
+  phone?: string;
+  coverLetter?: string;
+  cv?: string;
+  general?: string;
+};
+
+type Props = { 
+  jobId: string;
+  className?: string;
+};
+
+export default function JobApplicationForm({ jobId, className = '' }: Props) {
+  const [status, setStatus] = useState<'idle'|'submitting'|'ok'|'error'>('idle');
+  const [errors, setErrors] = useState<FormErrors>({});
+  const [uploadProgress, setUploadProgress] = useState(0);
+
+  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setStatus('submitting');
+    setErrors({});
+    setUploadProgress(0);
+
+    const formEl = e.currentTarget;
+    const fd = new FormData(formEl);
+    fd.set('jobId', jobId);
+
+    try {
+      const xhr = new XMLHttpRequest();
+      xhr.open('POST', `${process.env.NEXT_PUBLIC_EXPRESS_API_URL}/api/forms/apply`);
+
+      xhr.upload.onprogress = (event) => {
+        if (event.lengthComputable) {
+          const percent = Math.round((event.loaded / event.total) * 100);
+          setUploadProgress(percent);
+        }
+      };
+
+      xhr.onload = () => {
+        const data = JSON.parse(xhr.responseText);
+        if (xhr.status >= 200 && xhr.status < 300) {
+          formEl.reset();
+          setStatus('ok');
+          setUploadProgress(0);
+        } else {
+          if (xhr.status === 400 && data.details) {
+            const newErrors: FormErrors = {};
+            data.details.forEach((error: any) => {
+              newErrors[error.field as keyof FormErrors] = error.message;
+            });
+            setErrors(newErrors);
+          } else {
+            setErrors({ general: data.message || 'Submission failed. Please try again.' });
+          }
+          setStatus('error');
+        }
+      };
+
+      xhr.onerror = () => {
+        setErrors({ general: 'Network error. Please check your connection.' });
+        setStatus('error');
+      };
+
+      xhr.send(fd);
+    } catch (err: any) {
+      console.error('❌ Job form error:', err);
+      setErrors({ general: 'Unexpected error occurred. Please try again later.' });
+      setStatus('error');
+    }
+  }
+
+  return (
+    <form 
+      onSubmit={onSubmit} 
+      encType="multipart/form-data"
+      className={`
+        flex flex-col items-start gap-6
+        py-6 px-8 rounded-lg border border-[#B49D5A]/60 bg-white
+        w-full shadow-lg transition-all
+        ${className}
+      `}
+    >
+      {/* Honeypot */}
+      <div className="hidden" aria-hidden="true">
+        <input type="text" id="honeypot" name="honeypot" tabIndex={-1} autoComplete="off" />
+      </div>
+
+      {/* Full Name + Email */}
+      <div className="w-full grid gap-6 md:grid-cols-2">
+        <div>
+          <label className="block text-sm font-semibold text-gray-700 mb-2">
+            Full Name
+          </label>
+          <input 
+            name="fullName"
+            required
+            className={`w-full px-4 py-3 rounded-lg border-2 bg-white text-gray-900 
+              focus:outline-none focus:ring-2 focus:ring-[#B49D5A]/40 transition-all
+              ${errors.fullName ? 'border-red-500' : 'border-[#B49D5A]/70'}`}
+            placeholder="e.g. John Doe"
+          />
+          {errors.fullName && <p className="text-red-600 text-sm mt-1">{errors.fullName}</p>}
+        </div>
+
+        <div>
+          <label className="block text-sm font-semibold text-gray-700 mb-2">
+            Email
+          </label>
+          <input 
+            name="email"
+            type="email"
+            required
+            className={`w-full px-4 py-3 rounded-lg border-2 bg-white text-gray-900 
+              focus:outline-none focus:ring-2 focus:ring-[#B49D5A]/40 transition-all
+              ${errors.email ? 'border-red-500' : 'border-[#B49D5A]/70'}`}
+            placeholder="example@domain.com"
+          />
+          {errors.email && <p className="text-red-600 text-sm mt-1">{errors.email}</p>}
+        </div>
+      </div>
+
+      {/* Phone */}
+      <div className="w-full">
+        <label className="block text-sm font-semibold text-gray-700 mb-2">
+          Phone
+        </label>
+        <input 
+          name="phone"
+          type="tel"
+          required
+          className={`w-full px-4 py-3 rounded-lg border-2 bg-white text-gray-900 
+            focus:outline-none focus:ring-2 focus:ring-[#B49D5A]/40 transition-all
+            ${errors.phone ? 'border-red-500' : 'border-[#B49D5A]/70'}`}
+          placeholder="e.g. +966501234567"
+        />
+        {errors.phone && <p className="text-red-600 text-sm mt-1">{errors.phone}</p>}
+      </div>
+
+      {/* Cover Letter */}
+      <div className="w-full">
+        <label className="block text-sm font-semibold text-gray-700 mb-2">
+          Cover Letter
+        </label>
+        <textarea
+          name="coverLetter"
+          required
+          rows={6}
+          minLength={50}
+          className={`w-full px-4 py-3 rounded-lg border-2 bg-white text-gray-900 
+            focus:outline-none focus:ring-2 focus:ring-[#B49D5A]/40 transition-all resize-y
+            ${errors.coverLetter ? 'border-red-500' : 'border-[#B49D5A]/70'}`}
+          placeholder="Tell us about yourself and why you’re a great fit (min 50 characters)"
+        />
+        {errors.coverLetter && <p className="text-red-600 text-sm mt-1">{errors.coverLetter}</p>}
+      </div>
+
+      {/* CV Upload */}
+      <div className="w-full">
+        <label className="block text-sm font-semibold text-gray-700 mb-2">
+          Resume / CV
+        </label>
+        <input
+          name="cv"
+          type="file"
+          accept=".pdf,.doc,.docx"
+          required
+          className={`w-full px-4 py-3 rounded-lg border-2 bg-white text-gray-900 
+            focus:outline-none focus:ring-2 focus:ring-[#B49D5A]/40 transition-all
+            file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0
+            file:text-sm file:font-semibold file:bg-[#B49D5A] file:text-white hover:file:bg-[#A08948]
+            ${errors.cv ? 'border-red-500' : 'border-[#B49D5A]/70'}`}
+        />
+        {errors.cv && <p className="text-red-600 text-sm mt-1">{errors.cv}</p>}
+      </div>
+
+      {/* Progress Bar */}
+      {status === 'submitting' && uploadProgress > 0 && (
+        <div className="w-full bg-gray-200 rounded-full h-2 mt-2 overflow-hidden">
+          <div
+            className="bg-[#B49D5A] h-2 transition-all duration-300"
+            style={{ width: `${uploadProgress}%` }}
+          ></div>
+        </div>
+      )}
+
+      {/* Submit */}
+      <button
+        type="submit"
+        disabled={status === 'submitting'}
+        className={`w-full bg-[#B49D5A] text-white font-semibold py-3 px-6 rounded-lg 
+          hover:bg-[#937c41] focus:outline-none focus:ring-2 focus:ring-[#B49D5A]/50 
+          transition-all shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed`}
+      >
+        {status === 'submitting'
+          ? `Uploading… ${uploadProgress > 0 ? `${uploadProgress}%` : ''}`
+          : 'Apply Now'}
+      </button>
+
+      {/* Status Messages */}
+      {status === 'ok' && (
+        <div className="w-full p-4 bg-green-50 border border-green-200 rounded-lg text-center">
+          <p className="text-green-700 text-sm font-medium">
+            ✅ Application submitted successfully! We’ll review and contact you soon.
+          </p>
+        </div>
+      )}
+      {errors.general && (
+        <div className="w-full p-4 bg-red-50 border border-red-200 rounded-lg text-center">
+          <p className="text-red-600 text-sm font-medium">❌ {errors.general}</p>
+        </div>
+      )}
+    </form>
+  );
+}
+
+
+
+==============================
+src/app/[locale]/components/qastSection.tsx
+==============================
+
+"use client";
+import { motion } from "framer-motion";
+import Image from "next/image";
+
+export default function QASTSection() {
+  return (
+    <>
+      <section id="qast" className="w-full bg-[#0c0b0b] text-white">
+        {/* Section 1 - Introduction */}
+        <div className="min-h-screen flex flex-col justify-center items-center text-center px-6 sm:px-20 py-24">
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false }}
+            transition={{ duration: 1 }}
+            className="max-w-5xl"
+          >
+            <h2 className="text-4xl sm:text-5xl font-extrabold text-[#AC2E5D] mb-4">
+              QAST – Innovation in Technology
+            </h2>
+            <p className="text-lg text-gray-200 leading-relaxed">
+              QAST is a Network Services & Information Technology Management company committed to elevating Sudan's digital infrastructure. Our solutions are tailored to empower businesses and communities through innovation, reliability, and cutting-edge services.
+            </p>
+          </motion.div>
+        </div>
+
+        {/* Section 2 - Visual and Details */}
+        <div className="min-h-screen grid md:grid-cols-2 items-center px-6 sm:px-20 py-24 gap-16 bg-[#1a1a1a]">
+          {/* Text */}
+          <motion.div
+            initial={{ opacity: 0, x: -40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: false }}
+            transition={{ duration: 0.7 }}
+            className="space-y-6"
+          >
+            <h3 className="text-3xl font-bold text-[#AC2E5D]">Our Role</h3>
+            <p className="text-gray-200 text-md leading-relaxed">
+              As a pioneer in ICT services, QAST supports organizations by delivering network infrastructure, managed services, and innovative IT consulting. Our vision is to be the digital transformation partner of choice in the region.
+            </p>
+            <ul className="list-disc list-inside text-gray-300 space-y-2">
+              <li>Enterprise IT Infrastructure</li>
+              <li>Managed IT & Security Services</li>
+              <li>Smart Digital Solutions</li>
+              <li>Cloud and Data Services</li>
+            </ul>
+          </motion.div>
+
+          {/* Image */}
+          <motion.div
+            initial={{ opacity: 0, x: 40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: false }}
+            transition={{ duration: 0.7 }}
+            className="w-full h-[300px] sm:h-[400px] relative rounded-xl overflow-hidden shadow-lg"
+          >
+            <Image
+              src="/telecom.jpg"
+              alt="QAST Technology Illustration"
+              fill
+              className="object-cover rounded-xl"
+            />
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Mission/Vision - QAST Light Style */}
+      <section className="bg-[#f8fafc] px-6 sm:px-20 py-24">
+        <div className="max-w-6xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-3xl font-extrabold text-[#020202] mb-4">Our Vision & Mission</h2>
+            <span className="block w-24 h-1 bg-[#AC2E5D] rounded mx-auto" />
+          </motion.div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.1 }}
+              className="bg-white p-8 rounded-xl shadow-lg border border-[#AC2E5D]/20 hover:shadow-xl transition"
+            >
+              <h3 className="text-xl font-bold text-[#AC2E5D] mb-4">Our Vision</h3>
+              <p className="text-gray-700 leading-relaxed">
+                To be a leading ICT managed service and solutions provider in the region and Sudan.
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.2 }}
+              className="bg-white p-8 rounded-xl shadow-lg border border-[#AC2E5D]/20 hover:shadow-xl transition"
+            >
+              <h3 className="text-xl font-bold text-[#AC2E5D] mb-4">Our Mission</h3>
+              <p className="text-gray-700 leading-relaxed">
+                Building strong organization by investing on our people, new technologies and processes as to deliver the highest level of solutions and services to provide the maximum value to all stakeholders.
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.3 }}
+              className="bg-white p-8 rounded-xl shadow-lg border border-[#AC2E5D]/20 hover:shadow-xl transition"
+            >
+              <h3 className="text-xl font-bold text-[#AC2E5D] mb-4">Our Values</h3>
+              <p className="text-gray-700 leading-relaxed">
+                Professionalism: Demonstrate strong work commitments, treat others with respect and accountability.
+                Integrity: Engage in activities aligned with moral and ethical standards, building trust with clients, partners, and stakeholders.
+                Customer Centricity: Respect and fulfill customer needs, provide tailored support for their goals.
+              </p>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Management Structure - QAST Light Style */}
+      <section className="bg-white px-6 sm:px-20 py-24">
+        <div className="max-w-6xl mx-auto text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+            className="mb-16"
+          >
+            <h2 className="text-3xl font-extrabold text-[#020202] mb-4">Management Structure</h2>
+            <span className="block w-24 h-1 bg-[#AC2E5D] rounded mx-auto" />
+          </motion.div>
+
+          {/* Top Manager */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.1 }}
+            className="flex justify-center mb-12"
+          >
+            <div className="bg-white rounded-xl shadow-lg p-6 border-2 border-[#AC2E5D] w-64 hover:shadow-xl transition">
+              <h3 className="font-bold text-[#AC2E5D]">Name</h3>
+              <p className="text-sm text-gray-600">Position</p>
+              <p className="text-xs text-gray-500">Sudanese</p>
+            </div>
+          </motion.div>
+
+          {/* Sub Managers */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              { name: "Name", title: "Position", dept: "Nationality/Department" },
+              { name: "Name", title: "Position", dept: "Nationality/Department" },
+              { name: "Name", title: "Position", dept: "Nationality/Department" },
+              { name: "Name", title: "Position", dept: "Nationality/Department" },
+            ].map((m, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: 0.2 + idx * 0.1 }}
+                className="bg-white rounded-xl shadow-lg p-6 border border-[#AC2E5D]/50 hover:border-[#AC2E5D] hover:shadow-xl transition"
+              >
+                <h3 className="font-bold text-[#020202]">{m.name}</h3>
+                <p className="text-sm text-gray-600">{m.title}</p>
+                <p className="text-xs text-gray-500">{m.dept}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}
+
+
+==============================
+src/app/[locale]/components/qscSection.tsx
+==============================
+
+"use client";
+
+import Image from "next/image";
+import { motion } from "framer-motion";
+
+export default function QSCSection() {
+  return (
+    <>
+      <section id="qsc" className="text-white font-['Lora']">
+        {/* Section 1: Hero */}
+        <div className="min-h-screen bg-[#5F2C9B] flex flex-col justify-center items-center text-center px-6 sm:px-20 relative overflow-hidden">
+          <motion.h2
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+            className="text-5xl sm:text-6xl font-bold drop-shadow tracking-tight"
+          >
+            Excellence in <span className="text-[#FFD700]">Supply Chain</span>
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2, duration: 0.7 }}
+            className="text-lg sm:text-2xl text-white/90 mt-6 max-w-2xl"
+          >
+            Delivered with{" "}
+            <span className="font-semibold text-[#FFD700]">Quality</span>
+          </motion.p>
+        </div>
+
+        {/* Section 2: Company Info */}
+        <div className="min-h-screen bg-white text-gray-900 px-6 sm:px-20 py-24 flex flex-col justify-center font-['Lora']">
+          <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+            {/* Text Info */}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.7 }}
+            >
+              <h3 className="text-3xl font-bold text-[#5F2C9B] mb-4">
+                Quality for Supply Chain
+              </h3>
+              <span className="block w-20 h-1 bg-[#FFD700] rounded mb-6" />
+              <p className="text-lg leading-relaxed">
+                We provide end-to-end supply chain solutions — from logistics,
+                transport, customs clearance, to modern storage and door-to-door
+                services.
+              </p>
+              <p className="text-lg mt-4 leading-relaxed">
+                Our mission is to ensure seamless operations, cost efficiency, and
+                client satisfaction across the supply chain. Our strength lies in
+                our deep market knowledge and a commitment to excellence.
+              </p>
+            </motion.div>
+
+            {/* Image or Illustration */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.7 }}
+              className="flex justify-center"
+            >
+              <Image
+                src="/logistics.jpg"
+                alt="Quality Supply Chain"
+                width={500}
+                height={400}
+                className="rounded-xl shadow-xl"
+              />
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Mission/Vision - QSC Light Style */}
+      <section className="bg-[#5F2C9B] text-white px-6 sm:px-20 py-24">
+        <div className="max-w-6xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-3xl font-extrabold text-[#FFD700] mb-4">
+              Our Vision & Mission
+            </h2>
+            <span className="block w-24 h-1 bg-[#FFD700] rounded mx-auto" />
+          </motion.div>
+
+          {/* Centered Cards */}
+          <div className="flex flex-col md:flex-row justify-center items-center gap-8">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.1 }}
+              className="bg-white p-8 rounded-xl shadow-lg border border-[#FFD700]/20 hover:shadow-xl transition w-full max-w-md"
+            >
+              <h3 className="text-xl font-bold text-[#FFD700] mb-4">Vision</h3>
+              <p className="text-gray-700 leading-relaxed">
+                We aspire to be the leader in the supply chain industry in Sudan,
+                offering our local and international clients innovative and efficient
+                solutions to streamline the movement of goods and distribution. Our
+                vision is to help strengthen the Sudanese economy by becoming a
+                trusted partner to our clients, through safety, reliability, and
+                excellence in service.
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.2 }}
+              className="bg-white p-8 rounded-xl shadow-lg border border-[#FFD700]/20 hover:shadow-xl transition w-full max-w-md"
+            >
+              <h3 className="text-xl font-bold text-[#FFD700] mb-4">Mission</h3>
+              <p className="text-gray-700 leading-relaxed">
+                At Q Supply Chain, our mission is to provide integrated,
+                technology-driven solutions in supply chain services that meet the
+                needs of our clients across purchasing, shipping, customs clearance,
+                storage, distribution, and door-to-door delivery. We aim to be the
+                number one choice for all our clients by offering unparalleled
+                service while ensuring the highest levels of safety and quality.
+              </p>
+            </motion.div>
+          </div>
+        </div>
+
+        {/* Objectives Section */}
+        <div className="max-w-6xl mx-auto mt-16">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+            className="text-center mb-8"
+          >
+            <h2 className="text-3xl font-extrabold text-[#FFD700] mb-4">
+              Our Objectives
+            </h2>
+            <span className="block w-24 h-1 bg-[#FFD700] rounded mx-auto" />
+          </motion.div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 text-white">
+            {/* Objective 1 */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.1 }}
+              className="flex items-start gap-4 bg-[#5F2C9B] p-6 rounded-lg shadow-lg border border-[#FFD700]/50"
+            >
+              <div className="text-[#FFD700] text-3xl">
+                <i className="fas fa-lightbulb"></i> {/* Replace with your preferred icon library */}
+              </div>
+              <div>
+                <h3 className="text-xl font-bold mb-2">Continuous Innovation</h3>
+                <p className="text-sm leading-relaxed">
+                  We strive to continuously enhance our services by adopting the latest technologies and systems.
+                </p>
+              </div>
+            </motion.div>
+
+            {/* Objective 2 */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.2 }}
+              className="flex items-start gap-4 bg-[#5F2C9B] p-6 rounded-lg shadow-lg border border-[#FFD700]/50"
+            >
+              <div className="text-[#FFD700] text-3xl">
+                <i className="fas fa-star"></i>
+              </div>
+              <div>
+                <h3 className="text-xl font-bold mb-2">Excellence in Quality</h3>
+                <p className="text-sm leading-relaxed">
+                  Our focus is on delivering top-quality services with meticulous attention to detail, ensuring customer satisfaction.
+                </p>
+              </div>
+            </motion.div>
+
+            {/* Objective 3 */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.3 }}
+              className="flex items-start gap-4 bg-[#5F2C9B] p-6 rounded-lg shadow-lg border border-[#FFD700]/50"
+            >
+              <div className="text-[#FFD700] text-3xl">
+                <i className="fas fa-shield-alt"></i>
+              </div>
+              <div>
+                <h3 className="text-xl font-bold mb-2">Safety & Reliability</h3>
+                <p className="text-sm leading-relaxed">
+                  We are committed to providing secure and reliable storage environments, backed by advanced fire suppression systems.
+                </p>
+              </div>
+            </motion.div>
+
+            {/* Objective 4 */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.4 }}
+              className="flex items-start gap-4 bg-[#5F2C9B] p-6 rounded-lg shadow-lg border border-[#FFD700]/50"
+            >
+              <div className="text-[#FFD700] text-3xl">
+                <i className="fas fa-chart-line"></i>
+              </div>
+              <div>
+                <h3 className="text-xl font-bold mb-2">Expansion & Leadership</h3>
+                <p className="text-sm leading-relaxed">
+                  We aim for sustainable growth and expansion in both the local and regional markets, establishing a strong presence in the supply chain industry.
+                </p>
+              </div>
+            </motion.div>
+
+            {/* Objective 5 */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.5 }}
+              className="flex items-start gap-4 bg-[#5F2C9B] p-6 rounded-lg shadow-lg border border-[#FFD700]/50"
+            >
+              <div className="text-[#FFD700] text-3xl">
+                <i className="fas fa-users"></i>
+              </div>
+              <div>
+                <h3 className="text-xl font-bold mb-2">Investment in Human Capital</h3>
+                <p className="text-sm leading-relaxed">
+                  We believe in the power of human resources and are dedicated to training and developing our team to ensure the best service for our clients.
+                </p>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Management Structure - QSC Light Style */}
+      <section className="bg-white px-6 sm:px-20 py-24">
+        <div className="max-w-6xl mx-auto text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+            className="mb-16"
+          >
+            <h2 className="text-3xl font-extrabold text-[#5F2C9B] mb-4">
+              Management Structure
+            </h2>
+            <span className="block w-24 h-1 bg-[#FFD700] rounded mx-auto" />
+          </motion.div>
+
+          {/* Top Manager */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.1 }}
+            className="flex justify-center mb-12"
+          >
+            <div className="bg-[#5F2C9B] text-white rounded-xl shadow-lg p-6 border-2 border-[#FFD700] w-64 hover:shadow-xl transition">
+              <h3 className="font-bold text-[#FFD700]">Name</h3>
+              <p className="text-sm text-white/80">Position</p>
+              <p className="text-xs text-white/60">Sudanese</p>
+            </div>
+          </motion.div>
+
+          {/* Sub Managers */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              { name: "Name", title: "Position", dept: "Nationality/Department" },
+              { name: "Name", title: "Position", dept: "Nationality/Department" },
+              { name: "Name", title: "Position", dept: "Nationality/Department" },
+              { name: "Name", title: "Position", dept: "Nationality/Department" },
+            ].map((m, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: 0.2 + idx * 0.1 }}
+                className="bg-[#5F2C9B] text-white rounded-xl shadow-lg p-6 border border-[#FFD700]/50 hover:border-[#FFD700] hover:shadow-xl transition"
+              >
+                <h3 className="font-bold text-white">{m.name}</h3>
+                <p className="text-sm text-white/80">{m.title}</p>
+                <p className="text-xs text-white/60">{m.dept}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}
+
+
+==============================
+src/app/[locale]/components/tadSection.tsx
+==============================
+
+'use client';
+
+import { useEffect } from 'react';
+import AOS from 'aos';
+import Image from 'next/image';
+import 'aos/dist/aos.css';
+
+export default function TADSection() {
+  useEffect(() => {
+    AOS.init({ once: false, duration: 1000 });
+  }, []);
+
+  return (
+    <>
+      {/* TAD Hero Section */}
+      <section
+        className="relative min-h-screen bg-[#222153] text-white flex items-center justify-center px-6 sm:px-20"
+        style={{ fontFamily: '"Arial MT", Helvetica, sans-serif' }}
+      >
+        <div className="relative z-10 text-center max-w-3xl" data-aos="fade-up">
+          <h1 className="text-4xl sm:text-5xl font-extrabold mb-4 text-[#F29FC5]">
+            Smart Facility Management Solutions
+          </h1>
+          <p className="text-lg sm:text-xl text-[#E0E0F0]">
+            Elevating spaces through innovation, efficiency, and sustainability.
+          </p>
+        </div>
+      </section>
+
+      {/* TAD Content Section */}
+      <section
+        className="min-h-screen bg-[#f5f7fa] text-gray-900 px-6 sm:px-20 py-24 flex items-center"
+        style={{ fontFamily: '"Arial MT", Helvetica, sans-serif' }}
+      >
+        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+          {/* Left Content */}
+          <div data-aos="fade-right">
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-[#222153] mb-4">
+              About TAD
+            </h2>
+            <span className="block w-20 h-1 bg-[#87236B] rounded mb-6" />
+            <p className="text-lg leading-relaxed text-gray-700 mb-6">
+              TAD is a professional company providing integrated facility management services and smart building solutions. With a strong focus on sustainability and technology, we support various industries by delivering:
+            </p>
+            <ul className="list-disc list-inside text-gray-700 space-y-2">
+              <li>Asset & maintenance management systems</li>
+              <li>Cleaning, landscaping, and specialized services</li>
+              <li>Energy efficiency & automation systems</li>
+              <li>Tailored services for governmental, commercial, and industrial sectors</li>
+            </ul>
+          </div>
+
+          {/* Right Illustration */}
+          <div
+            className="relative w-full h-[400px] md:h-[500px] rounded-xl overflow-hidden shadow-lg"
+            data-aos="fade-left"
+          >
+            <Image
+              src="/facility.jpg"
+              alt="TAD Facility Illustration"
+              fill
+              className="object-cover"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Mission/Vision - TAD Style */}
+      <section className="bg-[#222153] text-white px-6 sm:px-20 py-24">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16" data-aos="fade-up">
+            <h2 className="text-3xl font-extrabold text-[#F29FC5] mb-4">Our Vision & Mission</h2>
+            <span className="block w-24 h-1 bg-[#F29FC5] rounded mx-auto" />
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            <div
+              data-aos="fade-up"
+              data-aos-delay="100"
+              className="bg-[#2c2968] p-8 rounded-xl border border-[#F29FC5]/20 hover:border-[#F29FC5]/50 transition"
+            >
+              <h3 className="text-xl font-bold text-[#F29FC5] mb-4">Vision</h3>
+              <p className="text-[#E7EAEF] leading-relaxed">
+                To build a brand that is recognized as a market leader in the region for providing professional, smart, and sustainable total
+facilities management solutions and services."
+              </p>
+            </div>
+
+            <div
+              data-aos="fade-up"
+              data-aos-delay="200"
+              className="bg-[#2c2968] p-8 rounded-xl border border-[#F29FC5]/20 hover:border-[#F29FC5]/50 transition"
+            >
+              <h3 className="text-xl font-bold text-[#F29FC5] mb-4">Mission</h3>
+                <ul className="list-disc list-inside text-[#E7EAEF] space-y-2 leading-relaxed">
+                <li>
+                  Being commercially astute in targeting strategically aligned business opportunities within our chosen markets through continuous improvement.
+                </li>
+                <li>
+                  Improving corporate governance for effective direction and control.
+                </li>
+                <li>
+                  Creating a high-performance culture that respects individuals, trains and develops personnel, and rewards achievement.
+                </li>
+                <li>
+                  Providing innovative FM solutions and a high level of service delivery that is cost-effective and meets international benchmarks.
+                </li>
+                </ul>
+            </div>
+
+            <div
+              data-aos="fade-up"
+              data-aos-delay="300"
+              className="bg-[#2c2968] p-8 rounded-xl border border-[#F29FC5]/20 hover:border-[#F29FC5]/50 transition"
+            >
+              <h3 className="text-xl font-bold text-[#F29FC5] mb-4">Goal</h3>
+              <p className="text-[#E7EAEF] leading-relaxed">
+                Delivering a complete suite of both hard and soft offerings to
+companies across North and East Africa.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Management Structure - TAD Style */}
+      <section className="bg-[#2c2968] text-white px-6 sm:px-20 py-24">
+        <div className="max-w-6xl mx-auto text-center">
+          <div className="mb-16" data-aos="fade-up">
+            <h2 className="text-3xl font-extrabold text-[#F29FC5] mb-4">Management Structure</h2>
+            <span className="block w-24 h-1 bg-[#F29FC5] rounded mx-auto" />
+          </div>
+
+          {/* Top Manager */}
+          <div className="flex justify-center mb-12" data-aos="fade-up" data-aos-delay="100">
+            <div className="bg-[#222153] rounded-xl shadow-lg p-6 border border-[#F29FC5] w-64 hover:bg-[#1d1c45] transition">
+              <h3 className="font-bold text-[#F29FC5]">Name</h3>
+              <p className="text-sm text-[#E7EAEF]">Position</p>
+              <p className="text-xs text-gray-400">Sudanese</p>
+            </div>
+          </div>
+
+          {/* Sub Managers */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              { name: "Name", title: "Position", dept: "Nationality/Department" },
+              { name: "Name", title: "Position", dept: "Nationality/Department" },
+              { name: "Name", title: "Position", dept: "Nationality/Department" },
+              { name: "Name", title: "Position", dept: "Nationality/Department" },
+            ].map((m, idx) => (
+              <div
+                key={idx}
+                data-aos="fade-up"
+                data-aos-delay={200 + idx * 100}
+                className="bg-[#222153] rounded-xl shadow-lg p-6 border border-[#F29FC5]/50 hover:border-[#F29FC5] hover:bg-[#1d1c45] transition"
+              >
+                <h3 className="font-bold text-white">{m.name}</h3>
+                <p className="text-sm text-[#E7EAEF]">{m.title}</p>
+                <p className="text-xs text-gray-400">{m.dept}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}
+
+
+==============================
+src/app/[locale]/components/ui/Button.tsx
+==============================
+
+'use client';
+
+type Variant = 'primary' | 'outline' | 'ghost';
+
+export default function Button({
+  children,
+  variant = 'outline',
+  className = '',
+  ...props
+}: React.ButtonHTMLAttributes<HTMLButtonElement> & { variant?: Variant }) {
+  const base = 'inline-flex items-center justify-center rounded-full px-4 py-2 text-sm transition';
+  const styles: Record<Variant, string> = {
+    primary: 'bg-[#B49C5B] text-white hover:brightness-110',
+    outline:
+      'border border-[#B49C5B]/40 text-[#0a1f44] bg-[#B49C5B]/10 hover:bg-[#B49C5B]/15',
+    ghost:
+      'border border-black/10 bg-white/60 text-gray-700 hover:bg-white',
+  };
+  return (
+    <button className={`${base} ${styles[variant]} ${className}`} {...props}>
+      {children}
+    </button>
+  );
+}
+
+
+
+==============================
+src/app/[locale]/components/ui/Card.tsx
+==============================
+
+export default function Card({
+  children,
+  className = '',
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
+  return (
+    <div className={`rounded-xl border border-black/10 bg-white shadow-[0_1px_2px_rgba(0,0,0,.05),0_8px_20px_-12px_rgba(0,0,0,.08)] ${className}`}>
+      {children}
+    </div>
+  );
+}
+
+
+
+==============================
+src/app/[locale]/components/ui/Hero.tsx
+==============================
+
+import Image from "next/image";
+import React from "react";
+
+type MediaImage = { asset?: { url?: string } ; alt?: string };
+type MediaFile  = { asset?: { url?: string } };
+
+interface HeroProps {
+  /* التوافق مع الكود القديم */
+  heroMediaType?: "image" | "video";
+  videoSource?: "file" | "url";
+  heroImage?: MediaImage;
+  heroVideoFile?: MediaFile;
+  heroVideoUrl?: string;
+  heroTitle?: string;
+  heroSubtitle?: string;
+
+  /* خصائص جديدة مرنة */
+  title?: string;            // بديل heroTitle
+  subtitle?: string;         // بديل heroSubtitle
+  fullScreen?: boolean;      // هيرو بطول الشاشة
+  align?: "center" | "left"; // محاذاة النص
+  ctaLabel?: string;
+  ctaHref?: string;
+  className?: string;
+  overlayOpacity?: number;   // 0..1
+}
+
+export default function Hero({
+  /* قديم */
+  heroMediaType = "image",
+  videoSource = "file",
+  heroImage,
+  heroVideoFile,
+  heroVideoUrl,
+  heroTitle,
+  heroSubtitle,
+  /* جديد */
+  title,
+  subtitle,
+  fullScreen = false,
+  align = "center",
+  ctaLabel,
+  ctaHref,
+  className = "",
+  overlayOpacity = 0.55,
+}: HeroProps) {
+  const finalTitle = title ?? heroTitle ?? "";
+  const finalSubtitle = subtitle ?? heroSubtitle ?? "";
+
+  const isVideo = heroMediaType === "video";
+  const hasImage = !!heroImage?.asset?.url;
+
+  // height: full hero في الهوم، و hero متوسط في الصفحات الداخلية
+  const heightCls = fullScreen ? "min-h-[70vh] lg:min-h-[86vh]" : "py-16 sm:py-20 lg:py-24";
+
+  // محاذاة النص
+  const alignCls =
+    align === "left"
+      ? "text-left items-start"
+      : "text-center items-center";
+
+  return (
+    <section
+      className={[
+        "relative w-full overflow-hidden border-b",
+        "border-[color:var(--ksh-gold,#b99a53)]/30 bg-[var(--ksh-bg,#0f1419)]",
+        heightCls,
+        className,
+      ].join(" ")}
+    >
+      {/* Background Media */}
+      <div className="absolute inset-0 -z-10">
+        {isVideo ? (
+          videoSource === "file" && heroVideoFile?.asset?.url ? (
+            <video
+              src={heroVideoFile.asset.url}
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="absolute inset-0 h-full w-full object-cover"
+            />
+          ) : videoSource === "url" && heroVideoUrl ? (
+            <iframe
+              src={heroVideoUrl}
+              title="Hero Video"
+              className="absolute inset-0 h-full w-full object-cover"
+              allow="autoplay; fullscreen; encrypted-media"
+            />
+          ) : (
+            <div className="absolute inset-0 bg-black" />
+          )
+        ) : hasImage ? (
+          <Image
+            src={heroImage!.asset!.url!}
+            alt={heroImage?.alt || "Hero background"}
+            fill
+            priority
+            className="object-cover"
+          />
+        ) : (
+          <div className="absolute inset-0 bg-[var(--ksh-bg,#0f1419)]" />
+        )}
+      </div>
+
+      {/* Overlay (gradient + gold wash) */}
+      <div
+        className="pointer-events-none absolute inset-0 -z-0"
+        style={{
+          background:
+            `linear-gradient(to bottom, rgba(0,0,0,${overlayOpacity}) 0%, rgba(0,0,0,${overlayOpacity}) 40%, rgba(0,0,0,${overlayOpacity * 0.85}) 100%),` +
+            `radial-gradient(700px 240px at 0% 0%, rgba(185,154,83,0.08), transparent 60%)`,
+        }}
+      />
+
+      {/* Content */}
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className={`flex flex-col ${alignCls}`}>
+          <h1 className="mx-auto max-w-4xl text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
+            {finalTitle}
+          </h1>
+
+          {finalSubtitle && (
+            <p className="mx-auto mt-6 max-w-3xl text-base leading-relaxed text-[color:var(--ksh-gold-soft,#d8c28e)] sm:text-lg">
+              {finalSubtitle}
+            </p>
+          )}
+
+          {(ctaLabel && ctaHref) && (
+            <div className={align === "left" ? "mt-8" : "mt-8 flex justify-center"}>
+              <a
+                href={ctaHref}
+                className="inline-flex items-center gap-2 rounded-xl border border-[color:var(--ksh-gold,#b99a53)]/40 bg-[color:var(--ksh-gold,#b99a53)]/10 px-5 py-3 text-sm font-medium text-[color:var(--ksh-gold-soft,#d8c28e)] transition hover:bg-[color:var(--ksh-gold,#b99a53)]/15"
+              >
+                {ctaLabel}
+                <svg className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                  <path d="M12.293 5.293a1 1 0 011.414 0l3.999 4a1 1 0 010 1.414l-4 4a1 1 0 11-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"/>
+                </svg>
+              </a>
+            </div>
+          )}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+
+
+==============================
+src/app/[locale]/components/ui/Pill.tsx
+==============================
+
+export default function Pill({
+  children,
+  tone = 'dim',
+}: {
+  children: React.ReactNode;
+  tone?: 'dim' | 'accent' | 'ghost';
+}) {
+  const styles =
+    tone === 'accent'
+      ? 'border border-[#B49C5B]/40 bg-[#B49C5B]/10 text-[#0a1f44]'
+      : tone === 'ghost'
+      ? 'border border-black/10 bg-white/60 text-gray-700'
+      : 'border border-black/10 bg-white text-gray-700';
+  return (
+    <span className={`inline-block rounded-full px-3 py-1 text-xs ${styles}`}>
+      {children}
+    </span>
+  );
+}
+
+
+
+==============================
+src/app/[locale]/components/ui/Section.tsx
+==============================
+
+export default function Section({ children, wide=false }: { children: React.ReactNode; wide?: boolean }) {
+  return (
+    <section className={`mx-auto ${wide?'max-w-7xl':'max-w-5xl'} w-full px-4 sm:px-6 lg:px-8`}>
+      {children}
+    </section>
+  );
+}
+
+
+
+==============================
+src/app/[locale]/contact/page.tsx
+==============================
+
+"use client";
+import { useState } from "react";
+
+type FormErrors = {
+  fullName?: string;
+  email?: string;
+  subject?: string;
+  message?: string;
+  general?: string;
+};
+
+export default function ContactForm() {
+  const [status, setStatus] = useState<"idle" | "submitting" | "ok" | "error">(
+    "idle"
+  );
+  const [errors, setErrors] = useState<FormErrors>({});
+
+  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setStatus("submitting");
+    setErrors({});
+
+    const formEl = e.currentTarget;
+    const fd = new FormData(formEl);
+    const formData = Object.fromEntries(fd.entries());
+    try {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_EXPRESS_API_URL}/api/forms/contact`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formData),
+        }
+      );
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        if (res.status === 400 && data.details) {
+          const newErrors: FormErrors = {};
+          data.details.forEach((err: any) => {
+            newErrors[err.field as keyof FormErrors] = err.message;
+          });
+          setErrors(newErrors);
+        } else {
+          setErrors({
+            general: data.message || "Submission failed. Please try again.",
+          });
+        }
+        setStatus("error");
+      } else {
+        formEl.reset();
+        setStatus("ok");
+      }
+    } catch (err: any) {
+      console.error("❌ Frontend error:", err);
+      setErrors({
+        general: "An unexpected error occurred. Please try again later.",
+      });
+      setStatus("error");
+    }
+  }
+
+  return (
+    <section className="bg-[#0F1626] py-16 px-6">
+      <div className="max-w-xl mx-auto">
+        <div className="bg-white border border-[#B49D5A]/40 rounded-xl shadow-lg p-8">
+          <h2 className="text-2xl font-bold text-center text-primary mb-6">
+            Get in Touch
+          </h2>
+
+          <form onSubmit={onSubmit} className="flex flex-col gap-6">
+            {/* Honeypot (Anti-bot) */}
+            <div className="hidden" aria-hidden="true">
+              <label htmlFor="honeypot">
+                Do not fill this out if you are human:
+              </label>
+              <input
+                type="text"
+                id="honeypot"
+                name="honeypot"
+                tabIndex={-1}
+                autoComplete="off"
+              />
+            </div>
+
+            {/* Full Name */}
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">
+                Full Name
+              </label>
+              <input
+                name="fullName"
+                required
+                className={`w-full px-4 py-3 rounded-lg border-2 bg-white text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#B49D5A]/40 transition-all
+                  ${errors.fullName ? "border-red-500" : "border-[#B49D5A]/70"}`}
+                placeholder="Example: John Doe"
+              />
+              {errors.fullName && (
+                <p className="text-red-600 text-sm mt-1">{errors.fullName}</p>
+              )}
+            </div>
+
+            {/* Email */}
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">
+                Email
+              </label>
+              <input
+                type="email"
+                name="email"
+                required
+                className={`w-full px-4 py-3 rounded-lg border-2 bg-white text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#B49D5A]/40 transition-all
+                  ${errors.email ? "border-red-500" : "border-[#B49D5A]/70"}`}
+                placeholder="example@domain.com"
+              />
+              {errors.email && (
+                <p className="text-red-600 text-sm mt-1">{errors.email}</p>
+              )}
+            </div>
+
+            {/* Subject */}
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">
+                Subject
+              </label>
+              <input
+                name="subject"
+                className={`w-full px-4 py-3 rounded-lg border-2 bg-white text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#B49D5A]/40 transition-all
+                  ${errors.subject ? "border-red-500" : "border-[#B49D5A]/70"}`}
+                placeholder="Example: Inquiry about company services"
+              />
+              {errors.subject && (
+                <p className="text-red-600 text-sm mt-1">{errors.subject}</p>
+              )}
+            </div>
+
+            {/* Message */}
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">
+                Message
+              </label>
+              <textarea
+                name="message"
+                rows={5}
+                required
+                className={`w-full px-4 py-3 rounded-lg border-2 bg-white text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#B49D5A]/40 transition-all resize-y
+                  ${errors.message ? "border-red-500" : "border-[#B49D5A]/70"}`}
+                placeholder="Write your message here, minimum 10 characters"
+              />
+              {errors.message && (
+                <p className="text-red-600 text-sm mt-1">{errors.message}</p>
+              )}
+            </div>
+
+            {/* Submit */}
+            <button
+              type="submit"
+              disabled={status === "submitting"}
+              className="w-full bg-[#B49D5A] text-white font-semibold py-3 px-6 rounded-lg hover:bg-[#937c41] focus:outline-none focus:ring-2 focus:ring-[#B49D5A]/50 transition-all shadow-md hover:shadow-lg"
+            >
+              {status === "submitting" ? "Sending…" : "Send Message"}
+            </button>
+
+            {/* Messages */}
+            {status === "ok" && (
+              <div className="p-4 bg-green-50 border border-green-200 rounded-lg text-center">
+                <p className="text-green-700 text-sm font-medium">
+                  ✅ Message sent successfully! We’ll get back to you shortly.
+                </p>
+              </div>
+            )}
+            {errors.general && (
+              <div className="p-4 bg-red-50 border border-red-200 rounded-lg text-center">
+                <p className="text-red-600 text-sm font-medium">
+                  ❌ {errors.general}
+                </p>
+              </div>
+            )}
+          </form>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+
+
+==============================
+src/app/[locale]/layout.tsx
+==============================
+
+import "./globals.css";
+import type { Metadata } from "next";
+import { getSettings } from "../../sanity/sanity-utils";
+import AOSInit from "./components/AOSInit";
+import { Geist, Geist_Mono } from "next/font/google";
+import LayoutShell from "./components/LayoutShell"; // تمت الإضافة
+import { NextIntlClientProvider, hasLocale } from "next-intl";
+import { getMessages } from "next-intl/server";
+
+import { notFound } from "next/navigation";
+import { routing } from "../../i18n/routing";
+
+export const metadata: Metadata = {
+  title: "Kuwaiti Sudanese Holding Company",
+  description: "Official Website for KSHC",
+  keywords:
+    "KSHC, Kuwaiti Sudanese Holding Company, Sudan, Kuwait, Business, Investment, Holding Company, Technology, Real Estate, Telecommunications, Logistics",
+};
+
+const geistSans = Geist({
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
+
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+
+type Props = {
+  children: React.ReactNode;
+  params: Promise<{ locale: string }>;
+};
+
+export default async function RootLayout({ children, params }: Props) {
+  const settings = await getSettings();
+
+  // Ensure that the incoming `locale` is valid
+  const { locale } = await params;
+  if (!hasLocale(routing.locales, locale)) {
+    notFound();
+  }
+  const messages = await getMessages();
+  return (
+    <html lang="en">
+      <body className="bg-white text-gray-900">
+        <div
+          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        >
+          {/* Fonts */}
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link
+            rel="preconnect"
+            href="https://fonts.gstatic.com"
+            crossOrigin="anonymous"
+          />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Geist+Sans:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600;700&display=swap"
+            rel="stylesheet"
+          />
+        </div>
+
+        <AOSInit />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+        {/* التحكم في إظهار الهيدر والفوتر خارج /admin */}
+        <NextIntlClientProvider messages={messages}>
+          <LayoutShell logo={settings?.logo}>{children}</LayoutShell>
+        </NextIntlClientProvider>
+      </body>
+    </html>
+  );
+}
+
+
+
+==============================
+src/app/[locale]/news/NewsPageContent.tsx
+==============================
+
+"use client";
+
+import { useState } from "react";
+import { CalendarDays, Newspaper } from "lucide-react";
+import Image from "next/image";
+import { PortableText } from "@portabletext/react";
+import BackToTopButton from "../components/BackToTopButton";
+
+interface NewsItem {
+  _id: string;
+  title: string;
+  date: string;
+  slug?: { current: string };
+  content: any[];
+  mainImage?: {
+    asset: { url: string };
+    alt?: string;
+  };
+  gallery?: {
+    asset: { url: string };
+    alt?: string;
+  }[];
+}
+
+export default function NewsPageContent({ news }: { news: NewsItem[] }) {
+  const [selectedNews, setSelectedNews] = useState<NewsItem | null>(null);
+
+  return (
+    <>
+      {/* News Cards Grid */}
+      <section className="py-20 px-4 sm:px-8 lg:px-20 bg-[#e7ebf0]">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h1 className="text-4xl font-extrabold text-primary mb-4">News & Updates</h1>
+            <div className="w-24 h-1 bg-[#B49C5B] rounded mx-auto mb-6" />
+            <p className="text-lg text-gray-700 max-w-2xl mx-auto">
+              Stay up to date with the latest news, announcements, and events from the Kuwaiti Sudanese Holding Company.
+            </p>
+          </div>
+        <BackToTopButton />
+          
+
+          <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
+            {news.map((item) => (
+              <div
+                key={item._id}
+                onClick={() => setSelectedNews(item)}
+                className="cursor-pointer bg-white rounded-2xl shadow-lg hover:shadow-2xl border border-[#e3e3e3] p-6 transition-all hover:scale-[1.03]"
+              >
+                <div className="flex items-center gap-2 mb-2 text-primary font-semibold">
+                  <Newspaper className="w-5 h-5" />
+                  <span className="text-base font-semibold">{item.title}</span>
+                </div>
+                <div className="flex items-center gap-1 text-sm text-gray-500 mb-3">
+                  <CalendarDays className="w-4 h-4" />
+                  <span>{new Date(item.date).toLocaleDateString()}</span>
+                </div>
+                {item.mainImage?.asset?.url && (
+                  <div className="w-full h-44 relative rounded-lg overflow-hidden mb-3">
+                    <Image
+                      src={item.mainImage.asset.url}
+                      alt={item.mainImage.alt || "News Image"}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                )}
+                <p className="text-gray-700 text-sm line-clamp-3">
+                  {item.content?.[0]?.children?.[0]?.text || ""}
+                </p>
+                <span className="inline-block mt-4 text-sm font-semibold text-[#B49C5B] hover:underline">
+                  Read More →
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Modal for News Details */}
+      {selectedNews && (
+        <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50">
+          <div className="bg-white rounded-xl p-6 max-w-4xl w-full relative overflow-y-auto max-h-[90vh] shadow-xl animate-fadeIn">
+            {/* Close button */}
+            <button
+              onClick={() => setSelectedNews(null)}
+              className="absolute top-4 right-4 text-gray-500 hover:text-black text-xl font-bold"
+            >
+              &times;
+            </button>
+
+            {/* Content */}
+            <h2 className="text-2xl font-bold text-primary mb-2">{selectedNews.title}</h2>
+            <div className="flex items-center gap-2 text-gray-500 text-sm mb-4">
+              <CalendarDays className="w-4 h-4" />
+              <span>{new Date(selectedNews.date).toLocaleDateString()}</span>
+            </div>
+
+            {selectedNews.mainImage?.asset?.url && (
+              <div className="w-full h-72 relative rounded-lg overflow-hidden mb-6">
+                <Image
+                  src={selectedNews.mainImage.asset.url}
+                  alt={selectedNews.mainImage.alt || "News image"}
+                  fill
+                  className="object-cover"
+                />
+              </div>
+            )}
+
+            <div className="prose max-w-none prose-sm sm:prose">
+              <PortableText value={selectedNews.content} />
+            </div>
+
+            {/* Gallery */}
+            {selectedNews.gallery?.length > 0 && (
+              <div className="mt-8">
+                <h4 className="text-lg font-semibold text-primary mb-4">Gallery</h4>
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                  {selectedNews.gallery.map((img, i) => (
+                    <div key={i} className="relative aspect-video overflow-hidden rounded-lg shadow">
+                      <Image
+                        src={img.asset.url}
+                        alt={img.alt || "Gallery Image"}
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+    </>
+  );
+}
+
+
+
+==============================
+src/app/[locale]/news/page.tsx
+==============================
+
+// app/news/page.tsx
+import { getNews, getSettings } from "../../../sanity/sanity-utils";
+import UnifiedHero from "../components/UnifiedHero";
+import NewsPageContent from "./NewsPageContent";
+
+export default async function NewsPage() {
+  const newsList = await getNews();
+  const settings = await getSettings();
+
+  return (
+    <main className="min-h-screen bg-[#f5f7fa] text-gray-900 font-sans">
+      <UnifiedHero
+        title="News & Updates"
+        subtitle="Stay informed about the latest developments at KSHC."
+        heroMediaType={settings.heroMediaType}
+        videoSource={settings.videoSource}
+        heroImage={settings.heroImage}
+        heroVideoFile={settings.heroVideoFile}
+        heroVideoUrl={settings.heroVideoUrl}
+        ctaText={settings.ctaText}
+        ctaHref={settings.ctaHref}
+      />
+      <NewsPageContent news={newsList} />
+    </main>
+  );
+}
+
+
+
+==============================
+src/app/[locale]/page.tsx
+==============================
+
+import {
+  getCEOMessage,
+  getInvestmentSectors,
+  getNews,
+  getSettings,
+  getSubsidiaries,
+} from "../../sanity/sanity-utils";
+
+import Subsidiaries from "./components/Subsidiaries";
+import News from "./components/News";
+import CEOMessage from "./components/CEOMessage";
+import Sectors from "./components/Sectors";
+import { Award, Globe, Target, TrendingUp, Users, Layers } from "lucide-react";
+import WhyUs from "./components/WhyUs";
+import AboutTeaser from "./components/AboutTeaser";
+import BackToTopButton from "./components/BackToTopButton";
+import MissionVision from "./components/MissionVision";
+import Hero from "./components/Hero";
+import Customers from "./components/Customers";
+import Testimonials from "./components/Testimonials";
+import { getTranslations } from "next-intl/server";
+
+export default async function Home() {
+  const [settings, subsidiaries, news, ceoMessage, sectors] = await Promise.all(
+    [
+      getSettings(),
+      getSubsidiaries(),
+      getNews(),
+      getCEOMessage(),
+      getInvestmentSectors(),
+    ]
+  );
+
+  const t = await getTranslations("HomePage");
+
+  return (
+    <div className="min-h-screen text-gray-900 font-sans bg-white">
+      {/* Hero */}
+      <Hero
+        heroMediaType={settings.heroMediaType}
+        videoSource={settings.videoSource}
+        heroImage={settings.heroImage}
+        heroVideoFile={settings.heroVideoFile}
+        heroVideoUrl={settings.heroVideoUrl}
+        heroTitle={settings.heroTitle}
+        heroSubtitle={settings.heroSubtitle}
+      />
+
+      {/* About Teaser */}
+      <section className="py-16 px-6 sm:px-20">
+        <div className="max-w-6xl mx-auto">
+          <AboutTeaser />
+        </div>
+      </section>
+
+      {/* Subsidiaries */}
+      <section id="subsidiaries" className="py-16 px-6 sm:px-20">
+        <div className="max-w-6xl mx-auto">
+          <Subsidiaries subsidiaries={subsidiaries} />
+        </div>
+      </section>
+
+      {/* Sectors */}
+      <section id="sectors" className="py-16 px-6 sm:px-20">
+        <div className="max-w-12xl mx-auto">
+          <Sectors sectors={sectors} />
+        </div>
+      </section>
+
+      {/* Mission/Vision */}
+      <section id="about" className="py-16 px-6 sm:px-20 bg-white">
+        <div className="max-w-6xl mx-auto">
+          <MissionVision
+            vision="To establish the largest economic group with foreign capital contributing to Sudan's growth."
+            mission="Bringing global technologies and business practices to Sudan, aligning the country with global advancements."
+            goal="Strengthening Kuwait–Sudan ties, rebuilding post-conflict Sudan, and investing in high-impact sectors."
+          />
+        </div>
+      </section>
+
+      {/* Why Us */}
+      <section id="why-us" className="py-16 px-6 sm:px-20">
+        <div className="max-w-6xl mx-auto">
+          <WhyUs />
+        </div>
+      </section>
+
+      {/* Objectives */}
+      <section id="objectives" className="py-16 px-6 sm:px-20 bg-white">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-extrabold text-primary mb-4">
+              General Objectives {t("title")}
+            </h2>
+            <span className="block mx-auto w-24 h-1 bg-[#B49C5B] rounded" />
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              {
+                title: "Kuwait–Sudan Ties",
+                description:
+                  "Introducing a unique model of foreign investment in Sudan.",
+                icon: <Globe className="text-primary w-7 h-7 mx-auto" />,
+              },
+              {
+                title: "Post-conflict Reconstruction",
+                description:
+                  "Establishing profitable institutions that contribute to development in areas like technology, services, and reconstruction.",
+                icon: <Award className="text-primary w-7 h-7 mx-auto" />,
+              },
+              {
+                title: "Smart Investments",
+                description:
+                  "Expanding and supporting effective initiatives through smart partnerships.",
+                icon: <TrendingUp className="text-primary w-7 h-7 mx-auto" />,
+              },
+              {
+                title: "Talent Development",
+                description:
+                  "Nurturing exceptional talent and supporting innovative ideas and projects.",
+                icon: <Users className="text-primary w-7 h-7 mx-auto" />,
+              },
+              {
+                title: "Social Responsibility",
+                description:
+                  "Focusing on social responsibility and fostering intergenerational connections.",
+                icon: <Target className="text-primary w-7 h-7 mx-auto" />,
+              },
+              {
+                title: "Smart Partnerships",
+                description: "Managing corporate assets efficiently.",
+                icon: <Layers className="text-primary w-7 h-7 mx-auto" />,
+              },
+            ].map((obj, idx) => (
+              <div
+                key={idx}
+                className="text-center space-y-4 p-6 bg-white rounded-xl shadow-sm"
+              >
+                <div className="bg-primary/10 p-4 rounded-full mb-4 flex items-center justify-center w-fit mx-auto">
+                  {obj.icon}
+                </div>
+                <h3 className="text-lg font-bold text-primary mb-2">
+                  {obj.title}
+                </h3>
+                <p className="text-sm text-gray-700 leading-relaxed">
+                  {obj.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Customers */}
+      <section id="customers" className="py-16 px-6 sm:px-20">
+        <div className="max-w-6xl mx-auto">
+          <Customers />
+        </div>
+      </section>
+
+      {/* Testimonials */}
+      <section id="testimonials" className="py-16 px-6 sm:px-20 bg-white">
+        <div className="max-w-6xl mx-auto">
+          <Testimonials />
+        </div>
+      </section>
+
+      {/* News */}
+      <section id="news" className="py-16 px-6 sm:px-20">
+        <div className="max-w-6xl mx-auto">
+          <News news={news} />
+        </div>
+      </section>
+
+      {/* CEO Message */}
+      <section id="ceo-message" className="py-16 px-6 sm:px-20 bg-white">
+        <div className="max-w-6xl mx-auto">
+          <CEOMessage
+            message={ceoMessage?.message}
+            imageUrl={ceoMessage?.image?.asset?.url}
+          />
+        </div>
+      </section>
+
+      <BackToTopButton />
+    </div>
+  );
+}
+
+
+
+==============================
+src/app/[locale]/services/components/ServiceSection.tsx
+==============================
+
+import Image from "next/image";
+import { Link } from "@/i18n/navigation";
+
+type Card = { title: string; desc: string; image: string };
+
+export default function ServiceSection({
+  heading,
+  subtext,
+  cards,
+  cta,
+  logo,
+  bgColor = "#ffffff",
+  accentColor = "#B49C5B",
+  textColor = "#374151",
+}: {
+  heading: string;
+  subtext?: string;
+  cards: Card[];
+  cta?: { label: string; href: string };
+  logo?: string;
+  bgColor?: string;
+  accentColor?: string;
+  textColor?: string;
+}) {
+  const isColored = bgColor !== "#ffffff" && bgColor !== "white";
+
+  return (
+    <section
+      className="px-6 sm:px-20 py-24"
+      style={{ backgroundColor: bgColor }}
+    >
+      <div className="max-w-6xl mx-auto">
+        {/* Header */}
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-12 gap-6">
+          <div>
+            <h3
+              className="text-3xl font-extrabold mb-2"
+              style={{ color: textColor }}
+            >
+              {heading}
+            </h3>
+            <p
+              className="max-w-2xl"
+              style={{ color: isColored ? `${textColor}cc` : "#6B7280" }}
+            >
+              {subtext}
+            </p>
+          </div>
+
+          {logo ? (
+            <div className="flex-shrink-0">
+              <Image
+                src={logo}
+                alt={heading}
+                width={120}
+                height={120}
+                className="object-contain"
+              />
+            </div>
+          ) : null}
+        </div>
+
+        {/* Cards */}
+        {cards.length > 0 && (
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            {cards.map((item, idx) => (
+              <div
+                key={idx}
+                className="group relative h-72 rounded-xl overflow-hidden transition-transform duration-500 hover:scale-105 shadow-md"
+              >
+                <Image
+                  src={item.image}
+                  alt={item.title}
+                  fill
+                  className="object-cover transition-all duration-700 brightness-75 group-hover:brightness-100"
+                />
+                <div className="absolute inset-0 flex flex-col justify-end p-6 bg-black/40 group-hover:bg-black/20 transition rounded-xl">
+                  <h4
+                    className="text-xl font-bold underline underline-offset-4 drop-shadow-md mb-1"
+                    style={{
+                      color: accentColor,
+                      textDecorationColor: accentColor,
+                    }}
+                  >
+                    {item.title}
+                  </h4>
+                  <p className="text-sm text-white opacity-0 group-hover:opacity-100 translate-y-3 group-hover:translate-y-0 transition-all duration-500">
+                    {item.desc}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* CTA */}
+        {cta && (
+          <div className="text-center mt-10">
+            {isColored ? (
+              <Link
+                href={cta.href}
+                className="inline-block px-6 py-2 rounded-lg font-semibold shadow hover:shadow-lg transition"
+                style={{
+                  backgroundColor: accentColor,
+                  color: bgColor,
+                }}
+              >
+                {cta.label}
+              </Link>
+            ) : (
+              <Link
+                href={cta.href}
+                className="font-semibold underline"
+                style={{ color: accentColor }}
+              >
+                {cta.label} →
+              </Link>
+            )}
+          </div>
+        )}
+      </div>
+    </section>
+  );
+}
+
+
+
+==============================
+src/app/[locale]/services/components/SubsidiarySection.tsx
+==============================
+
+import Image from "next/image";
+import { Link } from "@/i18n/navigation";
+
+type Card = {
+  title: string;
+  desc: string;
+  image: string;
+};
+
+type SubsidiarySectionProps = {
+  title: string;
+  subtitle: string;
+  logo: string;
+  bgColor?: string; // hex or tailwind class
+  cards: Card[];
+  cta?: { label: string; href: string };
+};
+
+const QAST_ACCENT = "#AC2E5D";
+const QAST_BG_DARK = "#020202";
+const QAST_WHITE = "#FFFFFF";
+
+export default function SubsidiarySection({
+  title,
+  subtitle,
+  logo,
+  bgColor = QAST_BG_DARK,
+  cards,
+  cta,
+}: SubsidiarySectionProps) {
+  const sectionBg = bgColor;
+
+  return (
+    <section
+      className="px-6 sm:px-20 py-24"
+      style={{ backgroundColor: sectionBg }}
+    >
+      <div className="max-w-6xl mx-auto">
+        {/* Header */}
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-12 gap-6">
+          <div>
+            <h2
+              className="text-3xl font-extrabold mb-2"
+              style={{ color: QAST_WHITE }}
+            >
+              {title}
+            </h2>
+            <p className="max-w-2xl" style={{ color: `${QAST_WHITE}cc` }}>
+              {subtitle}
+            </p>
+          </div>
+
+          <Image
+            src={logo}
+            alt={title}
+            width={120}
+            height={120}
+            className="object-contain"
+          />
+        </div>
+
+        {/* Cards */}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          {cards.map((card, idx) => (
+            <div
+              key={idx}
+              className="group relative h-80 rounded-xl overflow-hidden transition-transform duration-500 hover:scale-105 shadow-lg"
+            >
+              <Image
+                src={card.image}
+                alt={card.title}
+                fill
+                className="object-cover transition-all duration-700 brightness-75 group-hover:brightness-100"
+              />
+
+              <div className="absolute inset-0 flex flex-col justify-end p-6 bg-black/40 group-hover:bg-black/20 transition rounded-xl">
+                <h3
+                  className="text-lg font-bold mb-2"
+                  style={{ color: QAST_ACCENT }}
+                >
+                  {card.title}
+                </h3>
+                <p
+                  className="text-sm opacity-0 group-hover:opacity-100 transition duration-500"
+                  style={{ color: QAST_WHITE }}
+                >
+                  {card.desc}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* CTA */}
+        {cta && (
+          <div className="text-center mt-10">
+            <Link
+              href={cta.href}
+              className="inline-block px-6 py-2 rounded-lg font-semibold shadow hover:shadow-lg transition"
+              style={{
+                backgroundColor: QAST_ACCENT,
+                color: QAST_WHITE,
+              }}
+            >
+              {cta.label}
+            </Link>
+          </div>
+        )}
+      </div>
+    </section>
+  );
+}
+
+
+
+==============================
+src/app/[locale]/services/page.tsx
+==============================
+
+import UnifiedHero from "../components/UnifiedHero";
+import { getSettings } from "../../../sanity/sanity-utils";
+import ServiceSection from "./components/ServiceSection";
+
+export default async function ServicesPage() {
+  const settings = await getSettings();
+
+  return (
+    <main className="min-h-screen bg-[#f5f7fa] text-gray-900 font-sans">
+      {/* Hero */}
+      <UnifiedHero
+        title="Our Services"
+        subtitle="Explore our services and specialized investments at KSHC."
+        heroMediaType={settings?.heroMediaType}
+        videoSource={settings?.videoSource}
+        heroImage={settings?.heroImage}
+        heroVideoFile={settings?.heroVideoFile}
+        heroVideoUrl={settings?.heroVideoUrl}
+        height="medium"
+      />
+
+      {/* Our Services (general overview) */}
+      <ServiceSection
+        heading="Our Services"
+        subtext="We operate across a diverse set of sectors with innovative strategies and a commitment to excellence."
+        cards={[
+          {
+            title: "Telecommunications",
+            desc: "Advancing networks and communication technologies in Sudan.",
+            image: "/telecom.jpg",
+          },
+          {
+            title: "Real Estate",
+            desc: "Developing modern spaces and managing real estate portfolios.",
+            image: "/realestate.jpg",
+          },
+          {
+            title: "Logistics",
+            desc: "Integrated supply chain services including transport & storage.",
+            image: "/logistics.jpg",
+          },
+          {
+            title: "Facility Management",
+            desc: "Modern and efficient systems for property and infrastructure.",
+            image: "/facility.jpg",
+          },
+        ]}
+      />
+
+      {/* QAST Technology */}
+      <ServiceSection
+        heading="Technology Services"
+        subtext="QAST manages the full spectrum of technology needs: infrastructure, systems, and service management."
+        bgColor="#020202"
+        accentColor="#AC2E5D"
+        textColor="#FFFFFF"
+        cards={[
+          {
+            title: "Technology",
+            desc: "Reliable network connectivity and robust data center infrastructure.",
+            image: "/qast1.jpg",
+          },
+          {
+            title: "Telecom",
+            desc: "Cutting-edge telecom services, seamless voice and data transmission.",
+            image: "/qast2.jpg",
+          },
+          {
+            title: "Managed Services",
+            desc: "Professional and Managed Services designed to ease operations.",
+            image: "/qast3.jpg",
+          },
+          {
+            title: "Cloud & Hosting",
+            desc: "Secure cloud and hosting solutions for enterprises.",
+            image: "/qast4.jpg",
+          },
+        ]}
+        cta={{ label: "More About QAST", href: "/subsidiaries/qast" }}
+      />
+
+      {/* TAD Facility Management */}
+      <ServiceSection
+        heading="Facility Management Services"
+        subtext="TAD focuses on delivering a complete suite of both hard and soft offerings to companies across North and East Africa."
+        bgColor="#222153"
+        accentColor="#F29FC5"
+        textColor="#E7EAEF"
+        cards={[
+          {
+            title: "Hard Services",
+            desc: "Complete facility management covering air conditioners, plumbing, pumps, pools, generators…",
+            image: "/tad1.jpg",
+          },
+          {
+            title: "Soft Services",
+            desc: "Efficient cleaning, German-standard systems, staff training, safe supervision.",
+            image: "/tad2.jpg",
+          },
+          {
+            title: "Specialized Services",
+            desc: "Fire alarm, CCTV, elevators, diesel generators, rope access, landscaping, pest control.",
+            image: "/tad3.jpg",
+          },
+        ]}
+        cta={{ label: "More About TAD", href: "/subsidiaries/tad" }}
+      />
+
+      {/* Cubes Construction */}
+      <ServiceSection
+        heading="Construction Services"
+        subtext="CUBES specializes in infrastructure, construction, and property development."
+        bgColor="#075869"
+        accentColor="#A84A11"
+        textColor="#FFFFFF"
+        cards={[
+          {
+            title: "Residential Construction",
+            desc: "Modern residential buildings and housing developments.",
+            image: "/cubes1.jpg",
+          },
+          {
+            title: "Commercial Projects",
+            desc: "Office buildings, retail spaces, and commercial complexes.",
+            image: "/cubes2.jpg",
+          },
+          {
+            title: "Infrastructure Development",
+            desc: "Roads, bridges, and essential infrastructure projects.",
+            image: "/cubes3.jpg",
+          },
+          {
+            title: "Property Development",
+            desc: "Comprehensive property development and management services.",
+            image: "/cubes4.jpg",
+          },
+        ]}
+        cta={{ label: "More About CUBES", href: "/subsidiaries/cubes" }}
+      />
+
+      {/* Q Supply Chain */}
+      <ServiceSection
+        heading="Supply Chain Services"
+        subtext="Quality provides integrated logistics, procurement, and supply chain solutions."
+        bgColor="#5F2C9B"
+        accentColor="#FFD700"
+        textColor="#FFFFFF"
+        cards={[
+          {
+            title: "Procurement Services",
+            desc: "Strategic sourcing and procurement management solutions.",
+            image: "/q1.jpg",
+          },
+          {
+            title: "Logistics Management",
+            desc: "End-to-end logistics and transportation services.",
+            image: "/q2.jpg",
+          },
+          {
+            title: "Warehouse Solutions",
+            desc: "Modern warehousing and inventory management systems.",
+            image: "/q3.jpg",
+          },
+          {
+            title: "Supply Chain Optimization",
+            desc: "Data-driven supply chain analysis and optimization.",
+            image: "/q4.jpg",
+          },
+        ]}
+        cta={{ label: "More About Q Supply Chain", href: "/subsidiaries/q" }}
+      />
+    </main>
+  );
+}
+
+
+
+==============================
+src/app/[locale]/subsidiaries/page.tsx
+==============================
+
+import { Building2, Globe2, Users, Banknote } from "lucide-react";
+import { getSettings } from "../../../sanity/sanity-utils";
+import UnifiedHero from "../components/UnifiedHero";
+import BackToTopButton from "../components/BackToTopButton";
+import QASTSection from "../components/qastSection";
+import TADSection from "../components/tadSection";
+import CubesSection from "../components/cubesSection";
+import QSCSection from "../components/qscSection";
+
+const subsidiaries = [
+  {
+    id: "qast",
+    name: "QAST",
+    desc: "Network services & Information Technology Management Company.",
+    icon: <Globe2 className="w-10 h-10 text-[#B49C5B]" />,
+    tag: "Technology",
+  },
+  {
+    id: "tad",
+    name: "TAD",
+    desc: "Facility Management Services & Integrated Solutions Company.",
+    icon: <Building2 className="w-10 h-10 text-[#B49C5B]" />,
+    tag: "Facility Management",
+  },
+  {
+    id: "cubes",
+    name: "Cubes",
+    desc: "Construction & Real Estate Company.",
+    icon: <Users className="w-10 h-10 text-[#B49C5B]" />,
+    tag: "Construction",
+  },
+  {
+    id: "qsc",
+    name: "Quality for Supply Chains",
+    desc: "Supply Chains Management Services Company.",
+    icon: <Banknote className="w-10 h-10 text-[#B49C5B]" />,
+    tag: "Supply Chains",
+  },
+];
+
+export default async function SubsidiariesPage() {
+  const settings = await getSettings();
+
+  return (
+    <main className="min-h-screen bg-gradient-to-br from-[#f5f7fa] via-[#f7f9fc] to-[#e7ebf0] text-gray-900 font-sans">
+      {/* Hero */}
+      <UnifiedHero
+        title="Our Subsidiaries"
+        subtitle="Explore the diverse companies under the Kuwaiti Sudanese Holding Company, each contributing to Sudan's growth and development."
+        heroMediaType={settings.heroMediaType}
+        videoSource={settings.videoSource}
+        heroImage={settings.heroImage}
+        heroVideoFile={settings.heroVideoFile}
+        heroVideoUrl={settings.heroVideoUrl}
+      />
+
+      {/* Cards Overview */}
+      <section className="px-6 sm:px-20 pt-32 pb-20 min-h-screen flex items-center">
+        <div className="max-w-6xl mx-auto text-center w-full">
+          <h1 className="text-4xl font-extrabold text-primary mb-2">
+            Our Subsidiaries
+          </h1>
+          <div className="w-24 h-1 bg-[#B49C5B] rounded mb-8 mx-auto" />
+          <p className="text-lg text-gray-700 leading-relaxed max-w-2xl mx-auto mb-16">
+            Each of our subsidiaries is a leader in its field, working together
+            to build a stronger, more innovative Sudan. Explore our group
+            companies and their unique contributions.
+          </p>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+            {subsidiaries.map((sub, i) => (
+              <a
+                key={i}
+                href={`#${sub.id}`}
+                className="relative bg-white rounded-2xl shadow-xl p-8 flex flex-col items-center border border-[#B49C5B] hover:scale-105 hover:shadow-2xl transition-all duration-300 group"
+              >
+                <div className="absolute -top-4 right-6 bg-[#B49C5B]/90 text-white text-xs px-3 py-1 rounded-full shadow font-semibold tracking-wide">
+                  {sub.tag}
+                </div>
+                <div className="bg-primary/10 rounded-full p-4 mb-4 flex items-center justify-center">
+                  {sub.icon}
+                </div>
+                <h3 className="text-lg font-bold text-primary mb-2 group-hover:underline">
+                  {sub.name}
+                </h3>
+                <p className="text-sm text-gray-700 leading-relaxed mb-2">
+                  {sub.desc}
+                </p>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Individual Company Sections */}
+      <section id="qast">
+        <QASTSection />
+      </section>
+      <section id="tad">
+        <TADSection />
+      </section>
+      <section id="cubes">
+        <CubesSection />
+      </section>
+      <section id="qsc">
+        <QSCSection />
+      </section>
+
+      {/* Back to Top */}
+      <BackToTopButton />
+    </main>
+  );
+}
