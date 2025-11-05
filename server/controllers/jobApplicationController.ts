@@ -3,22 +3,30 @@ import { sanityClient as client } from "../config/sanityClient";
 import { sanitizeInput } from "../middleware/sanitizeInput";
 import { jobApplicationSchema } from "../validation/schemas";
 import { saveFileToDisk } from "../middleware/upload";
+import { getLocaleFromRequest, translate } from "../utils/i18n";
 
 /**
  * 🧾 Handles job applications
  * Validates form data + file + saves to Sanity
  */
 export const jobApplicationController = {
-  async submit(req: Request, res: Response, next: NextFunction): Promise<Response | void> {
+  async submit(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ): Promise<Response | void> {
+    // Get locale from request
+    const locale = getLocaleFromRequest(req);
+
     try {
       // 🧼 Step 1: Sanitize & validate fields
       const cleanData = sanitizeInput(req.body);
-      const parsed = jobApplicationSchema.safeParse(cleanData);
+      const parsed = jobApplicationSchema(locale).safeParse(cleanData);
 
       if (!parsed.success) {
         return res.status(400).json({
           success: false,
-          error: "Validation failed",
+          error: translate("errors.validationFailed", locale),
           details: parsed.error.issues.map((e) => ({
             field: e.path.join("."),
             message: e.message,
@@ -30,8 +38,10 @@ export const jobApplicationController = {
       if (!req.file) {
         return res.status(400).json({
           success: false,
-          error: "Missing CV file",
-          details: [{ field: "cv", message: "Please attach your CV file." }],
+          error: translate("errors.validationFailed", locale),
+          details: [
+            { field: "cv", message: translate("errors.cvRequired", locale) },
+          ],
         });
       }
 
@@ -51,13 +61,13 @@ export const jobApplicationController = {
 
       return res.status(200).json({
         success: true,
-        message: "✅ Application submitted successfully! Our HR team will contact you soon.",
+        message: translate("success.applicationSubmitted", locale),
       });
     } catch (err: any) {
       console.error("❌ JobApplicationController error:", err.message || err);
       return res.status(500).json({
         success: false,
-        error: "Internal server error. Please try again later.",
+        error: translate("errors.serverError", locale),
       });
     }
   },
