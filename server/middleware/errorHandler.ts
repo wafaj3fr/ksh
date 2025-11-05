@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from "express";
+import { getLocaleFromRequest, translate } from "../utils/i18n";
 
 /**
  * 🧩 Unified Global Error Handler
@@ -12,6 +13,9 @@ export function errorHandler(
 ) {
   console.error("❌ Error caught:", err);
 
+  // Get locale from request
+  const locale = getLocaleFromRequest(req);
+
   // 🔹 Default response shape
   let statusCode = 500;
   let response = {
@@ -21,26 +25,33 @@ export function errorHandler(
   };
 
   // 🔸 Multer / upload-related errors
-  if (err.message?.includes("Only PDF")) {
-    statusCode = 400;
-    response.error = "Invalid file type";
+  if (err.name === "MulterError" && err.code === "LIMIT_FILE_SIZE") {
+    statusCode = 413;
+    response.error = translate("errors.fileTooLarge", locale);
     response.details.push({
       field: "cv",
-      message: "Only PDF, DOC, or DOCX files are allowed.",
+      message: translate("errors.fileTooLarge", locale),
+    });
+  } else if (err.message?.includes("Only PDF")) {
+    statusCode = 400;
+    response.error = translate("errors.invalidFileType", locale);
+    response.details.push({
+      field: "cv",
+      message: translate("errors.invalidFileType", locale),
     });
   } else if (err.message?.includes("File content")) {
     statusCode = 400;
-    response.error = "Invalid file content";
+    response.error = translate("errors.invalidFileContent", locale);
     response.details.push({
       field: "cv",
-      message: "Uploaded file appears invalid. Please re-upload a valid document.",
+      message: translate("errors.invalidFileContent", locale),
     });
   } else if (err.message?.includes("too large")) {
     statusCode = 413;
-    response.error = "File too large";
+    response.error = translate("errors.fileTooLarge", locale);
     response.details.push({
       field: "cv",
-      message: "File exceeds the 10 MB size limit.",
+      message: translate("errors.fileTooLarge", locale),
     });
   }
 
