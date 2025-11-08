@@ -31,14 +31,16 @@ export default function NewsPageContent({ news }: { news: NewsItem[] }) {
       <section className="py-20 px-4 sm:px-8 lg:px-20 bg-[#e7ebf0]">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h1 className="text-4xl font-extrabold text-primary mb-4">News & Updates</h1>
+            <h1 className="text-4xl font-extrabold text-primary mb-4">
+              News & Updates
+            </h1>
             <div className="w-24 h-1 bg-[#B49C5B] rounded mx-auto mb-6" />
             <p className="text-lg text-gray-700 max-w-2xl mx-auto">
-              Stay up to date with the latest news, announcements, and events from the Kuwaiti Sudanese Holding Company.
+              Stay up to date with the latest news, announcements, and events
+              from the Kuwaiti Sudanese Holding Company.
             </p>
           </div>
-        <BackToTopButton />
-          
+          <BackToTopButton />
 
           <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
             {news.map((item) => (
@@ -84,13 +86,15 @@ export default function NewsPageContent({ news }: { news: NewsItem[] }) {
             {/* Close button */}
             <button
               onClick={() => setSelectedNews(null)}
-              className="absolute top-4 right-4 text-gray-500 hover:text-black text-xl font-bold"
+              className="absolute top-4 end-4 text-gray-500 hover:text-black text-xl font-bold"
             >
               &times;
             </button>
 
             {/* Content */}
-            <h2 className="text-2xl font-bold text-primary mb-2">{selectedNews.title}</h2>
+            <h2 className="text-2xl font-bold text-primary mb-2">
+              {selectedNews.title}
+            </h2>
             <div className="flex items-center gap-2 text-gray-500 text-sm mb-4">
               <CalendarDays className="w-4 h-4" />
               <span>{new Date(selectedNews.date).toLocaleDateString()}</span>
@@ -114,10 +118,15 @@ export default function NewsPageContent({ news }: { news: NewsItem[] }) {
             {/* Gallery */}
             {selectedNews.gallery?.length > 0 && (
               <div className="mt-8">
-                <h4 className="text-lg font-semibold text-primary mb-4">Gallery</h4>
+                <h4 className="text-lg font-semibold text-primary mb-4">
+                  Gallery
+                </h4>
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
                   {selectedNews.gallery.map((img, i) => (
-                    <div key={i} className="relative aspect-video overflow-hidden rounded-lg shadow">
+                    <div
+                      key={i}
+                      className="relative aspect-video overflow-hidden rounded-lg shadow"
+                    >
                       <Image
                         src={img.asset.url}
                         alt={img.alt || "Gallery Image"}

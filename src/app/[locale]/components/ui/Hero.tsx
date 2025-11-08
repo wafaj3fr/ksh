@@ -1,8 +1,8 @@
 import Image from "next/image";
 import React from "react";
 
-type MediaImage = { asset?: { url?: string } ; alt?: string };
-type MediaFile  = { asset?: { url?: string } };
+type MediaImage = { asset?: { url?: string }; alt?: string };
+type MediaFile = { asset?: { url?: string } };
 
 interface HeroProps {
   /* التوافق مع الكود القديم */
@@ -15,14 +15,14 @@ interface HeroProps {
   heroSubtitle?: string;
 
   /* خصائص جديدة مرنة */
-  title?: string;            // بديل heroTitle
-  subtitle?: string;         // بديل heroSubtitle
-  fullScreen?: boolean;      // هيرو بطول الشاشة
+  title?: string; // بديل heroTitle
+  subtitle?: string; // بديل heroSubtitle
+  fullScreen?: boolean; // هيرو بطول الشاشة
   align?: "center" | "left"; // محاذاة النص
   ctaLabel?: string;
   ctaHref?: string;
   className?: string;
-  overlayOpacity?: number;   // 0..1
+  overlayOpacity?: number; // 0..1
 }
 
 export default function Hero({
@@ -51,13 +51,13 @@ export default function Hero({
   const hasImage = !!heroImage?.asset?.url;
 
   // height: full hero في الهوم، و hero متوسط في الصفحات الداخلية
-  const heightCls = fullScreen ? "min-h-[70vh] lg:min-h-[86vh]" : "py-16 sm:py-20 lg:py-24";
+  const heightCls = fullScreen
+    ? "min-h-[70vh] lg:min-h-[86vh]"
+    : "py-16 sm:py-20 lg:py-24";
 
   // محاذاة النص
   const alignCls =
-    align === "left"
-      ? "text-left items-start"
-      : "text-center items-center";
+    align === "left" ? "text-start items-start" : "text-center items-center";
 
   return (
     <section
@@ -126,15 +126,21 @@ export default function Hero({
             </p>
           )}
 
-          {(ctaLabel && ctaHref) && (
-            <div className={align === "left" ? "mt-8" : "mt-8 flex justify-center"}>
+          {ctaLabel && ctaHref && (
+            <div
+              className={align === "left" ? "mt-8" : "mt-8 flex justify-center"}
+            >
               <a
                 href={ctaHref}
                 className="inline-flex items-center gap-2 rounded-xl border border-[color:var(--ksh-gold,#b99a53)]/40 bg-[color:var(--ksh-gold,#b99a53)]/10 px-5 py-3 text-sm font-medium text-[color:var(--ksh-gold-soft,#d8c28e)] transition hover:bg-[color:var(--ksh-gold,#b99a53)]/15"
               >
                 {ctaLabel}
-                <svg className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                  <path d="M12.293 5.293a1 1 0 011.414 0l3.999 4a1 1 0 010 1.414l-4 4a1 1 0 11-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z"/>
+                <svg
+                  className="h-4 w-4"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path d="M12.293 5.293a1 1 0 011.414 0l3.999 4a1 1 0 010 1.414l-4 4a1 1 0 11-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" />
                 </svg>
               </a>
             </div>

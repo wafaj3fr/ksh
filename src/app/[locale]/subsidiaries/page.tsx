@@ -74,7 +74,7 @@ export default async function SubsidiariesPage() {
                 href={`#${sub.id}`}
                 className="relative bg-white rounded-2xl shadow-xl p-8 flex flex-col items-center border border-[#B49C5B] hover:scale-105 hover:shadow-2xl transition-all duration-300 group"
               >
-                <div className="absolute -top-4 right-6 bg-[#B49C5B]/90 text-white text-xs px-3 py-1 rounded-full shadow font-semibold tracking-wide">
+                <div className="absolute -top-4 end-6 bg-[#B49C5B]/90 text-white text-xs px-3 py-1 rounded-full shadow font-semibold tracking-wide">
                   {sub.tag}
                 </div>
                 <div className="bg-primary/10 rounded-full p-4 mb-4 flex items-center justify-center">

@@ -50,7 +50,7 @@ export default function News({ news }: NewsProps) {
             {/* Previous preview */}
             {total > 1 && (
               <div
-                className="hidden sm:block absolute left-0 top-1/2 -translate-y-1/2 z-0 opacity-50 scale-90 transition-all duration-300 cursor-pointer"
+                className="hidden sm:block absolute start-0 top-1/2 -translate-y-1/2 z-0 opacity-50 scale-90 transition-all duration-300 cursor-pointer"
                 style={{ width: 320 }}
                 onClick={() => goTo((current - 1 + total) % total)}
               >
@@ -67,7 +67,7 @@ export default function News({ news }: NewsProps) {
             {/* Next preview */}
             {total > 1 && (
               <div
-                className="hidden sm:block absolute right-0 top-1/2 -translate-y-1/2 z-0 opacity-50 scale-90 transition-all duration-300 cursor-pointer"
+                className="hidden sm:block absolute end-0 top-1/2 -translate-y-1/2 z-0 opacity-50 scale-90 transition-all duration-300 cursor-pointer"
                 style={{ width: 320 }}
                 onClick={() => goTo((current + 1) % total)}
               >
@@ -120,7 +120,7 @@ function NewsCard({
   return (
     <div
       className={`
-        bg-white rounded-xl shadow p-4 sm:p-6 text-left transition-all duration-300
+        bg-white rounded-xl shadow p-4 sm:p-6 text-start transition-all duration-300
         flex-1 flex flex-col
         ${faded ? "opacity-60 scale-95" : "opacity-100 scale-105 border-2 border-[#B49C5B]"}
       `}

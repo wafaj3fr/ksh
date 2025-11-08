@@ -31,7 +31,7 @@ export default function BenefitsGrid({ heading, subtext, items }: Props) {
           return (
             <div
               key={`${item.text}-${i}`}
-              className="flex items-center gap-3 rounded-2xl border border-[#E6D9B3] bg-white px-5 py-4 text-left shadow-sm"
+              className="flex items-center gap-3 rounded-2xl border border-[#E6D9B3] bg-white px-5 py-4 text-start shadow-sm"
             >
               <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#F3EAD3]">
                 {Icon ? (

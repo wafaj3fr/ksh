@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { useMemo, useState } from 'react';
-import JobCard from './JobCard';
+import { useMemo, useState } from "react";
+import JobCard from "./JobCard";
 
 type Job = {
   _id: string;
@@ -18,7 +18,7 @@ type Job = {
 type Props = {
   jobs?: Job[];
   categories?: string[]; // اختياري: لو عايز تفرض ترتيب/مسميات معيّنة
-  pageSize?: number;     // اختياري: للعرض التدريجي
+  pageSize?: number; // اختياري: للعرض التدريجي
 };
 
 export default function JobsBrowser({ jobs, categories, pageSize = 9 }: Props) {
@@ -28,7 +28,7 @@ export default function JobsBrowser({ jobs, categories, pageSize = 9 }: Props) {
   const autoCats = useMemo(() => {
     const set = new Set<string>();
     for (const j of safeJobs) {
-      const raw = (j?.category ?? '').toString().trim();
+      const raw = (j?.category ?? "").toString().trim();
       if (raw) set.add(capitalize(raw));
     }
     return Array.from(set);
@@ -36,29 +36,34 @@ export default function JobsBrowser({ jobs, categories, pageSize = 9 }: Props) {
 
   // لو المستخدم مرّر categories نستخدمها (مع الحفاظ على All بالأول)، وإلا نستخدم المستخرجة
   const cats = useMemo(() => {
-    const base = (Array.isArray(categories) && categories.length) ? categories : autoCats;
-    return base[0] === 'All' ? base : ['All', ...base];
+    const base =
+      Array.isArray(categories) && categories.length ? categories : autoCats;
+    return base[0] === "All" ? base : ["All", ...base];
   }, [categories, autoCats]);
 
-  const [active, setActive] = useState<string>('All');
+  const [active, setActive] = useState<string>("All");
   const [visible, setVisible] = useState<number>(pageSize);
 
   // عدّاد لكل تبويب (يساعد تجربة المستخدم)
   const counts = useMemo(() => {
     const map: Record<string, number> = { All: safeJobs.length };
     for (const c of cats) {
-      if (c === 'All') continue;
+      if (c === "All") continue;
       const key = c.toLowerCase();
-      map[c] = safeJobs.filter(j => (j.category ?? '').toString().toLowerCase() === key).length;
+      map[c] = safeJobs.filter(
+        (j) => (j.category ?? "").toString().toLowerCase() === key
+      ).length;
     }
     return map;
   }, [cats, safeJobs]);
 
   // فلترة حسب التبويب (case-insensitive)
   const filtered = useMemo(() => {
-    if (active === 'All') return safeJobs;
+    if (active === "All") return safeJobs;
     const key = active.toLowerCase();
-    return safeJobs.filter(j => (j.category ?? '').toString().toLowerCase() === key);
+    return safeJobs.filter(
+      (j) => (j.category ?? "").toString().toLowerCase() === key
+    );
   }, [active, safeJobs]);
 
   const sliced = useMemo(() => filtered.slice(0, visible), [filtered, visible]);
@@ -81,13 +86,13 @@ export default function JobsBrowser({ jobs, categories, pageSize = 9 }: Props) {
               className={`rounded-full px-3 py-1.5 text-sm transition
                 ${
                   isActive
-                    ? 'border border-[#B49C5B]/50 bg-[#B49C5B]/20 text-[#0a1f44]'
-                    : 'border border-black/10 bg-white text-gray-700 hover:border-[#B49C5B]/40 hover:text-[#0a1f44]'
+                    ? "border border-[#B49C5B]/50 bg-[#B49C5B]/20 text-[#0a1f44]"
+                    : "border border-black/10 bg-white text-gray-700 hover:border-[#B49C5B]/40 hover:text-[#0a1f44]"
                 }`}
             >
               <span>{t}</span>
-              {t !== 'All' && (
-                <span className="ml-2 rounded-full bg-black/5 px-2 py-0.5 text-xs text-gray-700">
+              {t !== "All" && (
+                <span className="ms-2 rounded-full bg-black/5 px-2 py-0.5 text-xs text-gray-700">
                   {counts[t] ?? 0}
                 </span>
               )}
@@ -109,7 +114,7 @@ export default function JobsBrowser({ jobs, categories, pageSize = 9 }: Props) {
           {sliced.length < filtered.length && (
             <div className="mt-8 text-center">
               <button
-                onClick={() => setVisible(v => v + pageSize)}
+                onClick={() => setVisible((v) => v + pageSize)}
                 className="rounded-full border border-[#B49C5B]/40 bg-[#B49C5B]/10 px-5 py-2 text-sm text-[#0a1f44] hover:bg-[#B49C5B]/15"
               >
                 Show more . . .
@@ -119,7 +124,9 @@ export default function JobsBrowser({ jobs, categories, pageSize = 9 }: Props) {
         </>
       ) : (
         <div className="rounded-xl border border-black/10 bg-white p-8 text-center text-gray-700">
-          No positions in <span className="text-[#0a1f44] font-medium">{active}</span> right now.
+          No positions in{" "}
+          <span className="text-[#0a1f44] font-medium">{active}</span> right
+          now.
         </div>
       )}
     </div>

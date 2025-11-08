@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { usePathname } from 'next/navigation';
-import Header from './Header';
-import Footer from './Footer';
+import { usePathname } from "next/navigation";
+import Header from "./Header";
+import Footer from "./Footer";
 
 interface LayoutShellProps {
   children: React.ReactNode;
@@ -16,7 +16,7 @@ export default function LayoutShell({ children, logo }: LayoutShellProps) {
   const pathname = usePathname();
 
   // لا تعرض الهيدر والفوتر داخل لوحة التحكم
-  if (pathname.startsWith('/admin')) {
+  if (pathname.startsWith("/admin")) {
     return <>{children}</>;
   }
 

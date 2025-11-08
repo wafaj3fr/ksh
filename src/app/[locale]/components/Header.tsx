@@ -5,6 +5,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 
 interface HeaderProps {
   logo?: {
@@ -13,20 +14,21 @@ interface HeaderProps {
   };
 }
 
-const navItems = [
-  { name: "About", href: "/about" },
-  { name: "Subsidiaries", href: "/subsidiaries" },
-  { name: "News", href: "/news" },
-  { name: "Services", href: "/services" },
-  { name: "Careers", href: "/careers" },
-];
-
 export default function Header({ logo }: HeaderProps) {
+  const t = useTranslations("nav");
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [visible, setVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const pathname = usePathname();
+
+  const navItems = [
+    { name: t("about"), href: "/about" },
+    { name: t("subsidiaries"), href: "/subsidiaries" },
+    { name: t("news"), href: "/news" },
+    { name: t("services"), href: "/services" },
+    { name: t("careers"), href: "/careers" },
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -47,7 +49,7 @@ export default function Header({ logo }: HeaderProps) {
 
   return (
     <header
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${bgColor} ${
+      className={`fixed top-0 start-0 w-full z-50 transition-all duration-300 ${bgColor} ${
         visible ? "translate-y-0" : "-translate-y-full"
       }`}
     >
@@ -84,7 +86,7 @@ export default function Header({ logo }: HeaderProps) {
               >
                 {name}
                 <span
-                  className={`absolute left-0 bottom-0 w-full h-[2px] bg-[#B49C5B] transition-transform duration-200 ${
+                  className={`absolute start-0 bottom-0 w-full h-[2px] bg-[#B49C5B] transition-transform duration-200 ${
                     isActive
                       ? "scale-x-100"
                       : "scale-x-0 group-hover:scale-x-100"
@@ -97,9 +99,9 @@ export default function Header({ logo }: HeaderProps) {
           {/* CTA Contact Button */}
           <Link
             href="/contact"
-            className="ml-4 bg-[#B49C5B] text-black font-semibold text-xs px-4 py-1.5 rounded-full hover:bg-[#a4884a] transition"
+            className="ms-4 bg-[#B49C5B] text-black font-semibold text-xs px-4 py-1.5 rounded-full hover:bg-[#a4884a] transition"
           >
-            Contact
+            {t("contact")}
           </Link>
         </nav>
 

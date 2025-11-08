@@ -40,9 +40,12 @@ export default async function RootLayout({ children, params }: Props) {
   if (!hasLocale(routing.locales, locale)) {
     notFound();
   }
+
+  const dir = locale === "ar" ? "rtl" : "ltr";
+
   const messages = await getMessages();
   return (
-    <html lang="en">
+    <html lang={locale} dir={dir}>
       <body className="bg-white text-gray-900">
         <div
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}

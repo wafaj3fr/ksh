@@ -98,38 +98,33 @@ export default async function Home() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               {
-                title: "Kuwait–Sudan Ties",
-                description:
-                  "Introducing a unique model of foreign investment in Sudan.",
+                title: t("items.ties.title"),
+                description: t("items.ties.description"),
                 icon: <Globe className="text-primary w-7 h-7 mx-auto" />,
               },
               {
-                title: "Post-conflict Reconstruction",
-                description:
-                  "Establishing profitable institutions that contribute to development in areas like technology, services, and reconstruction.",
+                title: t("items.reconstruction.title"),
+                description: t("items.reconstruction.description"),
                 icon: <Award className="text-primary w-7 h-7 mx-auto" />,
               },
               {
-                title: "Smart Investments",
-                description:
-                  "Expanding and supporting effective initiatives through smart partnerships.",
+                title: t("items.investments.title"),
+                description: t("items.investments.description"),
                 icon: <TrendingUp className="text-primary w-7 h-7 mx-auto" />,
               },
               {
-                title: "Talent Development",
-                description:
-                  "Nurturing exceptional talent and supporting innovative ideas and projects.",
+                title: t("items.talent.title"),
+                description: t("items.talent.description"),
                 icon: <Users className="text-primary w-7 h-7 mx-auto" />,
               },
               {
-                title: "Social Responsibility",
-                description:
-                  "Focusing on social responsibility and fostering intergenerational connections.",
+                title: t("items.responsibility.title"),
+                description: t("items.responsibility.description"),
                 icon: <Target className="text-primary w-7 h-7 mx-auto" />,
               },
               {
-                title: "Smart Partnerships",
-                description: "Managing corporate assets efficiently.",
+                title: t("items.partnerships.title"),
+                description: t("items.partnerships.description"),
                 icon: <Layers className="text-primary w-7 h-7 mx-auto" />,
               },
             ].map((obj, idx) => (
