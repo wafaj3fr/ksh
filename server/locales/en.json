@@ -1,0 +1,28 @@
+{
+  "errors": {
+    "invalidEmail": "Invalid email format",
+    "emailTooLong": "Email must be less than 100 characters",
+    "nameTooShort": "Full name must be at least 3 characters",
+    "nameTooLong": "Full name must be less than 100 characters",
+    "nameInvalidChars": "Name can only contain letters, spaces, hyphens, and apostrophes",
+    "phoneRequired": "Phone number is required",
+    "invalidPhone": "Invalid phone format",
+    "coverLetterTooShort": "Cover letter must be at least 50 characters",
+    "coverLetterTooLong": "Cover letter too long (max 3000 characters)",
+    "jobIdRequired": "Job ID is required",
+    "subjectTooShort": "Subject must be at least 5 characters",
+    "subjectTooLong": "Subject must be less than 150 characters",
+    "messageTooShort": "Message must be at least 10 characters",
+    "messageTooLong": "Message too long (max 3000 characters)",
+    "fileTooLarge": "File exceeds the 10 MB size limit",
+    "invalidFileType": "Only PDF, DOC, or DOCX files are allowed",
+    "invalidFileContent": "Uploaded file appears invalid. Please re-upload a valid document",
+    "cvRequired": "CV file is required",
+    "validationFailed": "Validation failed",
+    "serverError": "Server error — please try again later"
+  },
+  "success": {
+    "contactSubmitted": "Your message has been sent successfully! We will contact you soon",
+    "applicationSubmitted": "Application submitted successfully! Our HR team will contact you soon"
+  }
+}
