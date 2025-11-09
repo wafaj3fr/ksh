@@ -6,6 +6,11 @@ interface CEOMessageProps {
 }
 
 export default function CEOMessage({ message, imageUrl }: CEOMessageProps) {
+  // Only show section if there's a message to display
+  if (!message) {
+    return null;
+  }
+
   return (
     <section className="bg-white py-24 px-6 sm:px-20">
       <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-12 items-start">

@@ -4,6 +4,11 @@ const successStories = {
   type: "document",
   fields: [
     {
+      name: "language",
+      type: "string",
+      hidden: true,
+    },
+    {
       name: "title",
       title: "Success Story Title",
       type: "string",

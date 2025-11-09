@@ -5,6 +5,11 @@ const ceoMessage = {
   title: "CEO Message",
   type: "document",
   fields: [
+    { 
+      name: "language", 
+      type: "string", 
+      hidden: true 
+    },
     { name: "title", title: "Title", type: "string" },
     { name: "message", title: "Message", type: "text" },
     {

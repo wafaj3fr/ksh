@@ -27,8 +27,11 @@ interface NewsProps {
 }
 
 export default function News({ news }: NewsProps) {
+  // Filter out any undefined or null items
+  const validNews = (news || []).filter((item) => item !== null && item !== undefined);
+  
   const [current, setCurrent] = useState(0);
-  const total = news.length;
+  const total = validNews.length;
 
   const goTo = (idx: number) => {
     if (idx < 0) setCurrent(total - 1);
@@ -36,7 +39,19 @@ export default function News({ news }: NewsProps) {
     else setCurrent(idx);
   };
 
-  const item = news[current];
+  const item = validNews[current];
+
+  if (total === 0) {
+    return (
+      <section id="news" className="px-8 sm:px-20 py-20 bg-white">
+        <div className="max-w-5xl mx-auto text-center">
+          <h2 className="text-3xl font-bold mb-2 text-primary">News & Updates</h2>
+          <span className="block mx-auto w-60 h-1 rounded bg-[#B49C5B] mb-8" />
+          <p className="text-gray-600">No news available at the moment.</p>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section id="news" className="px-8 sm:px-20 py-20 bg-white">
@@ -54,7 +69,7 @@ export default function News({ news }: NewsProps) {
                 style={{ width: 320 }}
                 onClick={() => goTo((current - 1 + total) % total)}
               >
-                <NewsCard item={news[(current - 1 + total) % total]} faded />
+                <NewsCard item={validNews[(current - 1 + total) % total]} faded />
               </div>
             )}
             {/* Main card */}
@@ -71,7 +86,7 @@ export default function News({ news }: NewsProps) {
                 style={{ width: 320 }}
                 onClick={() => goTo((current + 1) % total)}
               >
-                <NewsCard item={news[(current + 1) % total]} faded />
+                <NewsCard item={validNews[(current + 1) % total]} faded />
               </div>
             )}
           </div>
@@ -85,7 +100,7 @@ export default function News({ news }: NewsProps) {
               &#8592;
             </button>
             <div className="flex gap-2">
-              {news.map((_, idx) => (
+              {validNews.map((_, idx) => (
                 <button
                   key={idx}
                   onClick={() => goTo(idx)}
@@ -115,6 +130,11 @@ function NewsCard({
   item: NewsItem;
   faded?: boolean;
 }) {
+  // Safety check: return null if item is undefined
+  if (!item) {
+    return null;
+  }
+
   const slug = item.slug?.current;
 
   return (

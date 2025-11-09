@@ -3,9 +3,15 @@ import { getNews, getSettings } from "../../../sanity/sanity-utils";
 import UnifiedHero from "../components/UnifiedHero";
 import NewsPageContent from "./NewsPageContent";
 
-export default async function NewsPage() {
-  const newsList = await getNews();
-  const settings = await getSettings();
+interface Props {
+  params: Promise<{ locale: string }>
+}
+
+export default async function NewsPage({ params }: Props) {
+  const { locale } = await params
+
+  const newsList = await getNews(locale);
+  const settings = await getSettings(locale);
 
   return (
     <main className="min-h-screen bg-[#f5f7fa] text-gray-900 font-sans">

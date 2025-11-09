@@ -6,6 +6,11 @@ const subsidiary = {
   type: "document",
   fields: [
     {
+      name: "language",
+      type: "string",
+      hidden: true,
+    },
+    {
       name: "name",
       title: "Name",
       type: "string",

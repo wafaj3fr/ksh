@@ -57,11 +57,17 @@ type CareersContent = {
   hr?: { email?: string; phone?: string; whatsapp?: string };
 };
 
-export default async function CareersPage() {
+interface Props {
+  params: Promise<{ locale: string }>
+}
+
+export default async function CareersPage({ params }: Props) {
+  const { locale } = await params
+
   const [settings, page, jobs] = await Promise.all([
-    getSettings(),
-    client.fetch<CareersContent>(GROQ.careersPage),
-    client.fetch<Job[]>(GROQ.jobs),
+    getSettings(locale),
+    client.fetch<CareersContent>(GROQ.careersPage, { language: locale }),
+    client.fetch<Job[]>(GROQ.jobs, { language: locale }),
   ]);
 
   /** ---- SAFE defaults for Why-Work section (عشان ما يختفي لو البيانات ناقصة) ---- */

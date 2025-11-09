@@ -5,6 +5,12 @@ export default defineType({
   title: 'Careers Page',
   type: 'document',
   fields: [
+    // Language field for i18n
+    defineField({
+      name: 'language',
+      type: 'string',
+      hidden: true,
+    }),
     // Hero
     defineField({ name: 'title', type: 'string', title: 'Hero Title' }),
     defineField({ name: 'intro', type: 'text', title: 'Hero Subtitle' }),

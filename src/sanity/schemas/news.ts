@@ -4,6 +4,11 @@ const news = {
   type: "document",
   fields: [
     {
+      name: "language",
+      type: "string",
+      hidden: true,
+    },
+    {
       name: "title",
       title: "News Title",
       type: "string",

@@ -13,6 +13,11 @@ interface SubsidiariesProps {
 }
 
 export default function Subsidiaries({ subsidiaries }: SubsidiariesProps) {
+  // Only show section if there are subsidiaries to display
+  if (!subsidiaries || subsidiaries.length === 0) {
+    return null;
+  }
+
   return (
     <section id="subsidiaries" className="px-8 sm:px-20 py-20 bg-white">
       <h2 className="text-3xl font-bold mb-2 text-center text-primary">KSHC Subsidiaries</h2>

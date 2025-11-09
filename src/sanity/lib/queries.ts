@@ -59,7 +59,7 @@ export async function getHomepage(): Promise<Homepage> {
 /** Raw GROQ strings (use in server components or helpers) */
 export const GROQ = {
   // === Careers singleton with all new fields (no LinkedIn) ===
-  careersPage: defineQuery(`*[_type == "careersPage"][0]{
+  careersPage: defineQuery(`*[_type == "careersPage" && language == $language][0]{
     title,
     intro,
     units[]{title, description, "logoUrl": logo.asset->url},
@@ -75,8 +75,8 @@ export const GROQ = {
     hr{email, phone, whatsapp}
   }`),
 
-  // LIST: no params here (IMPORTANT: no $slug)
-  jobs: defineQuery(`*[_type == "job"] | order(_createdAt desc){
+  // LIST: filtered by language
+  jobs: defineQuery(`*[_type == "job" && language == $language] | order(_createdAt desc){
     _id,
     "id": _id,
     title,
@@ -89,7 +89,7 @@ export const GROQ = {
   }`),
 
   // DETAIL: this is the ONLY query that uses $slug
-  jobBySlug: defineQuery(`*[_type == "job" && slug.current == $slug][0]{
+  jobBySlug: defineQuery(`*[_type == "job" && slug.current == $slug && language == $language][0]{
     _id,
     "id": _id,
     title,
@@ -142,5 +142,5 @@ export const groq = {
   jobBySlug: `*[_type == "job" && slug.current == $slug][0]{ ..., "id": _id }`,
 };
 
-export const getJobs = () => client.fetch<Job[]>(GROQ.jobs);
-export const getJobBySlug = (slug: string) => client.fetch<Job>(GROQ.jobBySlug, { slug });
+export const getJobs = (language: string = 'en') => client.fetch<Job[]>(GROQ.jobs, { language });
+export const getJobBySlug = (slug: string, language: string = 'en') => client.fetch<Job>(GROQ.jobBySlug, { slug, language });

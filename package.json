@@ -27,6 +27,7 @@
     "@lottiefiles/react-lottie-player": "^3.6.0",
     "@portabletext/react": "^3.2.4",
     "@sanity/client": "^6.29.1",
+    "@sanity/document-internationalization": "^4.1.0",
     "@sanity/image-url": "^1.1.0",
     "@sanity/vision": "^3.86.1",
     "aos": "^2.3.4",

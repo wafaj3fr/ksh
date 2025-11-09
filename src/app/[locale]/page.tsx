@@ -20,14 +20,20 @@ import Customers from "./components/Customers";
 import Testimonials from "./components/Testimonials";
 import { getTranslations } from "next-intl/server";
 
-export default async function Home() {
+interface Props {
+  params: Promise<{ locale: string }>
+}
+
+export default async function Home({ params }: Props) {
+  const { locale } = await params
+
   const [settings, subsidiaries, news, ceoMessage, sectors] = await Promise.all(
     [
-      getSettings(),
-      getSubsidiaries(),
-      getNews(),
-      getCEOMessage(),
-      getInvestmentSectors(),
+      getSettings(locale),
+      getSubsidiaries(locale),
+      getNews(locale),
+      getCEOMessage(locale),
+      getInvestmentSectors(locale),
     ]
   );
 
@@ -36,15 +42,17 @@ export default async function Home() {
   return (
     <div className="min-h-screen text-gray-900 font-sans bg-white">
       {/* Hero */}
-      <Hero
-        heroMediaType={settings.heroMediaType}
-        videoSource={settings.videoSource}
-        heroImage={settings.heroImage}
-        heroVideoFile={settings.heroVideoFile}
-        heroVideoUrl={settings.heroVideoUrl}
-        heroTitle={settings.heroTitle}
-        heroSubtitle={settings.heroSubtitle}
-      />
+      {settings && (
+        <Hero
+          heroMediaType={settings.heroMediaType}
+          videoSource={settings.videoSource}
+          heroImage={settings.heroImage}
+          heroVideoFile={settings.heroVideoFile}
+          heroVideoUrl={settings.heroVideoUrl}
+          heroTitle={settings.heroTitle}
+          heroSubtitle={settings.heroSubtitle}
+        />
+      )}
 
       {/* About Teaser */}
       <section className="py-16 px-6 sm:px-20">

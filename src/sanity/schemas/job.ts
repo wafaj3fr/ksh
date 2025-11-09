@@ -5,6 +5,11 @@ export default defineType({
   title: 'Job',
   type: 'document',
   fields: [
+    defineField({
+      name: 'language',
+      type: 'string',
+      hidden: true,
+    }),
     defineField({ name: 'title', type: 'string', title: 'Title', validation: r => r.required() }),
     defineField({ name: 'slug', type: 'slug', title: 'Slug', options: { source: 'title' }, validation: r => r.required() }),
     defineField({ name: 'department', type: 'string', title: 'Department/Company' }), // لبطاقة Current Openings
