@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 interface HeaderProps {
   logo?: {
@@ -103,6 +104,9 @@ export default function Header({ logo }: HeaderProps) {
           >
             {t("contact")}
           </Link>
+
+          {/* Language Switcher */}
+          <LanguageSwitcher />
         </nav>
 
         {/* Mobile Menu Button */}
@@ -133,6 +137,11 @@ export default function Header({ logo }: HeaderProps) {
                 </Link>
               )
             )}
+
+            {/* Language Switcher for Mobile */}
+            <div className="pt-3 mt-3 border-t border-gray-200">
+              <LanguageSwitcher />
+            </div>
           </div>
         </div>
       )}
