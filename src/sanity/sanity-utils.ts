@@ -13,10 +13,11 @@ export default client;
 /**
  * Fetch Settings
  */
-export async function getSettings() {
+export async function getSettings(language: string = 'en') {
   try {
-    const data = await client.fetch(groq`
-      *[_type == "settings"][0]{
+    // Try to fetch with language filter first
+    let data = await client.fetch(groq`
+      *[_type == "settings" && language == $language][0]{
         heroMediaType,
         videoSource,
         heroVideoUrl,
@@ -37,7 +38,35 @@ export async function getSettings() {
         },
         contactInfo,
       }
-    `);
+    `, { language });
+    
+    // If no settings found for this language, fall back to any settings
+    if (!data) {
+      data = await client.fetch(groq`
+        *[_type == "settings"][0]{
+          heroMediaType,
+          videoSource,
+          heroVideoUrl,
+          heroVideoFile {
+            asset->{
+              url
+            }
+          },
+          heroImage {
+            asset->{ url },
+            alt
+          },
+          heroTitle,
+          heroSubtitle,
+          logo {
+            asset->{ url },
+            alt
+          },
+          contactInfo,
+        }
+      `);
+    }
+    
     return data;
   } catch (error) {
     console.error("Error fetching settings:", error);
@@ -48,10 +77,10 @@ export async function getSettings() {
 /**
  * Fetch Subsidiaries
  */
-export async function getSubsidiaries() {
+export async function getSubsidiaries(language: string = 'en') {
   try {
     const data = await client.fetch(groq`
-      *[_type == "subsidiary"]{
+      *[_type == "subsidiary" && language == $language]{
         _id,
         name,
         sector,
@@ -66,7 +95,8 @@ export async function getSubsidiaries() {
           }
         }
       }
-    `);
+    `, { language });
+    
     return data;
 
   } catch (error) {
@@ -78,10 +108,10 @@ export async function getSubsidiaries() {
 /**
  * Fetch News
  */
-export async function getNews() {
+export async function getNews(language: string = 'en') {
   try {
     const data = await client.fetch(groq`
-      *[_type == "news"] | order(date desc) {
+      *[_type == "news" && language == $language] | order(date desc) {
         _id,
         title,
         slug,
@@ -100,9 +130,13 @@ export async function getNews() {
           alt
         }
       }
-    `);
+    `, { language });
 
-    return data;
+    // Ensure all items have valid slug structure
+    return data.map((item: any) => ({
+      ...item,
+      slug: item.slug || { current: '' },
+    }));
 
   } catch (error) {
     console.error("Error fetching News:", error);
@@ -113,10 +147,10 @@ export async function getNews() {
 /**
  * Fetch CEO Message
  */
-export async function getCEOMessage() {
+export async function getCEOMessage(language: string = 'en') {
   try {
     const data = await client.fetch(groq`
-      *[_type == "ceoMessage"][0]{
+      *[_type == "ceoMessage" && language == $language][0]{
         title,
         message,
         image {
@@ -125,7 +159,7 @@ export async function getCEOMessage() {
           }
         }
       }
-    `);
+    `, { language });
 
     return data;
 
@@ -135,15 +169,16 @@ export async function getCEOMessage() {
   }
 }
 
-export async function getInvestmentSectors() {
+export async function getInvestmentSectors(language: string = 'en') {
   try {
     const data = await client.fetch(groq`
-      *[_type == "investmentSector"]{
+      *[_type == "investmentSector" && language == $language]{
         title,
         description,
         icon
       }
-    `);
+    `, { language });
+    
     return data;
   } catch (error) {
     console.error("Error fetching Investment Sectors:", error);

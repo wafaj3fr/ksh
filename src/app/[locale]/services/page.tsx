@@ -2,8 +2,13 @@ import UnifiedHero from "../components/UnifiedHero";
 import { getSettings } from "../../../sanity/sanity-utils";
 import ServiceSection from "./components/ServiceSection";
 
-export default async function ServicesPage() {
-  const settings = await getSettings();
+interface Props {
+  params: Promise<{ locale: string }>;
+}
+
+export default async function ServicesPage({ params }: Props) {
+  const { locale } = await params;
+  const settings = await getSettings(locale);
 
   return (
     <main className="min-h-screen bg-[#f5f7fa] text-gray-900 font-sans">

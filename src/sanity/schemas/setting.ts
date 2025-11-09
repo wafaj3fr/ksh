@@ -4,6 +4,11 @@ const settings = {
   type: "document",
   fields: [
     {
+      name: "language",
+      type: "string",
+      hidden: true,
+    },
+    {
       name: "logo",
       title: "Company Logo",
       type: "image",

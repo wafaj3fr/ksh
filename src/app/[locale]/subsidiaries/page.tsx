@@ -38,8 +38,13 @@ const subsidiaries = [
   },
 ];
 
-export default async function SubsidiariesPage() {
-  const settings = await getSettings();
+export default async function SubsidiariesPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const settings = await getSettings(locale);
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-[#f5f7fa] via-[#f7f9fc] to-[#e7ebf0] text-gray-900 font-sans">

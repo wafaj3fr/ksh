@@ -6,6 +6,11 @@ const investmentSector = {
   type: "document",
   fields: [
     {
+      name: "language",
+      type: "string",
+      hidden: true,
+    },
+    {
       name: "title",
       title: "Sector Title",
       type: "string",

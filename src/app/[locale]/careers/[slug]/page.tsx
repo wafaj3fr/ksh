@@ -9,19 +9,19 @@ import JobApplicationForm from "../../components/forms/JobApplicationForm";
 import UnifiedHero from "../../components/UnifiedHero";
 
 export default async function JobPage(props: {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string; locale: string }>;
 }) {
-  // ✅ حل المشكلة: await props.params
-  const { slug } = await props.params;
+  // ✅ await props.params and extract both slug and locale
+  const { slug, locale } = await props.params;
 
-  const job = await client.fetch(GROQ.jobBySlug, { slug });
+  const job = await client.fetch(GROQ.jobBySlug, { slug, language: locale });
 
   if (!job) {
     return <div className="px-6 py-12 text-[#3a3f46]">Not found</div>;
   }
 
   const meta = [job.department, job.location, job.type].filter(Boolean);
-  const settings = await getSettings();
+  const settings = await getSettings(locale);
   return (
     <main className="pb-24 bg-[#f5f7fa] text-gray-900">
       {/* <Hero heroTitle={job.title} heroSubtitle={job.intro} /> */}

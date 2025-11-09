@@ -14,6 +14,11 @@ export default function Sectors({
 }: {
   sectors: InvestmentSectorProps[];
 }) {
+  // Only show section if there are sectors to display
+  if (!sectors || sectors.length === 0) {
+    return null;
+  }
+
   return (
     <section
       id="sectors"

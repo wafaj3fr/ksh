@@ -13,8 +13,13 @@ import UnifiedHero from "../components/UnifiedHero";
 import { getSettings } from "../../../sanity/sanity-utils";
 import { getTranslations } from "next-intl/server";
 
-export default async function AboutPage() {
-  const settings = await getSettings();
+interface Props {
+  params: Promise<{ locale: string }>;
+}
+
+export default async function AboutPage({ params }: Props) {
+  const { locale } = await params;
+  const settings = await getSettings(locale);
   const t = await getTranslations("about");
 
   const boardMembers = [

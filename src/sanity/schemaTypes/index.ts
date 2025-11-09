@@ -7,6 +7,7 @@ import job from '../schemas/job'
 import jobApplication from '../schemas/jobApplication'
 import ceoMessage from '../schemas/ceoMessage'
 import contactForm from '../schemas/contactForm'
+import investmentSector from '../schemas/investmentSector'
 
 const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -14,6 +15,7 @@ const schema: { types: SchemaTypeDefinition[] } = {
     subsidiary,
     news,
     ceoMessage,
+    investmentSector,
     careersPage,
     job,
     jobApplication,
